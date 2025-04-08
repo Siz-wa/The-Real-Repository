@@ -1,7 +1,7 @@
 <?php
 
 spl_autoload_register(function($class) {
-    $paths = ["../controllers", "../models", "../config"];
+    $paths = ["../controllers", "../models", "../config","../routers"];
     foreach ($paths as $path) {
         $file = "$path/$class.php";
         if (file_exists($file)) {
@@ -14,8 +14,15 @@ spl_autoload_register(function($class) {
 
 $router = new Router();
 
-$router->addroute('home','Customcontroller','index');
-$router->addroute('faqs','FAQSController','faqs');
+$router->addroute('home','HomeController','Home');
+$router->addroute('faqs','FAQSController','Faqs');
+$router->addroute('changepw','ChangePwController','Faqs');
+$router->addroute('aboutus','AboutUsController','AboutUs');
+$router->addroute('register','RegisterController','Register');
+$router->addroute('login','LoginController','Login');
+$router->addroute('services1','ServicesController','Services');
+$router->addroute('contact','ContactController','Contact');
+$router->addroute('forgotpw','ForgotPwController','ForgotPw');
 
 
 

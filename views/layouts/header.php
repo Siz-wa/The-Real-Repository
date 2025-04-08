@@ -11,14 +11,14 @@
         <ul>
           <li><a href="../public/index.php?action=home" class="active">Home<br></a></li>
           <li><a href="../public/index.php?action=aboutus">About</a></li>
-          <li><a href="../public/index.php?action=services">Services</a></li>
+          <li><a href="../public/index.php?action=services1">Services</a></li>
           <li><a href="#menu">Menu</a></li>
           <li><a href="../public/index.php?action=contact">Contact</a></li>
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
 
-      <a class="btn-getstarted" href="Log-In.html">Log In</a>
+      <a class="btn-getstarted" href="../public/index.php?action=login">Log In</a>
   
     </div>
   </header>

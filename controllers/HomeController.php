@@ -4,7 +4,7 @@ require_once "../models/Customer.php";
 
 
 
-class Customcontroller extends Controller{
+class HomeController extends Controller{
 
   
     private $CustomerModel;
@@ -14,7 +14,7 @@ class Customcontroller extends Controller{
         $this->CustomerModel = new Customer($db);
     }
 
-    public function index(){
+    public function Home(){
         $customers = $this->CustomerModel->getAllCustomers();
         $this->loadView('home',['customers' => $customers]);
     }

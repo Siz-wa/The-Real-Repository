@@ -12,32 +12,6 @@
 
 <body class="starter-page-page">
 
-  <header id="header" class="header d-flex align-items-center sticky-top">
-    <div class="container position-relative d-flex align-items-center justify-content-between">
-
-      <a href="index.html" class="logo d-flex align-items-center me-auto me-xl-0">
-        <img src="./assets/img/logo cookies.png" alt="" width="50px">
-        <h1 class="sitename">Two Hearts Confections</h1>
-        <span>.</span>
-      </a>
-
-      <nav id="navmenu" class="navmenu">
-        <ul>
-          <li><a href="index.html">Home<br></a></li>
-          <li><a href="About-Us.html" class="active">About</a></li>
-          <li><a href="Services1.html">Services</a></li>
-          <li><a href="#menu">Menu</a></li>
-          <li><a href="Contact-Us.html">Contact</a></li>
-        </ul>
-        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
-      </nav>
-
-      <a class="btn-getstarted" href="Log-In.html">Log In</a>
-  
-    </div>
-  </header>
-
-
   <main class="main"><!-- About Section -->
     <section id="about" class="about section">
 

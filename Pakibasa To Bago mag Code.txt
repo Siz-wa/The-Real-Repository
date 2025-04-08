@@ -6,3 +6,7 @@
 // dito ko muna to ititigil 4:18pm 4/8/25
 
 // ------------------------------------------------
+
+// Batle pre yung UI naten may problema every time may "<p>" ang default nya ay white
+ngayon problema yan kase white din yung bg naten kaya hindi mabasa yung any elements na naka
+<p></p> paki-ayos yan 

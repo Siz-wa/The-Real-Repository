@@ -8,9 +8,6 @@
   <meta name="description" content="">
   <meta name="keywords" content="">
 
-
-
-
 </head>
 
 <body class="starter-page-page">
@@ -105,9 +102,6 @@
     </section>
   </main>
 
-  
-
- 
 </body>
 
 </html>
