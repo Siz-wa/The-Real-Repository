@@ -222,7 +222,7 @@ h6 {
 .Wrapper {
   width: 420px;
   background: blueviolet;
-  color: #fff;
+  color: color-mix(in srgb, var(--default-color), transparent 50%);
   border-radius: 10px;
   padding: 30px 40px;
 }

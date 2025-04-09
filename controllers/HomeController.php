@@ -1,8 +1,4 @@
 <?php
-require_once "Controller.php";
-require_once "../models/Customer.php";
-
-
 
 class HomeController extends Controller{
 
