@@ -1,0 +1,49 @@
+//  4/8/2025 4:14pm natapos ko yung problema which is walang php tag ang Router file kaya di nya natatanggap yung data na na nirerequest ng index
+// tapos ang hirap pa hanapin ng path files ng mga controllers dahil mali pala ang naka set up na path files dun  variable n $controllerFiles
+// Dito ako nagtatapos tinanggal ko ang htaccess file for the mean time.
+// may bagong problema akong nakita which is yung each sa index di nya nakukuha yung action variable sa link.
+// im still thinking kung paano ko sya maayos
+// dito ko muna to ititigil 4:18pm 4/8/25
+
+// ------------------------------------------------
+
+// Batle pre yung UI naten may problema every time may "<p>" ang default nya ay white
+ngayon problema yan kase white din yung bg naten kaya hindi mabasa yung any elements na naka
+<p></p> makikisuyo paki ayos particularly makikita yung mga bug nato sa login, register pati forgot password 
+
+
+// 2:00AM 4/9/25 Nalagyan ko na ng controller ang mga webpages na nagawan na ng UI 
+about us, change pw, conctact, faqs, forgot pw, home, log in, sign up at services.
+
+// natapos ko narin ang router para sa mga ibat-ibagn webpages asa website namen
+
+//naayos ko din ang ilan sa mga bugs tulad ng mga makikita sa webpages na my forms tulad ng 
+log in, register, change pass, at forgot pass kung saang ang label or any types of text ay nagiging white 
+which is naging problema dahil hindi sya nag cocontrast sa why bg ng webpages namen. 
+nasa public pala dapat ang main.css at wrapper element na dapat  kung e tweak
+
+// dito na angtatapos ang update
+
+//--------------------------------------------------
+
+// 2:14 PM 4/9/25 magsisimula na akong mag set up ng groundwork para sa register
+// 2:50 PM may nakita akong mga bugs sa UI ng webapages namen which is yung footer
+bg webpages namen ay naka wrapped ng sobra or nag ba break agad sya without fully consumming the 12 grids
+in each lines
+// 3:30 PM 4/9/25 naayos ko na ang bug by just copying the forgotpw file and recreating the log in page. 
+
+// 1:55 AM 4/10/25 Nagawa ko na ang registration it has the basic capability to register 
+users and save their data sa database. sa pagawa ko ng backend para ma achieve ito ay may nakaharap akong bugs
+isa na dito ang hindi pag submit ng data mula sa input form papunta sa database dahil wala palang "names" attribute ang mga
+input tags sa structures ng UI. Isa pa dito ang hindi ma submit ang data papunta sa database dahil sa isang 
+foreign key contraints kaya hindi pwede mag insert sa table ng customer which means kailangan naten mag assign ng value para
+sa foreign key contrainst every time na mag iinsert. for the meantime tinaggal ko muna ang foreign key contraints.
+
+I am still thinking of a way para masolve ang foreign key problem sa registration. dito ko na tataposin ang 
+log na ito nababaliw na ako.
+
+//----------------------------------------------------
+
+// 3:27 I 4/14/25 i did a little bit of coding for login and made a few revisions for register. it's mostly complete
+
+
