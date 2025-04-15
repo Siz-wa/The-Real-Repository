@@ -45,5 +45,24 @@ log na ito nababaliw na ako.
 //----------------------------------------------------
 
 // 3:27 I 4/14/25 i did a little bit of coding for login and made a few revisions for register. it's mostly complete
+// 4:28PM 4/14/25 I laid the methods and controller necessarry for login '
+although it has no full functioality yet the groundwork has been laid to implement the full functionality
+i just have to prepare the dashboad next.
+
+========================================================
+
+// 1:24AM 5/15/25 i moved the dahsboard pages in the project folder and at the moment
+i am confused how do i deal with these pages because it has different css linked in each pages 
+it makes me a bit hesitant to touch something complex without understanding it. Im gonna talk to
+Dudong about this. Im thinking of making dudong another Admin pages that abides to the orginal css
+of our page.
+
+// 1:28AM 5/15/25 for now I will improve the login system of our website.
+// 3:26 AM 5/15/25 naka encounter ako ng error kung saan hindi ko mai display
+ang file na finetch ko mula sa database naayos ko sya gamit ang file get contents funtion
+
+//11:29 AM 4/15/25 binura ko ang <script src="https://unpkg.com/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+dahil naging sagabal sya sa pag load ng website dropdown profile sa header.
+
 
 

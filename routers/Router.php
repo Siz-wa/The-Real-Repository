@@ -4,7 +4,10 @@ class Router {
     
 
     private $routes = [];
+    // 
 
+
+    // Constructor to initialize the routes array
     public function addroute($action,$controller,$method) {
         $this->routes[$action] = [
             'controller' => $controller,
@@ -12,6 +15,9 @@ class Router {
         ];
     }
 
+    // Method to dispatch the request to the appropriate controller and method 
+    // based on the action parameter in the URL
+    // This method is responsible for loading the correct controller and calling the appropriate method
     public function dispatch($action){
         if (isset($this -> routes[$action])){
             $controllerName = $this->routes[$action]['controller'];

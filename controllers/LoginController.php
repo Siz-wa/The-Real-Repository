@@ -22,10 +22,39 @@ class LoginController extends Controller{
         $this->password = $password ?? null;
         
         if($this->authenticateUserModel->authenticateUser($this->email, $this->password)){
-            // Redirect to home page or dashboard
+            header("Location: ../views/dashboard/MainDash.php");
+            exit();
            
         }else{
-            // Redirect back to login page with error message
+            echo '<script>
+                document.addEventListener("DOMContentLoaded", function() {
+                const wrapper = document.querySelector(".wrapper.p-4.rounded.shadow.bg-white[style=\'width: 400px;\']");
+                if (wrapper) {
+                    const heading = wrapper.querySelector("h1.text-center.mb-4");
+                    if (heading) {
+                    const alertDiv = document.createElement("div");
+                    alertDiv.className = "alert alert-danger";
+                    alertDiv.role = "alert";
+                    alertDiv.textContent = "You are not logged in!";
+                    heading.insertAdjacentElement("afterend", alertDiv);
+                    
+                    // Set a timeout to fade out the alert after 5 seconds
+                    setTimeout(function() {
+                        let opacity = 1;
+                        const fadeInterval = setInterval(function() {
+                        if (opacity <= 0) {
+                            clearInterval(fadeInterval);
+                            alertDiv.remove();
+                        } else {
+                            opacity -= 0.1;
+                            alertDiv.style.opacity = opacity;
+                        }
+                        }, 50); // Adjust the interval for smoother fading
+                    }, 5000);
+                    }
+                }
+                });
+            </script>';
             
         }
     }

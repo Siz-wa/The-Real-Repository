@@ -1,4 +1,5 @@
 <?php
+
 class AuthenticationModel {
     private $conn;
 
@@ -19,36 +20,22 @@ class AuthenticationModel {
         if ($login->rowCount() > 0) {
             $user = $login->fetch(PDO::FETCH_ASSOC);
             if (password_verify($password, $user['password'])) {
-            echo '<script>
-                document.addEventListener("DOMContentLoaded", function() {
-                const wrapper = document.querySelector(".wrapper.p-4.rounded.shadow.bg-white[style=\'width: 400px;\']");
-                if (wrapper) {
-                    const heading = wrapper.querySelector("h1.text-center.mb-4");
-                    if (heading) {
-                    const alertDiv = document.createElement("div");
-                    alertDiv.className = "alert alert-success";
-                    alertDiv.role = "alert";
-                    alertDiv.textContent = "You have successfully logged in!";
-                    heading.insertAdjacentElement("afterend", alertDiv);
-                    
-                    // Set a timeout to fade out the alert after 5 seconds
-                    setTimeout(function() {
-                        let opacity = 1;
-                        const fadeInterval = setInterval(function() {
-                        if (opacity <= 0) {
-                            clearInterval(fadeInterval);
-                            alertDiv.remove();
-                        } else {
-                            opacity -= 0.1;
-                            alertDiv.style.opacity = opacity;
-                        }
-                        }, 50); // Adjust the interval for smoother fading
-                    }, 5000);
-                    }
-                }
-                });
-            </script>';
-            return true;
+                $_SESSION['user_id'] = $user['customerID'];
+                $_SESSION['fname'] = $user['fname'];
+                $_SESSION['lname'] = $user['lname'];
+                $_SESSION['sex'] = $user['sex'];
+                $_SESSION['phoneNo'] = $user['phoneNo'];
+                $_SESSION['address'] = $user['address'];
+                $_SESSION['province'] = $user['province'];
+                $_SESSION['pfPicture'] = "data:image/jpeg;base64," . base64_encode($user['pfPicture']);
+                $_SESSION['salesrepEmployeeNum'] = $user['salesrepEmployeeNum'];
+                $_SESSION['email'] = $user['email'];
+                $_SESSION['password'] = $user['password'];
+                
+                
+                
+                header("Location: ../views/dashboard/MainDash.php");
+                exit();
             }
         }else {
             return false; // Authentication failed

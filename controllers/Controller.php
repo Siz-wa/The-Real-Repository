@@ -7,11 +7,11 @@ class Controller {
 
     public function loadView($view,$data = []){
         extract($data);
-        require_once "../views/layouts/asset.php";
-        require_once "../views/layouts/header.php";
-        require_once "../views/{$view}.php";
-        require_once "../views/layouts/footer.php";
-        require_once "../views/layouts/asset2.php";
+        include "../views/layouts/asset.php";
+        include "../views/layouts/header.php";
+        include "../views/{$view}.php";
+        include "../views/layouts/footer.php";
+        include "../views/layouts/asset2.php";
     }
 }
 ?>

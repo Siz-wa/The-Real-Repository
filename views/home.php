@@ -1,23 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-<h2>Customer List</h2>
-
-<?php if (isset($customers) && !empty($customers)) : ?>
-    <table border="1">
-        <tr>
-            <th>ID</th><th>Name</th><th>Email</th>
-        </tr>
-        <?php foreach ($customers as $customer) : ?>
-            <tr>
-                <td><?= htmlspecialchars($customer['customerID']) ?></td>
-                <td><?= htmlspecialchars($customer['fname'] . ' ' . $customer['lname']) ?></td>
-                <td><?= htmlspecialchars($customer['email']) ?></td>
-            </tr>
-        <?php endforeach; ?>
-    </table>
-<?php else : ?>
-    <p>No customers found.</p>
-<?php endif; ?>
 
 <head>
   <meta charset="utf-8">

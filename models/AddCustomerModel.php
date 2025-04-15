@@ -33,42 +33,11 @@ class AddCustomerModel
 
         // If validation passes, register the user
         $this->registerUser( $this->firstName, $this->lastName,  $this->email, $this->password, $this->sex);
-      
+        
       }else {
 
-        // Display error messages
-        // after finding validation errors in validate()
-        foreach ($this->error as $errorMessage) {
-            echo '<script>
-              document.addEventListener("DOMContentLoaded", function() {
-              const wrapper = document.querySelector(".wrapper.p-4.rounded.shadow.bg-white[style=\'width: 500px; overflow-y: auto;\']");
-              if (wrapper) {
-              const heading = wrapper.querySelector("h1.text-center.mb-2");
-              if (heading) {
-              const alertDiv = document.createElement("div");
-              alertDiv.className = "alert alert-danger";
-              alertDiv.role = "alert";
-              alertDiv.textContent = "' . $errorMessage . '";
-              heading.insertAdjacentElement("afterend", alertDiv);
-              
-              // Set a timeout to fade out the alert after 5 seconds
-              setTimeout(function() {
-                let opacity = 1;
-                const fadeInterval = setInterval(function() {
-                if (opacity <= 0) {
-                  clearInterval(fadeInterval);
-                  alertDiv.remove();
-                } else {
-                  opacity -= 0.1;
-                  alertDiv.style.opacity = opacity;
-                }
-                }, 50); // Adjust the interval for smoother fading
-              }, 5000);
-              }
-              }
-              });
-              </script>';
-            }
+        // passes the array of errors to the controller of register page
+        return $this->error; 
       }
     
   }
@@ -130,16 +99,19 @@ class AddCustomerModel
     // Hash the password
     $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
 
-    // Save user data to the database (example code, replace with actual database logic)
-    // $db = new Database();
-    // $db->query("INSERT INTO users (first_name, last_name, email, password, sex) VALUES (?, ?, ?, ?, ?)", [$firstName, $lastName, $email, $hashedPassword, $sex]);
+  
 
-    $addCustomer = $this->conn->prepare("INSERT INTO `customer`(`fname`,`lname`,`password`,`email`,`sex`) VALUES (:fname,:lname,:password,:email,:sex)");
+
+    // Save user data to the database
+    $addCustomer = $this->conn->prepare("INSERT INTO `customer`(`fname`, `lname`, `password`, `email`, `sex`, `pfPicture`) VALUES (:fname, :lname, :password, :email, :sex, :pfPicture)");
     $addCustomer->bindParam(':fname', $firstName);
     $addCustomer->bindParam(':lname', $lastName);
     $addCustomer->bindParam(':password', $hashedPassword);
     $addCustomer->bindParam(':email', $email);
     $addCustomer->bindParam(':sex', $sex);
+   
+    $image = file_get_contents('../public/assets/img/gallery/CookiePookie.png');
+    $addCustomer->bindParam(':pfPicture', $image);
     $addCustomer->execute();
   }
 }

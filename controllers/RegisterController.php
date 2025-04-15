@@ -4,12 +4,6 @@ require_once "Controller.php";
 class RegisterController extends Controller{
 
     private $addCustomerModel;
-    private $fname;
-    private $lname;
-    private $email;
-    private $password;
-    private $confirmPassword;
-    private $sex;
     public function __construct(){
         global $db;
         $this->addCustomerModel = new AddCustomerModel($db);
@@ -19,16 +13,44 @@ class RegisterController extends Controller{
     }
 
     public function addCustomer($fname, $lname, $email, $password, $confirmPassword, $sex){
-        $this->fname = $fname ?? null;
-        $this->lname = $lname ?? null;
-        $this->email = $email ?? null;
-        $this->password = $password ?? null;
-        $this->confirmPassword = $confirmPassword ?? null;
-        $this->sex = $sex ?? null;
-
-        $this->addCustomerModel->handleFormSubmission($this->fname, $this->lname, $this->email, $this->password, $this->confirmPassword, $this->sex);  
-        header('Location: ../views/test.html');
-        exit;
+        
+            $errors = $this->addCustomerModel->handleFormSubmission($fname, $lname, $email, $password, $confirmPassword, $sex);
+       
+            if(is_array($errors)){
+                foreach ($errors as $errorMessage) {
+                echo '<script>
+                  document.addEventListener("DOMContentLoaded", function() {
+                  const wrapper = document.querySelector(".wrapper.p-4.rounded.shadow.bg-white[style=\'width: 500px; overflow-y: auto;\']");
+                  if (wrapper) {
+                  const heading = wrapper.querySelector("h1.text-center.mb-2");
+                  if (heading) {
+                  const alertDiv = document.createElement("div");
+                  alertDiv.className = "alert alert-danger";
+                  alertDiv.role = "alert";
+                  alertDiv.textContent = "' . $errorMessage . '";
+                  heading.insertAdjacentElement("afterend", alertDiv);
+                  
+                  // Set a timeout to fade out the alert after 5 seconds
+                  setTimeout(function() {
+                    let opacity = 1;
+                    const fadeInterval = setInterval(function() {
+                    if (opacity <= 0) {
+                      clearInterval(fadeInterval);
+                      alertDiv.remove();
+                    } else {
+                      opacity -= 0.1;
+                      alertDiv.style.opacity = opacity;
+                    }
+                    }, 50); // Adjust the interval for smoother fading
+                  }, 5000);
+                  }
+                  }
+                  });
+                  </script>';
+                }
+        } else{
+          
+        }
         
         
          
