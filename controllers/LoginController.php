@@ -14,7 +14,15 @@ class LoginController extends Controller{
         $this->authenticateUserModel = new AuthenticationModel($db);
     }
     public function Login(){
-        $this->loadView('login');
+
+        if (isset($_SESSION['user_id'])) {
+            header("Location: ../views/dashboard/MainDash.php");
+            exit();
+        }
+    
+        $this->loadView('login'); // load the login view
+    
+        
     }
 
     public function loginUser($email, $password){
@@ -35,7 +43,7 @@ class LoginController extends Controller{
                     const alertDiv = document.createElement("div");
                     alertDiv.className = "alert alert-danger";
                     alertDiv.role = "alert";
-                    alertDiv.textContent = "You are not logged in!";
+                    alertDiv.textContent = "Invalid email or password. Please try again.";
                     heading.insertAdjacentElement("afterend", alertDiv);
                     
                     // Set a timeout to fade out the alert after 5 seconds

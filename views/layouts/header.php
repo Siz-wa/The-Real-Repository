@@ -1,12 +1,9 @@
-<?php
-session_start();
 
-?>
 <header id="header" class="header d-flex align-items-center sticky-top">
   <div class="container position-relative d-flex align-items-center justify-content-between">
 
     <a href="index.html" class="logo d-flex align-items-center me-auto me-xl-0">
-      <img src="./assets/img/logo cookies.png" alt="" width="50px">
+      <img src="./assets/img/logo cookies.png" alt="" width="80px" height="80px">
       <h1 class="sitename">Two Hearts Confections</h1>
       <span>.</span>
     </a>
@@ -25,7 +22,7 @@ session_start();
     <?php if (isset($_SESSION['user_id'])): ?>
       <div class="dropdown">
         <a href="#" class="profile-dropdown-toggle" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-          <img src="<?php echo htmlspecialchars($_SESSION['pfPicture']); ?>" alt="Profile Picture" class="rounded-circle" width="40px" height="40px">
+          <img src="<?php echo htmlspecialchars($_SESSION['pfPicture']); ?>" alt="Profile Picture" class="rounded-circle" width="60px" height="60px">
         </a>
         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
           <li class="dropdown-item text-center">
@@ -38,7 +35,7 @@ session_start();
         </ul>
       </div>
     <?php else: ?>
-      <a href="../public/index.php?action=login" class="btn btn-primary">Login</a>
+      <a href="../public/index.php?action=login" class="btn-getstarted">Login</a>
     <?php endif; ?>
 
   </div>

@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 spl_autoload_register(function($class) {
     $paths = ["../controllers", "../models", "../config","../routers"];
     foreach ($paths as $path) {

@@ -9,7 +9,12 @@ class RegisterController extends Controller{
         $this->addCustomerModel = new AddCustomerModel($db);
     }
     public function Register(){
-        $this->loadView('register');
+      if (isset($_SESSION['user_id'])) {
+        header("Location: ../views/dashboard/MainDash.php");
+        exit();
+      } 
+
+      $this->loadView('register');
     }
 
     public function addCustomer($fname, $lname, $email, $password, $confirmPassword, $sex){
@@ -49,7 +54,7 @@ class RegisterController extends Controller{
                   </script>';
                 }
         } else{
-          
+            $this->loadView('home');
         }
         
         

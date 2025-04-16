@@ -63,6 +63,21 @@ ang file na finetch ko mula sa database naayos ko sya gamit ang file get content
 
 //11:29 AM 4/15/25 binura ko ang <script src="https://unpkg.com/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 dahil naging sagabal sya sa pag load ng website dropdown profile sa header.
+// nag ayos ako today ng session handler para hindi accessible sa user yung login at register pag logged in na sila
+//also nag install ako ng compose para sa forgot password backend. still figuring out paano ko sya gagawin
+for now matutulog muna ako because there is a lot to be done
+
+//4:39 PM 4/16/25 
+// DITO AKO NAG TATAPOS NAG SET UP LANG AKO NG FEW FUNCTIONS NA MAG HAHANDLE NG FORGOT PASSWORD REQUEST
+// MAG SESEND NG EMAIL SA USER FOR THEIR RECOVERY
+//  MAG VAVALIDATE NG EMAIL KUNG ITO BA TALAGA AY NAG EEXIST SA DATABASE AND ERROR HANDLERS AS WELL YUN LANG
+// NAGAWA KO NARIN PALA YUNG CONTROLLER ANF I AM SUPPOSED TO FINISH THIS TODAY yun lang
+// DIKO MUNA TO ITUTULLOY MAG KIKITA PA KAME NI APRIL TODAY !
+
+
+//12:10 AM 4/17/25
+//I think natapos ko na yung hardest part ng forgot pw which is yung putanginagn phpmailer shit
+at yung token handling sa database okay na ang sakit sa ulo tigil ko muna to
 
 
 

@@ -1,6 +1,8 @@
 <?php
 
+
  if(isset($_POST['submit'])){
+
 
   if(isset($_POST['email']) && isset($_POST['password'])){
     $email = $_POST['email'];
@@ -12,6 +14,8 @@
       $login->loginUser( $email, $password);
     }
     }
+
+
  }
 ?>
 
@@ -29,11 +33,12 @@
 
 <body class="starter-page-page">
 
+
   <main class="main d-flex justify-content-center align-items-center" style="height: 100vh; background-color:rgb(238, 238, 238);">
-    
+ 
 <div class="wrapper p-4 rounded shadow bg-white" style="width: 400px;">
       <h1 class="text-center mb-4">Sign In</h1>
-    
+
       <form method="POST">
 
         <div class="mb-3">

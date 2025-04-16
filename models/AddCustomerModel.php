@@ -5,12 +5,7 @@ class AddCustomerModel
 {
 
   private $conn;
-  private $firstName;
-  private $lastName;
-  private $email;
-  private $password;
-  private $confirmPassword;
-  private $sex;
+ 
   private $error = [];
 
   public function __construct($db) {
@@ -19,21 +14,14 @@ class AddCustomerModel
   }
 
   public function handleFormSubmission($fname,$lname,$email,$password,$confirmPassword,$sex){
-   
-      $this->firstName = $fname ?? 'ERROR202';
-      $this->lastName = $lname ?? 'ERROR202';
-      $this->email = $email ?? 'ERROR202';
-      $this->password = $password ?? 'ERROR202';
-      $this->confirmPassword = $confirmPassword ?? 'ERROR202';
-      $this->sex = $sex ?? 'ERROR202';
     
       //  Ito din gagalawin ko im gonna think about it
       // Validate form data
-      if ($this->validate( $this->firstName, $this->lastName,  $this->email, $this->password, $this->confirmPassword, $this->sex)) {
+      if ($this->validate($fname,$lname,$email,$password,$confirmPassword,$sex)) {
 
         // If validation passes, register the user
-        $this->registerUser( $this->firstName, $this->lastName,  $this->email, $this->password, $this->sex);
-        
+        $this->registerUser($fname,$lname,$email,$password, $sex);
+        return true;
       }else {
 
         // passes the array of errors to the controller of register page
@@ -91,6 +79,17 @@ class AddCustomerModel
       $isValid = false;
     }
 
+    // Check if the email is already taken
+    $query = $this->conn->prepare("SELECT COUNT(*) FROM `customer` WHERE `email` = :email");
+    $query->bindParam(':email', $email);
+    $query->execute();
+    $emailCount = $query->fetchColumn();
+
+    if ($emailCount > 0) {
+      $this->error[] = "Email is already taken.";
+      $isValid = false;
+    }
+
     return $isValid;
   }
 
@@ -110,7 +109,7 @@ class AddCustomerModel
     $addCustomer->bindParam(':email', $email);
     $addCustomer->bindParam(':sex', $sex);
    
-    $image = file_get_contents('../public/assets/img/gallery/CookiePookie.png');
+    $image = file_get_contents('../public/assets/img/gallery/Neon.png');
     $addCustomer->bindParam(':pfPicture', $image);
     $addCustomer->execute();
   }
