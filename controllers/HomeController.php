@@ -6,8 +6,8 @@ class HomeController extends Controller{
     private $CustomerModel;
     
     public function __construct(){
-        global $db;
-        $this->CustomerModel = new Customer($db);
+      
+        $this->CustomerModel = new Customer();
     }
 
     public function Home(){

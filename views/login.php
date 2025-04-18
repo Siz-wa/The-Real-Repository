@@ -1,23 +1,3 @@
-<?php
-
-
- if(isset($_POST['submit'])){
-
-
-  if(isset($_POST['email']) && isset($_POST['password'])){
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-    
-    
-    if($_SERVER['REQUEST_METHOD']==='POST'){
-      $login = new LoginController();
-      $login->loginUser( $email, $password);
-    }
-    }
-
-
- }
-?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -33,13 +13,28 @@
 
 <body class="starter-page-page">
 
-
   <main class="main d-flex justify-content-center align-items-center" style="height: 100vh; background-color:rgb(238, 238, 238);">
- 
-<div class="wrapper p-4 rounded shadow bg-white" style="width: 400px;">
-      <h1 class="text-center mb-4">Sign In</h1>
+    
+<div class="wrapper p-4 rounded shadow bg-white" style="width: 500px;">
+      
+        <h1 class="text-center mb-2">Forgot Password ?</h1>
+        <?php if (isset($errors) && is_array($errors)): ?>
+        <?php foreach ($errors as $error): ?>
+        <div class="alert alert-danger" role="alert">
+        <?= htmlspecialchars($error, ENT_QUOTES, 'UTF-8') ?>
+        </div>
+        <?php endforeach; ?>
+        <?php endif; ?>
 
-      <form method="POST">
+        
+        <?php if (isset($messages) && is_array($messages)): ?>
+        <?php foreach ($messages as $message): ?>
+        <div class="alert alert-success" role="success">
+        <?= htmlspecialchars($message, ENT_QUOTES, 'UTF-8') ?>
+        </div>
+        <?php endforeach; ?>
+        <?php endif; ?>
+      <form method="POST" action="">
 
         <div class="mb-3">
           <label for="email" class="form-label">Email</label>
@@ -47,36 +42,77 @@
         </div>
 
         <div class="mb-3">
-          <label for="password" class="form-label">Password</label>
+          <label for="email" class="form-label">Email</label>
           <input name="password" type="password" id="password" class="form-control" placeholder="Enter your password" required>
         </div>
 
-        <div class="form-check">
-        <input class="form-check-input" type="radio" name="rememberMe" id="rememberMe" value="rememberMe" required style="outline: 2px solid #e58f3c; outline-offset: 2px;">
-          <label class="form-check-label" for="rememberMe">Remember Me</label>
-        </div>
+        <div class="d-flex justify-content-between align-items-center mb-3">
+        <button name="submit" type="submit" class="btn w-100 text-white" style="background-color: #e58f3c; transition: 0.3s;">Log In</button>
+        </div class="text-center mt-3">
 
-        <div class="mb-3">
-        <button type="submit" name="submit" class="btn w-100 text-white" style="background-color: #e58f3c; transition: 0.3s;">Login</button>
-        <div class="text-center mt-3">
-        </div>
-
-        
 
       </form>
 
+        <div class="text-center mt-3">
+        <p><a href="../public/index.php?action=register" class="text-decoration-none">Dont Have an Account ?</a></p>
+        </div>
+       
+
+        <div class="text-center mt-3">
+        <p><a href="../public/index.php?action=forgotpw" class="text-decoration-none">Forgot Password ?</a></p>
+        </div>
+        <div class="text-center mt-3">
+    <p><a href="../public/index.php?action=login" class="text-decoration-none">Go back</a></p>
+    </div>
       
     </div>
 
-    <div class="text-center mt-3">
-    <p><a href="../public/index.php?action=forgotpw" class="text-decoration-none">Forgot password?</a></p>
-    <p>Dont have an Account? <a href="../public/index.php?action=register" class="text-decoration-none">Sign Up Here!</a></p>
-    </div>
+
     
     </div>
     
   </main>
 
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const alerts = document.querySelectorAll(".alert.alert-danger");
+      alerts.forEach(alert => {
+        setTimeout(() => {
+          let opacity = 1;
+          const fade = setInterval(() => {
+            if (opacity <= 0) {
+              clearInterval(fade);
+              alert.remove();
+            } else {
+              opacity -= 0.1;
+              alert.style.opacity = opacity;
+            }
+          }, 50);
+        }, 5000);
+      });
+    });
+  </script>
+  
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const alerts = document.querySelectorAll(".alert.alert-success");
+        alerts.forEach(success => {
+          setTimeout(() => {
+            let opacity = 1;
+            const fade = setInterval(() => {
+              if (opacity <= 0) {
+                clearInterval(fade);
+                alert.remove();
+              } else {
+                opacity -= 0.1;
+                alert.style.opacity = opacity;
+              }
+            }, 50);
+          }, 5000);
+        });
+      });
+  </script>
 </body>
 
 </html>

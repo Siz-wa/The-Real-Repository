@@ -1,25 +1,4 @@
-<?php
 
- if(isset($_POST['submit'])){
-
-  if(isset($_POST['fname']) && isset($_POST['lname']) && isset($_POST['email']) && isset($_POST['password']) && isset($_POST['confirm-password'])&& isset($_POST['sex'])){
-    $fname = $_POST['fname'];
-    $lname = $_POST['lname'];
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-    $confirm_password = $_POST['confirm-password'];
-    $sex = $_POST['sex'];
-
-
-
-    if($_SERVER['REQUEST_METHOD']==='POST'){
-      $register = new RegisterController();
-  
-      $register->addCustomer($fname, $lname, $email, $password, $confirm_password, $sex);
-    }
-    }
- }
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -37,6 +16,13 @@
     <main class="main d-flex justify-content-center align-items-center" style="height: 150vh; background-color:rgb(238, 238, 238);">
       <div class="wrapper p-4 rounded shadow bg-white" style="width: 500px; overflow-y: auto;">
         <h1 class="text-center mb-2">Sign Up</h1>
+        <?php if (isset($errors) && is_array($errors)): ?>
+        <?php foreach ($errors as $error): ?>
+        <div class="alert alert-danger" role="alert">
+        <?= htmlspecialchars($error, ENT_QUOTES, 'UTF-8') ?>
+        </div>
+        <?php endforeach; ?>
+        <?php endif; ?>
         <form method="POST">
             <div class="mb-3">
             <label for="name" class="form-label">First Name</label>
@@ -78,7 +64,25 @@
         </form>
       </div>
     </main>
-
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const alerts = document.querySelectorAll(".alert.alert-danger");
+      alerts.forEach(alert => {
+        setTimeout(() => {
+          let opacity = 1;
+          const fade = setInterval(() => {
+            if (opacity <= 0) {
+              clearInterval(fade);
+              alert.remove();
+            } else {
+              opacity -= 0.1;
+              alert.style.opacity = opacity;
+            }
+          }, 50);
+        }, 5000);
+      });
+    });
+  </script>
     
 
 </body>

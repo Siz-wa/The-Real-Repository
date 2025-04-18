@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,104 +8,90 @@
   <title>Two Hearts Confections</title>
   <meta name="description" content="">
   <meta name="keywords" content="">
-
- 
-
-
-
 </head>
 
 <body class="starter-page-page">
 
- 
+<main class="main d-flex justify-content-center align-items-center" style="height: 150vh; background-color:rgb(238, 238, 238);">
+      <div class="wrapper p-4 rounded shadow bg-white" style="width: 500px; overflow-y: auto;">
+        <h1 class="text-center mb-2">Change Password</h1>
+       
+        <!-- RENDERS THE ERRORS THAT CAME FROM CHANGEPW CONTROLLER -->
+            
+            <?php if (isset($errors) && is_array($errors)): ?>
+              <?php foreach ($errors as $error): ?>
+                <div class="alert alert-danger" role="alert">
+                  <?= htmlspecialchars($error, ENT_QUOTES, 'UTF-8') ?>
+                </div>
+              <?php endforeach; ?>
+            <?php endif; ?>
+            
+            <?php if (isset($messages) && is_array($messages)): ?>
+              <?php foreach ($messages as $message): ?>
+                <div class="alert alert-success" role="success">
+                  <?= htmlspecialchars($message, ENT_QUOTES, 'UTF-8') ?>
+                </div>
+              <?php endforeach; ?>
+            <?php endif; ?>
 
-  <main class="main d-flex justify-content-center align-items-center" style="height: 100vh; background-color: #f8f9fa;">
-    <div class="card p-4 shadow" style="max-width: 400px; width: 100%;">
-      <div class="text-center mb-3">
-        <img src="assets/img/logo cookies.png" alt="Logo" width="60">
-        <h2 class="mt-2">Forgot Password</h2>
+        <form method="POST" action="">
+              <div class="mb-3">
+              <label for="password" class="form-label">New Password</label>
+              <input type="password" name="password" id="password" class="form-control" placeholder="Enter your new password" required>
+              </div>
+              <div class="mb-3">
+              <label for="confirm-password" class="form-label">Confirm New Password</label>
+              <input type="password" name="confirmPassword" id="confirm-password" class="form-control" placeholder="Confirm your new password" required>
+              </div>
+              <button type="submit" name="submit" class="btn w-100 text-white" style="background-color: #e58f3c; transition: 0.3s;">Change Password</button>
+              
+        </form>
       </div>
-      <p class="text-center">Enter your email to reset your password.</p>
-      <form action="" method="post">
-        <div class="mb-3">
-          <label for="email" class="form-label">Email Address</label>
-          <input type="email" id="email" name="email" class="form-control" required>
-        </div>
-        <button type="submit" class="btn btn-primary w-100">Send Reset Link</button>
-      </form>
-      <div class="text-center mt-3">
-        <a href="Log-In.html" class="text-decoration-none">Back to Login</a>
-      </div>
-    </div>
-  </main>
+    </main>
+
+    <!-- This is responsible for making the error messages fade -->
+      <script>
+      document.addEventListener("DOMContentLoaded", function() {
+      const alerts = document.querySelectorAll(".alert.alert-danger");
+        alerts.forEach(alert => {
+          setTimeout(() => {
+            let opacity = 1;
+            const fade = setInterval(() => {
+              if (opacity <= 0) {
+                clearInterval(fade);
+                alert.remove();
+              } else {
+                opacity -= 0.1;
+                alert.style.opacity = opacity;
+              }
+            }, 50);
+          }, 5000);
+        });
+      });
+      </script>
 
   <script>
-    var password = document.getElementById("password"),
-        confirm_password = document.getElementById("confirmPassword");
-  
-    enableSubmitButton();
-  
-    function validatePassword() {
-      if (password.value !== confirm_password.value) {
-        confirm_password.setCustomValidity("Passwords Don't Match");
-        return false;
-      } else {
-        confirm_password.setCustomValidity('');
-        return true;
-      }
-    }
-  
-    password.onchange = validatePassword;
-    confirm_password.onkeyup = validatePassword;
-  
-    function enableSubmitButton() {
-      document.getElementById('submitButton').disabled = false;
-      document.getElementById('loader').style.display = 'none';
-    }
-  
-    function disableSubmitButton() {
-      document.getElementById('submitButton').disabled = true;
-      document.getElementById('loader').style.display = 'unset';
-    }
-  
-    function validateSignupForm() {
-      var form = document.getElementById('signupForm');
-  
-      for (var i = 0; i < form.elements.length; i++) {
-        if (form.elements[i].value === '' && form.elements[i].hasAttribute('required')) {
-          console.log('There are some required fields!');
-          return false;
-        }
-      }
-  
-      if (!validatePassword()) {
-        return false;
-      }
-  
-      onSignup();
-      return false; 
-    }
-  
-    function onSignup() {
-      var xhttp = new XMLHttpRequest();
-      xhttp.onreadystatechange = function() {
-        disableSubmitButton();
-  
-        if (this.readyState == 4 && this.status == 200) {
-          enableSubmitButton();
-        } else {
-          console.log('AJAX call failed!');
-          setTimeout(function() {
-            enableSubmitButton();
-          }, 1000);
-        }
-      };
-  
-      xhttp.open("GET", "ajax_info.txt", true);
-      xhttp.send();
-    }
+    document.addEventListener("DOMContentLoaded", function() {
+        const alerts = document.querySelectorAll(".alert.alert-success");
+        alerts.forEach(success => {
+          setTimeout(() => {
+            let opacity = 1;
+            const fade = setInterval(() => {
+              if (opacity <= 0) {
+                clearInterval(fade);
+                alert.remove();
+              } else {
+                opacity -= 0.1;
+                alert.style.opacity = opacity;
+              }
+            }, 50);
+          }, 5000);
+        });
+      });
   </script>
 
+
+    
 </body>
 
 </html>

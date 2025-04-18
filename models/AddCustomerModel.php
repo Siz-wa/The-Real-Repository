@@ -8,9 +8,8 @@ class AddCustomerModel
  
   private $error = [];
 
-  public function __construct($db) {
-    $db = new Database();
-    $this->conn = $db ->connect();
+  public function __construct() {
+    $this->conn = Database::getInstance()->getConnection();
   }
 
   public function handleFormSubmission($fname,$lname,$email,$password,$confirmPassword,$sex){
@@ -21,7 +20,7 @@ class AddCustomerModel
 
         // If validation passes, register the user
         $this->registerUser($fname,$lname,$email,$password, $sex);
-        return true;
+        
       }else {
 
         // passes the array of errors to the controller of register page

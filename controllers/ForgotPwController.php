@@ -7,8 +7,8 @@ require '../vendor/autoload.php';
 
 class ForgotPwController extends Controller{
 
-    private $token;
-    private $expirydate;
+    private $errors = [];
+    private $messages =[];
     private $host = 'smtp.gmail.com';
     private $smtpAuth = true;
     private $username ='gordora.joey25@gmail.com';
@@ -18,17 +18,113 @@ class ForgotPwController extends Controller{
     private $forgotPwModel;
    
     public function __construct(){
-        global $db;
-        $this->forgotPwModel = new forgotPwModel($db);
+        $this->forgotPwModel = new ForgotPwModel();
     }    
     public function ForgotPw(){
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $email = $_POST['email'];
+            $token = bin2hex(random_bytes(32));
+            $expirydate = date('Y-m-d H:i:s', strtotime('+1 hour'));
+    
+            $subject = 'Password Reset Request';
+            $resetLink = "http://localhost/../public/index.php?action=changepw&token=" . urlencode($token);
+    
+            $mailbody = "
+            <html>
+                <head>
+                    <style>
+                        body {
+                            font-family: Arial, sans-serif;
+                            background-color: #f9f9f9;
+                            color: #333;
+                            line-height: 1.6;
+                            margin: 0;
+                            padding: 0;
+                        }
+                        .email-container {
+                            max-width: 600px;
+                            margin: 20px auto;
+                            background: #ffffff;
+                            border: 1px solid #ddd;
+                            border-radius: 8px;
+                            overflow: hidden;
+                            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                        }
+                        .email-header {
+                            background-color: #ff6f61;
+                            color: #ffffff;
+                            text-align: center;
+                            padding: 20px;
+                            font-size: 24px;
+                            font-weight: bold;
+                        }
+                        .email-body {
+                            padding: 20px;
+                        }
+                        .email-body p {
+                            margin: 10px 0;
+                        }
+                        .reset-button {
+                            display: inline-block;
+                            margin: 20px 0;
+                            padding: 10px 20px;
+                            background-color: #ff6f61;
+                            color: #ffffff;
+                            text-decoration: none;
+                            font-size: 16px;
+                            font-weight: bold;
+                            border-radius: 5px;
+                        }
+                        .reset-button:hover {
+                            background-color: #e65a50;
+                        }
+                        .email-footer {
+                            text-align: center;
+                            padding: 10px;
+                            font-size: 12px;
+                            color: #777;
+                            background-color: #f1f1f1;
+                        }
+                    </style>
+                </head>
+                <body>
+                    <div class='email-container'>
+                        <div class='email-header'>
+                            Password Reset Request
+                        </div>
+                        <div class='email-body'>
+                            <p>Hi,</p>
+                            <p>We received a request to reset your password. Click the button below to reset your password:</p>
+                            <p style='text-align: center;'>
+                                <a href='$resetLink' class='reset-button'>Reset Password</a>
+                            </p>
+                            <p>If you did not request a password reset, please ignore this email or contact support if you have concerns.</p>
+                            <p>Thank you,<br>Two Hearts Confections Team</p>
+                        </div>
+                        <div class='email-footer'>
+                            &copy; " . date('Y') . " Two Hearts Confections. All rights reserved.
+                        </div>
+                    </div>
+                </body>
+            </html>";
+    
+            $this->forgotPwRequest($email, $mailbody, $subject, $token, $expirydate);
+            return;
+        }
+    
 
         if(isset($_SESSION['user_id'])){
             header('Location: ../views/dashboard/MainDash.php');
             exit;
 
         }
-        $this->loadView('forgotpw');
+        $this->loadView('forgotpw', [
+            'title' => 'Forgot Password',
+            'errors' => $this->errors,
+            'messages' => $this->messages,
+        ]);
+
     }
 
     public function forgotPwRequest($email,$mailbody,$subject,$token,$expirydate){
@@ -36,74 +132,29 @@ class ForgotPwController extends Controller{
         $errors = $this->forgotPwModel->forgotPwHandler($email,$token,$expirydate);
 
         if($errors){
-            foreach ($errors as $errorMessage) {
-                echo '<script>
-                    document.addEventListener("DOMContentLoaded", function() {
-                    const wrapper = document.querySelector(".wrapper.p-4.rounded.shadow.bg-white[style=\'width: 500px;\']");
-                    if (wrapper) {
-                        const heading = wrapper.querySelector("h1.text-center.mb-2");
-                        if (heading) {
-                            const alertDiv = document.createElement("div");
-                            alertDiv.className = "alert alert-danger";
-                            alertDiv.role = "alert";
-                            alertDiv.textContent = "' . $errorMessage . '";
-                            heading.insertAdjacentElement("afterend", alertDiv);
-                            
-                            // Set a timeout to fade out the alert after 5 seconds
-                            setTimeout(function() {
-                                let opacity = 1;
-                                const fadeInterval = setInterval(function() {
-                                    if (opacity <= 0) {
-                                        clearInterval(fadeInterval);
-                                        alertDiv.remove();
-                                    } else {
-                                        opacity -= 0.1;
-                                        alertDiv.style.opacity = opacity;
-                                    }
-                                }, 50); // Adjust the interval for smoother fading
-                            }, 5000);
-                        }
-                    }
-                    });
-                    </script>';
-            } 
+            $this->errors = $errors;
+            $this->loadView('forgotpw', [
+                'title' => 'Forgot Password',
+                'errors' => $this->errors,
+                'messages' => $this->messages,
+            ]);
+            
 
         }else{
             $this->sendEmail($email,$mailbody,$subject,$token);
-            echo '<script>
-                    document.addEventListener("DOMContentLoaded", function() {
-                    const wrapper = document.querySelector(".wrapper.p-4.rounded.shadow.bg-white[style=\'width: 500px;\']");
-                    if (wrapper) {
-                        const heading = wrapper.querySelector("h1.text-center.mb-2");
-                        if (heading) {
-                            const alertDiv = document.createElement("div");
-                            alertDiv.className = "alert alert-success";
-                            alertDiv.role = "success";
-                            alertDiv.textContent = "A password reset link has been sent to your email address. Please check your inbox.";
-                            heading.insertAdjacentElement("afterend", alertDiv);
-                            
-                            // Set a timeout to fade out the alert after 5 seconds
-                            setTimeout(function() {
-                                let opacity = 1;
-                                const fadeInterval = setInterval(function() {
-                                    if (opacity <= 0) {
-                                        clearInterval(fadeInterval);
-                                        alertDiv.remove();
-                                    } else {
-                                        opacity -= 0.1;
-                                        alertDiv.style.opacity = opacity;
-                                    }
-                                }, 50); // Adjust the interval for smoother fading
-                            }, 5000);
-                        }
-                    }
-                    });
-                    </script>';
+            $this->messages[] = "A password reset link has been sent to your email address.";
+            $this->loadView('forgotpw', [
+                'title' => 'Forgot Password',
+                'errors' => $this->errors,
+                'messages' => $this->messages,
+            ]);
         }
         
     }
 
 
+     
+   
     public function sendEmail($email,$mailbody,$subject,$token){
         $mail = new PHPMailer(true);
         try {

@@ -1,6 +1,6 @@
 
   <link href="assets/img/logo cookies.png" rel="icon">
-  <link href="assets/img/logo cookies.png" rel="icon">
+  
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com" rel="preconnect">

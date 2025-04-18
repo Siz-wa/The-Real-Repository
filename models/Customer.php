@@ -5,9 +5,8 @@ class Customer{
     private $conn;
 
 
-    public function __construct($db) {
-        $db = new Database();
-        $this->conn = $db ->connect();
+    public function __construct() {
+        $this->conn = Database::getInstance()->getConnection();
     }
 
     public function getAllCustomers(){

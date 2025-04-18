@@ -16,7 +16,7 @@ $router = new Router();
 
 $router->addroute('home','HomeController','Home');
 $router->addroute('faqs','FAQSController','Faqs');
-$router->addroute('changepw','ChangePwController','Faqs');
+$router->addroute('changepw','ChangePwController','ChangePwd');
 $router->addroute('aboutus','AboutUsController','AboutUs');
 $router->addroute('register','RegisterController','Register');
 $router->addroute('login','LoginController','Login');
