@@ -79,5 +79,20 @@ for now matutulog muna ako because there is a lot to be done
 //I think natapos ko na yung hardest part ng forgot pw which is yung putanginagn phpmailer shit
 at yung token handling sa database okay na ang sakit sa ulo tigil ko muna to
 
+// kaya ng mag palit ng chagne pw from forgot password 
+4:23 AM 4/19/25
+//ginawa ko nang MVC compliance ang system major chagnes sa code ng system
 
+========
+
+//4:21 AM 4/20/25 nagkaroon ng problema nnung nag set up ako ng php mailer sa registration page
+hindi sya nag gegenerate ng token like how it supposed to be yun pala yung method na responsible
+para mag return ng true boolean para ma trigger yung if(METHOD DITO) ay hindi nag rereturn kaya
+hindi na tatrigger yung if() although i manage to fix it this is where another problem came to be nung 
+gumamit na ako ng inheretance at abstraction kung saan nag karoon ng "Call to a member function prepare() on null"
+dahil may multiple connection akong inoopen sa bawat classes na ine extend ko . i manage to fix this 
+by just using parent::__construct but i dont even know this and i now know what is protected for
+
+i will end this log here.
+=========
 

@@ -1,0 +1,8 @@
+RewriteEngine On
+
+# Skip existing files and folders
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Rewrite everything to index.php with a GET parameter "action"
+RewriteRule ^(.+)$ index.php?action=$1 [QSA,L]

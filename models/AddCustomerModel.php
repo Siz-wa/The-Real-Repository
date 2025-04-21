@@ -1,25 +1,28 @@
 <?php
-require_once "../config/Database.php";
 
-class AddCustomerModel
-{
-
-  private $conn;
- 
+class AddCustomerModel extends TokenGeneratorModel{
   private $error = [];
+  
 
   public function __construct() {
-    $this->conn = Database::getInstance()->getConnection();
+    parent::__construct();
   }
 
-  public function handleFormSubmission($fname,$lname,$email,$password,$confirmPassword,$sex){
+  public function handleFormSubmission($fname,$lname,$email,$password,$confirmPassword,$sex,$token,$expiryDate) {
     
       //  Ito din gagalawin ko im gonna think about it
       // Validate form data
       if ($this->validate($fname,$lname,$email,$password,$confirmPassword,$sex)) {
 
         // If validation passes, register the user
-        $this->registerUser($fname,$lname,$email,$password, $sex);
+        if($this->registerUser($fname,$lname,$email,$password, $sex)){
+          // Sends email after registering the user into the database 
+          $this->tokendatabase($email, $token,$expiryDate);
+          return true; // Registration successful
+
+        } else{
+          return $this->error[] = "Something went wrong. Please try again later.";
+        }
         
       }else {
 
@@ -111,7 +114,11 @@ class AddCustomerModel
     $image = file_get_contents('../public/assets/img/gallery/Neon.png');
     $addCustomer->bindParam(':pfPicture', $image);
     $addCustomer->execute();
+
+    return true;
   }
+
+ 
 }
 ?>
 

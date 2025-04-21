@@ -1,35 +1,6 @@
-﻿<!DOCTYPE html>
-<html lang="en" dir="ltr">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Dashboard Template</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="icon" type="image/x-icon" href="favicon.png">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-        <link href="css2?family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" media="screen" href="assets/css/perfect-scrollbar.min.css">
-        <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css">
-        <link defer="" rel="stylesheet" type="text/css" media="screen" href="assets/css/animate.css">
-        <script src="assets/js/perfect-scrollbar.min.js"></script>
-        <script defer="" src="assets/js/popper.min.js"></script>
-        <script defer="" src="assets/js/tippy-bundle.umd.min.js"></script>
-        <script defer="" src="assets/js/sweetalert.min.js"></script>
-    </head>
-
-    <body x-data="main" class="relative overflow-x-hidden font-nunito text-sm font-normal antialiased" :class="[ $store.app.sidebar ? 'toggle-sidebar' : '', $store.app.theme === 'dark' || $store.app.isDarkMode ?  'dark' : '', $store.app.menu, $store.app.layout,$store.app.rtlClass]">
-        <!-- sidebar menu overlay -->
-       
-            <!-- end sidebar section -->
-
-            <div class="main-content flex flex-col min-h-screen">
-                <!-- start header section -->
-             
-                <!-- end header section -->
-
+<body x-data="main" class="relative overflow-x-hidden font-nunito text-sm font-normal antialiased" :class="[ $store.app.sidebar ? 'toggle-sidebar' : '', $store.app.theme === 'dark' || $store.app.isDarkMode ?  'dark' : '', $store.app.menu, $store.app.layout,$store.app.rtlClass]">
+            <div class="main-content flex flex-col min-h-screen">  
                 <div class="animate__animated p-6" :class="[$store.app.animation]">
-                    <!-- start main content section -->
 
                     <div x-data="notes">
                         <div class="relative flex h-full gap-5 sm:h-[calc(100vh_-_150px)]">
@@ -45,7 +16,7 @@
                                                 <path opacity="0.5" d="M11 12.8975L13.8978 13.6739" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
                                             </svg>
                                         </div>
-                                        <h3 class="text-lg font-semibold ltr:ml-3 rtl:mr-3">Notes</h3>
+                                        <h3 class="text-lg font-semibold ltr:ml-3 rtl:mr-3">Delivery Dates</h3>
                                     </div>
                                     <div class="my-4 h-px w-full border-b border-[#e0e6ed] dark:border-[#1b2e4b]"></div>
                                     <div class="perfect-scrollbar relative -mr-3.5 h-full grow pr-3.5">
@@ -145,7 +116,7 @@
                                                                 <div class="flex-none">
                                                                     <template x-if="note.thumb">
                                                                         <div class="rounded-full bg-gray-300 p-0.5 dark:bg-gray-700">
-                                                                            <img class="h-8 w-8 rounded-full object-cover" :src="`assets/images/${note.thumb}`">
+                                                                            <img class="h-8 w-8 rounded-full object-cover" :src="`assetsD/images/${note.thumb}`">
                                                                         </div>
                                                                     </template>
                                                                     <template x-if="!note.thumb && note.user">
@@ -437,12 +408,12 @@
             </div>
         </div>
 
-        <script src="assets/js/alpine-collaspe.min.js"></script>
-        <script src="assets/js/alpine-persist.min.js"></script>
-        <script defer="" src="assets/js/alpine-ui.min.js"></script>
-        <script defer="" src="assets/js/alpine-focus.min.js"></script>
-        <script defer="" src="assets/js/alpine.min.js"></script>
-        <script src="assets/js/custom.js"></script>
+        <script src="assetsD/js/alpine-collaspe.min.js"></script>
+        <script src="assetsD/js/alpine-persist.min.js"></script>
+        <script defer="" src="assetsD/js/alpine-ui.min.js"></script>
+        <script defer="" src="assetsD/js/alpine-focus.min.js"></script>
+        <script defer="" src="assetsD/js/alpine.min.js"></script>
+        <script src="assetsD/js/custom.js"></script>
         <script>
             document.addEventListener('alpine:init', () => {
                 // main section
@@ -1014,4 +985,3 @@
             });
         </script>
     </body>
-</html>

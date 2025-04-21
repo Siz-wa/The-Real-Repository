@@ -1,19 +1,11 @@
 <?php
 require_once "Controller.php";
 
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
-require '../vendor/autoload.php';
-
 class ForgotPwController extends Controller{
 
     private $errors = [];
     private $messages =[];
-    private $host = 'smtp.gmail.com';
-    private $smtpAuth = true;
-    private $username ='gordora.joey25@gmail.com';
-    private $appPassword = 'cfcg ogco dyix hvmf'; 
-    private $port = 587;
+   
 
     private $forgotPwModel;
    
@@ -52,7 +44,7 @@ class ForgotPwController extends Controller{
                             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
                         }
                         .email-header {
-                            background-color: #ff6f61;
+                            background-color: #0197e1;
                             color: #ffffff;
                             text-align: center;
                             padding: 20px;
@@ -69,7 +61,7 @@ class ForgotPwController extends Controller{
                             display: inline-block;
                             margin: 20px 0;
                             padding: 10px 20px;
-                            background-color: #ff6f61;
+                            background-color: #0197e1;
                             color: #ffffff;
                             text-decoration: none;
                             font-size: 16px;
@@ -77,7 +69,7 @@ class ForgotPwController extends Controller{
                             border-radius: 5px;
                         }
                         .reset-button:hover {
-                            background-color: #e65a50;
+                            background-color: #e58f3c;
                         }
                         .email-footer {
                             text-align: center;
@@ -141,7 +133,7 @@ class ForgotPwController extends Controller{
             
 
         }else{
-            $this->sendEmail($email,$mailbody,$subject,$token);
+            $this->sendEmail($email,$mailbody,$subject);
             $this->messages[] = "A password reset link has been sent to your email address.";
             $this->loadView('forgotpw', [
                 'title' => 'Forgot Password',
@@ -150,36 +142,6 @@ class ForgotPwController extends Controller{
             ]);
         }
         
-    }
-
-
-     
-   
-    public function sendEmail($email,$mailbody,$subject,$token){
-        $mail = new PHPMailer(true);
-        try {
-            //Server settings
-            $mail->isSMTP();                                            
-            $mail->Host       = $this->host;                     
-            $mail->SMTPAuth   = $this->smtpAuth;                                  
-            $mail->Username   = $this->username;                   
-            $mail->Password   = $this->appPassword;                              
-            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         
-            $mail->Port       = $this->port;                                    
-
-            //Recipients
-            $mail->setFrom($this->username, 'Two Hearts Confections');
-            $mail->addAddress($email);     
-
-            // Content
-            $mail->isHTML(true);                                  
-            $mail->Subject = $subject;
-            $mail->Body = $mailbody;
-            
-            $mail->send();
-        } catch (Exception $e) {
-            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-        }
     }
 }
 ?>

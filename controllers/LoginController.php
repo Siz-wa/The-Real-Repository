@@ -62,8 +62,10 @@ class LoginController extends Controller{
                 'email' => $user['email']
             ];
 
-            header("Location: ../views/dashboard/MainDash.php");
-            exit();
+            $this->loadView2('dashboarduser', [
+                'title' => 'Dashboard',
+                'user' => $_SESSION['user'],
+            ]);
         }else{
             $errors = $result['errors'];
             $this->loadView('login', [

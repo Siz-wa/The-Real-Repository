@@ -1,23 +1,8 @@
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Two Hearts Confections</title>
-  <meta name="description" content="">
-  <meta name="keywords" content="">
-
-</head>
-
-<body class="starter-page-page">
-
-  <main class="main d-flex justify-content-center align-items-center" style="height: 100vh; background-color:rgb(238, 238, 238);">
+<main class="main d-flex justify-content-center align-items-center" style="height: 100vh; background-color:rgb(238, 238, 238);">
     
 <div class="wrapper p-4 rounded shadow bg-white" style="width: 500px;">
       
-        <h1 class="text-center mb-2">Forgot Password ?</h1>
+        <h1 class="text-center mb-2">Sign In ?</h1>
         <?php if (isset($errors) && is_array($errors)): ?>
         <?php foreach ($errors as $error): ?>
         <div class="alert alert-danger" role="alert">
@@ -42,7 +27,7 @@
         </div>
 
         <div class="mb-3">
-          <label for="email" class="form-label">Email</label>
+          <label for="email" class="form-label">Password</label>
           <input name="password" type="password" id="password" class="form-control" placeholder="Enter your password" required>
         </div>
 
@@ -113,6 +98,3 @@
         });
       });
   </script>
-</body>
-
-</html>

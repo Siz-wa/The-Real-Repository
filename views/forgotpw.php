@@ -1,17 +1,4 @@
 
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Two Hearts Confections</title>
-  <meta name="description" content="">
-  <meta name="keywords" content="">
-
-</head>
-
-<body class="starter-page-page">
 
   <main class="main d-flex justify-content-center align-items-center" style="height: 100vh; background-color:rgb(238, 238, 238);">
     
@@ -99,6 +86,3 @@
         });
       });
   </script>
-</body>
-
-</html>
