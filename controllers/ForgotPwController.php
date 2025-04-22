@@ -14,6 +14,11 @@ class ForgotPwController extends Controller{
     }    
     public function ForgotPw(){
 
+        if (isset($_SESSION['user']['user_id'])) {
+            header("Location: ../public/index.php?action=dashboarduser");
+            exit();
+        }
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $email = $_POST['email'];
             $token = bin2hex(random_bytes(32));
@@ -107,8 +112,8 @@ class ForgotPwController extends Controller{
     
 
         if(isset($_SESSION['user_id'])){
-            header('Location: ../views/dashboard/MainDash.php');
-            exit;
+            $this->loadUserDashboard('dashboard');
+            return;
 
         }
         $this->loadView('forgotpw', [

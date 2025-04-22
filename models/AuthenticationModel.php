@@ -17,16 +17,29 @@ class AuthenticationModel {
        
         if($this->validate($email,$password)){
            $user = $this->findUser($email,$password);
+            
+           if($this->getRole($user['customerID'])){
+                return[
+                    'success' => true,
+                    'user' => $user,
+                    'admin' => true,
+                    'errors' => null
+                   ];
 
-           return[
-            'success' => true,
-            'user' => $user,
-            'errors' => null
-           ];
+            }else{
+                return[
+                    'success' => true,
+                    'user' => $user,
+                    'admin' => false,
+                    'errors' => null
+                   ];
+            }
+
         } else{
             return [
                 'success' => false,
                 'user' => null,
+                'admin' => false,
                 'errors' => $this->errors
             ];
         }
@@ -69,6 +82,23 @@ class AuthenticationModel {
         }
 
     }
+
+    public function getRole($userID){
+        try {
+            $query = "SELECT * FROM administrator WHERE userID = :customerID";
+            $getRole = $this->conn->prepare($query);
+            $getRole->bindParam(':customerID', $userID);
+            $getRole->execute();
+            if ($getRole->rowCount() > 0) {
+            return true;
+            }
+        } catch (PDOException $e) {
+            $this->errors[] = "Error fetching role: " . $e->getMessage();
+            return false;
+        }
+    }
+
+
 
 }
 

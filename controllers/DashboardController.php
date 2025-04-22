@@ -6,8 +6,13 @@ class DashboardController extends Controller{
     }
 
     public function Dashboard() {
+
+        if (isset($_SESSION['user']['user_id']) && $_SESSION['user']['admin'] === true) {
+            header("Location: ../public/index.php?action=admindashboard");
+            exit();
+        }
         // Load the dashboard view
-        $this->loadView2('dashboarduser');
+        $this->loadUserDashboard('dashboarduser');
     }
 
 }

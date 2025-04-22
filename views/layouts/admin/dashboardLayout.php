@@ -19,6 +19,7 @@
         <main class="page-view">
             <?php include "../views/{$view}.php"; ?>
         </main>
+    
     </div>
 
     <?php include "dashboardAsset2.php"; ?>

@@ -11,7 +11,10 @@ class RegisterController extends Controller{
     }
     public function Register(){
 
-      // Check if the form is submitted
+      if (isset($_SESSION['user']['user_id'])) {
+        header("Location: ../public/index.php?action=dashboarduser");
+        exit();
+    }
 
       if(isset($_POST['submit'])){
         if(isset($_POST['fname']) && isset($_POST['lname']) && isset($_POST['email']) && isset($_POST['password']) && isset($_POST['confirm-password'])&& isset($_POST['sex'])){

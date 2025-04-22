@@ -21,9 +21,10 @@ $router->addroute('aboutus','AboutUsController','AboutUs');
 $router->addroute('register','RegisterController','Register');
 $router->addroute('login','LoginController','Login');
 $router->addroute('services1','ServicesController','Services');
-$router->addroute('contact','ContactController',method: 'Contact');
+$router->addroute('contact','ContactController','Contact');
 $router->addroute('forgotpw','ForgotPwController','ForgotPw');
 $router->addroute('dashboarduser','DashboardController','Dashboard');
+$router->addroute('admindashboard','AdminDashboardController','AdminDashboard');
 
 
 

@@ -313,7 +313,6 @@
       </div>
 
     </section><!-- /Developer Section -->
-
     </section><!-- /About Section -->
   </main>
 

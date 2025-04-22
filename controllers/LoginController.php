@@ -31,8 +31,8 @@ class LoginController extends Controller{
           
         }
 
-        if (isset($_SESSION['user_id'])) {
-            header("Location: ../views/dashboard/MainDash.php");
+        if (isset($_SESSION['user']['user_id'])) {
+            header("Location: ../public/index.php?action=dashboarduser");
             exit();
         }
     
@@ -55,17 +55,23 @@ class LoginController extends Controller{
                 'lname' => $user['lname'],
                 'sex' => $user['sex'],
                 'phoneNo' => $user['phoneNo'],
-                'address' => $user['address'],
+                'blk' => $user['blk'],
+                'lot' => $user['lot'],
+                'zipcode' => $user['ZipCode'],
                 'province' => $user['province'],
                 'pfPicture' => "data:image/jpeg;base64," . base64_encode($user['pfPicture']),
-                'salesrepEmployeeNum' => $user['salesrepEmployeeNum'],
-                'email' => $user['email']
+                'email' => $user['email'],
+                'admin' => $result['admin'],
             ];
 
-            $this->loadView2('dashboarduser', [
-                'title' => 'Dashboard',
-                'user' => $_SESSION['user'],
-            ]);
+            if($result['admin']){
+                header("Location: ../public/index.php?action=admindashboard");
+                exit();
+            }else{
+                header("Location: ../public/index.php?action=dashboarduser");
+                exit();
+            }
+
         }else{
             $errors = $result['errors'];
             $this->loadView('login', [

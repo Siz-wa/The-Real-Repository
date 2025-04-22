@@ -5,8 +5,6 @@ use PHPMailer\PHPMailer\Exception;
 require '../vendor/autoload.php';
 
 class Controller {
-
-
     private $host = 'smtp.gmail.com';
     private $smtpAuth = true;
     private $username ='gordora.joey25@gmail.com';
@@ -24,9 +22,16 @@ class Controller {
         include "../views/layouts/generals/generalLayout.php";
     }
 
-    public function loadView2($view, $data = []) {
+    public function loadUserDashboard($view, $data = []) {
         extract($data);
-        include "../views/layouts/dashboard/dashboardLayout.php";  
+        include "../views/layouts/users/dashboardLayout.php";  
+
+    }
+    
+    // this is for admin
+    public function loadAdmin($view, $data = []) {
+        extract($data);
+        include "../views/layouts/admin/dashboardLayout.php";  
 
     }
 
