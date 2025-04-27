@@ -533,7 +533,7 @@
                                                 <tr class="group text-white-dark hover:text-black dark:hover:text-white-light/90">
                                                 <td class="min-w-[150px] text-black dark:text-white">
                                                         <div class="flex">
-                                                            <img class="h-8 w-8 rounded-md object-cover ltr:mr-3 rtl:ml-3" src="<?= $recentOrder['pfPicture'] ? 'data:image/jpeg;base64,' . base64_encode($prod['image']) : 'default.jpg' ?>" alt="avatar">
+                                                            <img class="h-8 w-8 rounded-md object-cover ltr:mr-3 rtl:ml-3" src="<?= $prod['image'] ? 'data:image/jpeg;base64,' . base64_encode($prod['image']) : 'default.jpg' ?>" alt="avatar">
                                                             <p class="whitespace-nowrap"><?= $prod['productName']?><span class="block text-xs text-primary"><?= htmlspecialchars($prod['category'])?></span></p>
                                                         </div>
                                                     </td>
@@ -564,10 +564,9 @@
                 <div class="mt-auto p-6 pt-0 text-center dark:text-white-dark ltr:sm:text-left rtl:sm:text-right">
                     © <span id="footer-year">2022</span>. kyuuush All rights reserved.
                 </div>
-                <!-- end footer section -->
+                
             </div>
         </div>
-
 
       <script>
             //GRAPH FOR EXPENSES AND REVENUES 
@@ -577,8 +576,10 @@
             const maxExpensesIndex = monthlyExpenses.indexOf(Math.max(...monthlyExpenses));
 
             // PIE CHART FOR ORDER BY CATEGORY
+            
             const categories =<?= json_encode($categories,JSON_HEX_TAG)?>;
-            const order =<?= json_encode($order,JSON_HEX_TAG)?>;
+            const percentage =<?= json_encode($percentage,JSON_HEX_TAG)?>;
+            let formattedPercentage = percentage.map(val => parseFloat(val));
 
             // for total orders
             const monthlyOrder = <?= json_encode($monthlyOrder)?>;
@@ -1005,23 +1006,25 @@
                     // sales by category
                     get salesByCategoryOptions() {
                         return {
-                            series: order,
+                            series: formattedPercentage,
                             chart: {
                                 type: 'donut',
                                 height: 460,
                                 fontFamily: 'Nunito, sans-serif',
                             },
                             dataLabels: {
-                                enabled: false,
+                                enabled: true, // <--- ENABLE datalabels to show percentage on each slice
+                                
                             },
                             stroke: {
                                 show: true,
                                 width: 20,
                                 colors: isDark ? '#0e1726' : '#fff',
                             },
-                            colors: isDark ? ['#5c1ac3', '#e2a03f', '#e7515a', '#e2a03f'] : ['#e2a03f', '#5c1ac3', '#e7515a'],
+                            colors: isDark ? ['#5c1ac3', '#e2a03f', '#e7515a', '#7b52ff', '#ff7b7b', '#f9a500', '#52c1f5', '#ff6347', '#8e44ad', '#2ecc71']
+                            : ['#e2a03f', '#5c1ac3', '#e7515a', '#ff8c00', '#6b8e23', '#00bfff', '#ff6347', '#ff69b4', '#32cd32', '#ff4500'],
                             legend: {
-                                position: 'bottom',
+                                position: 'top',
                                 horizontalAlign: 'center',
                                 fontSize: '14px',
                                 markers: {
@@ -1059,9 +1062,7 @@
                                                 color: '#888ea8',
                                                 fontSize: '29px',
                                                 formatter: (w) => {
-                                                    return w.globals.seriesTotals.reduce(function (a, b) {
-                                                        return a + b;
-                                                    }, 0);
+                                                    return "100.00%"
                                                 },
                                             },
                                         },
@@ -1118,7 +1119,8 @@
                                 show: true,
                                 width: 1,
                             },
-                            colors: ['#e2a03f', '#e0e6ed'],
+                            colors: ['#5c1ac3', '#e2a03f', '#e7515a', '#2196f3', '#4caf50', '#ff5722', '#9c27b0', '#00bcd4']
+                            ,
                             responsive: [
                                 {
                                     breakpoint: 480,

@@ -265,16 +265,18 @@ class AdminDashboardModel{
     public function getSalesByCategory() {
         try {
             $query = "
-            SELECT c.name AS category_name, COUNT(op.orderID) AS totalOrder
-            FROM order_product op
-            JOIN product p ON op.productID = p.productID
-            JOIN category c ON p.categoryID = c.categoryID
-            GROUP BY c.name
+                SELECT 
+                    c.name AS category_name, 
+                    COUNT(op.orderID) AS totalOrder,
+                    ROUND((COUNT(op.orderID) / (SELECT COUNT(*) FROM order_product)) * 100, 2) AS percentage
+                FROM order_product op
+                JOIN product p ON op.productID = p.productID
+                JOIN category c ON p.categoryID = c.categoryID
+                GROUP BY c.name
             ";
-
-            $stmt = $this->conn->prepare($query);
-            $stmt->execute();
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $percentage = $this->conn->prepare($query);
+            $percentage->execute();
+            return $percentage->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
             error_log("Error fetching orders by category: " . $e->getMessage());
             return [];

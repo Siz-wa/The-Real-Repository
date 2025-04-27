@@ -29,10 +29,10 @@ class AdminDashboardController extends Controller{
         $analyticsData = $this->adminDashboardModel->adminDashboardHandler();
         // Format data for the view
         $categories = [];
-        $order = [];
+        $percetage = [];
         foreach ($analyticsData['salesByCat'] as $data) {
             $categories[] = $data['category_name'];
-            $order[] = $data['totalOrder'];
+            $percentage[] = $data['percentage'];
         }
         // calculationg the profit
         $profit = $analyticsData['totalRevenue'] - $analyticsData['totalExpenses'];
@@ -44,7 +44,7 @@ class AdminDashboardController extends Controller{
             'monthlyExpenses' => $analyticsData['monthlyExpenses'],
             'totalExpenses' => $analyticsData['totalExpenses'],
             'categories' => $categories,
-            'order' => $order,
+            'percentage' => $percentage,
             'totalOrder' => $analyticsData['totalOrder'],
             'monthlyOrder' => $analyticsData['monthlyOrder'],
             'profit' => $profit,

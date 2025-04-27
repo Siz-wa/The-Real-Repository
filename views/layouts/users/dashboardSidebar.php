@@ -207,7 +207,7 @@
                                         <a href="../public/index.php?action=admindashboard">Analytics</a>
                                     </li>
                                     <li>
-                                        <a href="index.html">Sales</a>
+                                        <a href="../public/index.php?action=demographics">Demographics</a>
                                     </li>
                                     <li>
                                         <a href="finance.html">Finance</a>

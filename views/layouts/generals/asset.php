@@ -1,5 +1,4 @@
-
-  <link href="assets/img/logo cookies.png" rel="icon">
+  <link rel="icon" type="image/x-icon" href="../public/assets/img/thc logo.png">  
   
 
   <!-- Fonts -->

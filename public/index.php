@@ -27,6 +27,7 @@ $router->addroute('dashboarduser','DashboardController','Dashboard');
 $router->addroute('admindashboard','AdminDashboardController','AdminDashboard');
 $router->addroute('logout','LogoutController','Logout');
 $router->addroute('profile','ProfileController','Profile');
+$router->addroute('demographics','DemographicsController','Demographics');
 
 
 
