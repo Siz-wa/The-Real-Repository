@@ -173,7 +173,7 @@
 
                     <!-- USER -->
                         <div class="flex items-center justify-between px-4 py-3">
-                            <a href="index.html" class="main-logo flex shrink-0 items-center">
+                            <a href="../public/index.php?action=profile" class="main-logo flex shrink-0 items-center">
                                 <img class="ml-[3px] w-12 h-12 rounded-full flex-none" src="<?php echo htmlspecialchars($_SESSION['user']['pfPicture']); ?>" alt="image">
                                 <span class="align-middle text-sm font-semibold ltr:ml-1.5 rtl:mr-1.5 dark:text-white-light lg:inline block break-words truncate max-w-[80px]"><?php echo htmlspecialchars($_SESSION['user']['fname'].' '.$_SESSION['user']['lname'])?></span>
                             </a>
@@ -202,11 +202,12 @@
                                     </div>
                                 </button>
                                 <ul x-cloak="" x-show="activeDropdown === 'dashboard'" x-collapse="" class="sub-menu text-gray-500">
+                                    
                                     <li>
-                                        <a href="index.html" class="active">Sales</a>
+                                        <a href="../public/index.php?action=admindashboard">Analytics</a>
                                     </li>
                                     <li>
-                                        <a href="analytics.html">Analytics</a>
+                                        <a href="index.html">Sales</a>
                                     </li>
                                     <li>
                                         <a href="finance.html">Finance</a>

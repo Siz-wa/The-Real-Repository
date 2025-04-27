@@ -2,7 +2,6 @@
 class AdminDashboardController extends Controller{
 
     private $adminDashboardModel;
-
     public function __construct(){
         $this->adminDashboardModel = new AdminDashboardModel();   
     }
@@ -12,9 +11,7 @@ class AdminDashboardController extends Controller{
         if (isset($_SESSION['user']['user_id']) && $_SESSION['user']['admin'] === false) {
             header("Location: ../public/index.php?action=dashboarduser");
             exit();
-        }
- 
-        
+        } 
         // foreach($testing as $test){
         //     $orderID = $test['orderID'];
         //     $productName = $test['productName'];
@@ -28,12 +25,33 @@ class AdminDashboardController extends Controller{
         //     $this->adminDashboardModel->insertExpenses($category, $desc, $totalCost, $orderID);
 
         // }
+
         $analyticsData = $this->adminDashboardModel->adminDashboardHandler();
+        // Format data for the view
+        $categories = [];
+        $order = [];
+        foreach ($analyticsData['salesByCat'] as $data) {
+            $categories[] = $data['category_name'];
+            $order[] = $data['totalOrder'];
+        }
+        // calculationg the profit
+        $profit = $analyticsData['totalRevenue'] - $analyticsData['totalExpenses'];
+
 
         $this->loadAdmin('adminDashboard', [
             'monthlyRevenue' => $analyticsData['monthlyRevenue'],
             'totalRevenue' => $analyticsData['totalRevenue'],
-            'monthlyExpenses' => $analyticsData['monthlyExpenses']
+            'monthlyExpenses' => $analyticsData['monthlyExpenses'],
+            'totalExpenses' => $analyticsData['totalExpenses'],
+            'categories' => $categories,
+            'order' => $order,
+            'totalOrder' => $analyticsData['totalOrder'],
+            'monthlyOrder' => $analyticsData['monthlyOrder'],
+            'profit' => $profit,
+            'currentWeek' => $analyticsData['currentWeek'],
+            'lastWeek' => $analyticsData['lastWeek'],
+            'recentOrders' => $analyticsData['recentOrders'],
+            'topProd' => $analyticsData['topProd']
         ]);
     }
 

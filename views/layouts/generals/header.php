@@ -30,8 +30,9 @@
             <p class="mb-0"><strong><?php echo htmlspecialchars($_SESSION['user']['fname']) . ' ' . htmlspecialchars($_SESSION['user']['lname']); ?></strong></p>
           </li>
           <li><hr class="dropdown-divider"></li>
-          <li><a class="dropdown-item" href="../public/index.php?action=profile">View Profile</a></li>
-          <li><a class="dropdown-item" href="../sessionDestroyer.php">Log Out</a></li>
+          <li><a class="dropdown-item bi bi-person-fill" href="../public/index.php?action=profile"> View Profile</a></li>
+          <li><a class="dropdown-item bi bi-grid-fill" href="../public/index.php?action=admindashboard"> Dashboard</a></li>
+          <li><a class="dropdown-item bi-door-open-fill" href="../public/index.php?action=logout"> Log Out</a></li>
         </ul>
       </div>
     <?php else: ?>

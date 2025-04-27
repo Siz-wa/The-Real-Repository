@@ -57,10 +57,13 @@ class LoginController extends Controller{
                 'phoneNo' => $user['phoneNo'],
                 'blk' => $user['blk'],
                 'lot' => $user['lot'],
-                'zipcode' => $user['ZipCode'],
+                'zipCode' => $user['ZipCode'],
                 'province' => $user['province'],
+                'city' => $user['city'],
                 'pfPicture' => "data:image/jpeg;base64," . base64_encode($user['pfPicture']),
                 'email' => $user['email'],
+                'Bday' => $user['Bday'],
+                'isVerified' => $user['isVerified'],
                 'admin' => $result['admin'],
             ];
 

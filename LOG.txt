@@ -96,3 +96,4 @@ by just using parent::__construct but i dont even know this and i now know what 
 i will end this log here.
 =========
 
+// may babalikan ako sa admin yung mga table dapat pag na click mapupunta sa specific page. aalis lang ako sandali para ayusin yung iba

@@ -25,6 +25,8 @@ $router->addroute('contact','ContactController','Contact');
 $router->addroute('forgotpw','ForgotPwController','ForgotPw');
 $router->addroute('dashboarduser','DashboardController','Dashboard');
 $router->addroute('admindashboard','AdminDashboardController','AdminDashboard');
+$router->addroute('logout','LogoutController','Logout');
+$router->addroute('profile','ProfileController','Profile');
 
 
 
