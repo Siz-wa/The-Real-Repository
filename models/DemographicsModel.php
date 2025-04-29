@@ -95,9 +95,9 @@ class DemographicsModel{
             $query = "
             SELECT 
                 CASE 
-                    WHEN sex = 'male' THEN 'male'
-                    WHEN sex = 'female' THEN 'female'
-                    ELSE 'others'
+                    WHEN sex = 'Male' THEN 'Male'
+                    WHEN sex = 'Female' THEN 'Female'
+                    ELSE 'Others'
                 END AS gender, 
                 COUNT(*) AS genderCount,
                 ROUND((COUNT(*) / (SELECT COUNT(*) FROM customer)) * 100, 2) AS percentage
