@@ -17,16 +17,16 @@ class CitiesModel{
         try{
             $query = "
             SELECT 
-                city,
+                COALESCE(NULLIF(city, ''), 'Users with undefined city') AS city,
                 COUNT(*) AS totalCustomers,
                 ROUND((COUNT(*) / (SELECT COUNT(*) FROM customer)) * 100, 2) AS cityPercentage
             FROM 
                 customer
             GROUP BY 
-                city
+                COALESCE(NULLIF(city, ''), 'Others')
             ORDER BY 
                 totalCustomers DESC
-            ";
+        ";
 
             $getCityData = $this->conn->prepare($query);
             $getCityData -> execute();

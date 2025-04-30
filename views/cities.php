@@ -248,6 +248,8 @@
                     },
                 }));
 
+
+
                 Alpine.data('multipleTable', () => ({
               
                     datatable2: null,
@@ -271,9 +273,7 @@
                                 {
                                     select: 0,
                                     render: (data, cell, row) => {
-                                        return `<div class="flex items-center w-max"><img class="w-9 h-9 rounded-full ltr:mr-2 rtl:ml-2 object-cover" src="assets/images/profile-${
-                                            row.dataIndex + 1
-                                        }.jpeg" />${data}</div>`;
+                                        return `<a href="../public/index.php?action=citydata&cityName=${encodeURIComponent(data)}"><div class="flex items-center w-max">${data}</div></a>`;
                                     },
                                     sort: 'asc',
                                 },
