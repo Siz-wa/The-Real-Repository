@@ -31,6 +31,9 @@ $router->addroute('demographics','DemographicsController','Demographics');
 $router->addroute('cities','CitiesController','Cities');
 $router->addroute('verifyaccount','VerifyAccountController','VerifyAccount');
 $router->addroute('citydata','CityDataController','CityData');
+$router->addroute('users','UsersController','Users');
+$router->addroute('orderdetails','OrderDetailsController','OrderDetails');
+$router->addroute('paymentdetails','PaymentDetailsController','PaymentDetails');
 
 
 

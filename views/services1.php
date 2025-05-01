@@ -4,7 +4,7 @@
       <div class="container">
         <div class="row justify-content-center">
           <!-- Basic Plan -->
-          <div class="col-lg-3 mb-4">
+          <!-- <div class="col-lg-3 mb-4">
             <a href="Services.html" style="text-decoration: none;">
               <div class="card h-100 text-center border-0 shadow" style="transition: all 0.4s ease; border-radius: 20px; overflow: hidden; cursor: pointer;">
                 <div class="card-header text-white" style="background-color: #f4b89e;">
@@ -21,7 +21,7 @@
                 </div>
               </div>
             </a>
-          </div>
+          </div> -->
   
           <!-- Standard Plan -->
           <div class="col-lg-3 mb-4">

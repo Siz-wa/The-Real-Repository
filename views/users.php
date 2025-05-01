@@ -16,22 +16,19 @@
                     </li>
                 </ul>
                 <div class="pt-5">
-                    <div class="mb-5 grid grid-cols-1 gap-5 lg:grid-cols-3 xl:grid-cols-4">
-                        <div class="panel">
+
+                <div class="panel mb-5 lg:col-span-2">
                             <div class="mb-5 flex items-center justify-between">
                                 <h5 class="text-lg font-semibold dark:text-white-light">Profile</h5>
-                                <a href="users-account-settings.html" class="btn btn-primary rounded-full p-2 ltr:ml-auto rtl:mr-auto">
-                                    <svg width="24" height="24" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5">
-                                        <path opacity="0.5" d="M4 22H20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
-                                        <path d="M14.6296 2.92142L13.8881 3.66293L7.07106 10.4799C6.60933 10.9416 6.37846 11.1725 6.17992 11.4271C5.94571 11.7273 5.74491 12.0522 5.58107 12.396C5.44219 12.6874 5.33894 12.9972 5.13245 13.6167L4.25745 16.2417L4.04356 16.8833C3.94194 17.1882 4.02128 17.5243 4.2485 17.7515C4.47573 17.9787 4.81182 18.0581 5.11667 17.9564L5.75834 17.7426L8.38334 16.8675L8.3834 16.8675C9.00284 16.6611 9.31256 16.5578 9.60398 16.4189C9.94775 16.2551 10.2727 16.0543 10.5729 15.8201C10.8275 15.6215 11.0583 15.3907 11.5201 14.929L11.5201 14.9289L18.3371 8.11195L19.0786 7.37044C20.3071 6.14188 20.3071 4.14999 19.0786 2.92142C17.85 1.69286 15.8581 1.69286 14.6296 2.92142Z" stroke="currentColor" stroke-width="1.5"></path>
-                                        <path opacity="0.5" d="M13.8879 3.66406C13.8879 3.66406 13.9806 5.23976 15.3709 6.63008C16.7613 8.0204 18.337 8.11308 18.337 8.11308M5.75821 17.7437L4.25732 16.2428" stroke="currentColor" stroke-width="1.5"></path>
-                                    </svg>
-                                </a>
                             </div>
                             <div class="mb-5">
                                 <div class="flex flex-col items-center justify-center">
-                                    <img src="<?php echo $_SESSION['user']['pfPicture']?>" alt="image" class="mb-5 h-24 w-24 rounded-full object-cover">
-                                    <p class="text-xl font-semibold text-primary"><?php echo $_SESSION['user']['fname'].' '.$_SESSION['user']['lname'] ?></p>
+                                    <?php if(empty($pfPicture)):?>
+                                        <img src="<?= $pfPicture ?>" alt="image" class="mb-5 h-24 w-24 rounded-full object-cover">
+                                    <?php else:?>
+                                        <img src="../public/assetsD/images/user-profile.jpeg" alt="nigga" class="mb-5 h-24 w-24 rounded-full object-cover">
+                                    <?php endif;?>    
+                                    <p class="text-xl font-semibold text-primary"><?= htmlspecialchars($fname.' '.$lname)?></p>
                                 </div>
                                 <ul class="m-auto mt-5 flex max-w-[160px] flex-col space-y-4 font-semibold text-white-dark">
                                     <li class="flex items-center gap-2">
@@ -42,7 +39,7 @@
                                             <path d="M4.99994 7.5L5.11605 7.38388C5.62322 6.87671 5.68028 6.0738 5.24994 5.5C4.81959 4.9262 4.87665 4.12329 5.38382 3.61612L5.49994 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                                             <path d="M14.4999 7.5L14.6161 7.38388C15.1232 6.87671 15.1803 6.0738 14.7499 5.5C14.3196 4.9262 14.3767 4.12329 14.8838 3.61612L14.9999 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                                         </svg>
-                                        <?php if ($_SESSION === 1): ?>
+                                        <?php if ($isVerified === 1): ?>
                                             <?php echo htmlspecialchars('Verified'); ?>
                                         <?php else: ?>
                                             <?php echo "Unverified"; ?>
@@ -55,8 +52,8 @@
                                             <path opacity="0.5" d="M17 4V2.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
                                             <path opacity="0.5" d="M2 9H22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
                                         </svg>
-                                        <?php if (isset($_SESSION['user']['Bday'])): ?>
-                                            <?php echo htmlspecialchars($_SESSION['user']['Bday']); ?>
+                                        <?php if (isset($Bday)): ?>
+                                            <?= htmlspecialchars($Bday)?>
                                         <?php else: ?>
                                             <?php echo "No Data Yet"; ?>
                                         <?php endif; ?> 
@@ -68,7 +65,7 @@
                                         </svg>
                 
                                         <?php if (!empty($_SESSION['user']['province']) && !empty($_SESSION['user']['city'])): ?>
-                                            <?php echo htmlspecialchars($_SESSION['user']['province'] . ', ' . $_SESSION['user']['city']); ?>
+                                            <?= htmlspecialchars($city.', '.$province)?>
                                         <?php else: ?>
                                             <?php echo "No Data Yet"; ?>
                                         <?php endif; ?>    
@@ -79,7 +76,7 @@
                                                 <path opacity="0.5" d="M2 12C2 8.22876 2 6.34315 3.17157 5.17157C4.34315 4 6.22876 4 10 4H14C17.7712 4 19.6569 4 20.8284 5.17157C22 6.34315 22 8.22876 22 12C22 15.7712 22 17.6569 20.8284 18.8284C19.6569 20 17.7712 20 14 20H10C6.22876 20 4.34315 20 3.17157 18.8284C2 17.6569 2 15.7712 2 12Z" stroke="currentColor" stroke-width="1.5"></path>
                                                 <path d="M6 8L8.1589 9.79908C9.99553 11.3296 10.9139 12.0949 12 12.0949C13.0861 12.0949 14.0045 11.3296 15.8411 9.79908L18 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
                                             </svg>
-                                            <span class="truncate text-primary"><?php echo htmlspecialchars($_SESSION['user']['email'])?></span></a>
+                                            <span class="truncate text-primary"><?= htmlspecialchars($email)?></span></a>
                                     </li>
                                     <li class="flex items-center gap-2">
                                         <svg width="24" height="24" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5">
@@ -88,8 +85,8 @@
                                             <path opacity="0.5" d="M16.1007 13.3589C16.1007 13.3589 15.0181 14.4353 12.0631 11.4971C9.10807 8.55886 10.1907 7.48242 10.1907 7.48242" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
                                         </svg>
                                         <span class="whitespace-nowrap" dir="ltr">
-                                        <?php if (!empty($_SESSION['user']['phoneNo'])): ?>
-                                            <?php echo htmlspecialchars($_SESSION['user']['phoneNo']); ?>
+                                        <?php if (!empty($phoneNo)): ?>
+                                           <?= htmlspecialchars($phoneNo)?>
                                         <?php else: ?>
                                             <?php echo "No Data Yet"; ?>
                                         <?php endif; ?>
@@ -120,318 +117,95 @@
                                         </a>
                                     </li>
                                 </ul>
+                                
                             </div>
-                        </div>
-                        <div class="panel lg:col-span-2 xl:col-span-3">
-                            <div class="mb-5">
-                                <h5 class="text-lg font-semibold dark:text-white-light">Task</h5>
-                            </div>
-                            <div class="mb-5">
-                                <div class="table-responsive font-semibold text-[#515365] dark:text-white-light">
-                                    <table class="whitespace-nowrap">
-                                        <thead>
-                                            <tr>
-                                                <th>Projects</th>
-                                                <th>Progress</th>
-                                                <th>Task Done</th>
-                                                <th class="text-center">Time</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody class="dark:text-white-dark">
-                                            <tr>
-                                                <td>Figma Design</td>
-                                                <td>
-                                                    <div class="flex h-1.5 w-full rounded-full bg-[#ebedf2] dark:bg-dark/40">
-                                                        <div class="w-[29.56%] rounded-full bg-danger"></div>
-                                                    </div>
-                                                </td>
-                                                <td class="text-danger">29.56%</td>
-                                                <td class="text-center">2 mins ago</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Vue Migration</td>
-                                                <td>
-                                                    <div class="flex h-1.5 w-full rounded-full bg-[#ebedf2] dark:bg-dark/40">
-                                                        <div class="w-1/2 rounded-full bg-info"></div>
-                                                    </div>
-                                                </td>
-                                                <td class="text-success">50%</td>
-                                                <td class="text-center">4 hrs ago</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Flutter App</td>
-                                                <td>
-                                                    <div class="flex h-1.5 w-full rounded-full bg-[#ebedf2] dark:bg-dark/40">
-                                                        <div class="w-[39%] rounded-full bg-warning"></div>
-                                                    </div>
-                                                </td>
-                                                <td class="text-danger">39%</td>
-                                                <td class="text-center">a min ago</td>
-                                            </tr>
-                                            <tr>
-                                                <td>API Integration</td>
-                                                <td>
-                                                    <div class="flex h-1.5 w-full rounded-full bg-[#ebedf2] dark:bg-dark/40">
-                                                        <div class="w-[78.03%] rounded-full bg-success"></div>
-                                                    </div>
-                                                </td>
-                                                <td class="text-success">78.03%</td>
-                                                <td class="text-center">2 weeks ago</td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>Blog Update</td>
-                                                <td>
-                                                    <div class="flex h-1.5 w-full rounded-full bg-[#ebedf2] dark:bg-dark/40">
-                                                        <div class="w-full rounded-full bg-secondary"></div>
-                                                    </div>
-                                                </td>
-                                                <td class="text-success">100%</td>
-                                                <td class="text-center">18 hrs ago</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Landing Page</td>
-                                                <td>
-                                                    <div class="flex h-1.5 w-full rounded-full bg-[#ebedf2] dark:bg-dark/40">
-                                                        <div class="w-[19.15%] rounded-full bg-danger"></div>
-                                                    </div>
-                                                </td>
-                                                <td class="text-danger">19.15%</td>
-                                                <td class="text-center">5 days ago</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Shopify Dev</td>
-                                                <td>
-                                                    <div class="flex h-1.5 w-full rounded-full bg-[#ebedf2] dark:bg-dark/40">
-                                                        <div class="w-[60.55%] rounded-full bg-primary"></div>
-                                                    </div>
-                                                </td>
-                                                <td class="text-success">60.55%</td>
-                                                <td class="text-center">8 days ago</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- NAKATAGONG SUMMARY -->
-                    <div class="grid grid-cols-1 gap-5 md:grid-cols-2">
-                        <!-- <div class="panel">
-                            <div class="mb-5">
-                                <h5 class="text-lg font-semibold dark:text-white-light">Summary</h5>
-                            </div>
-                            <div class="space-y-4">
-                                <div class="rounded border border-[#ebedf2] dark:border-0 dark:bg-[#1b2e4b]">
-                                    <div class="flex items-center justify-between p-4 py-2">
-                                        <div class="grid h-9 w-9 place-content-center rounded-md bg-secondary-light text-secondary dark:bg-secondary dark:text-secondary-light">
-                                            <svg width="24" height="24" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 shrink-0">
-                                                <path d="M3.79424 12.0291C4.33141 9.34329 4.59999 8.00036 5.48746 7.13543C5.65149 6.97557 5.82894 6.8301 6.01786 6.70061C7.04004 6 8.40956 6 11.1486 6H12.8515C15.5906 6 16.9601 6 17.9823 6.70061C18.1712 6.8301 18.3486 6.97557 18.5127 7.13543C19.4001 8.00036 19.6687 9.34329 20.2059 12.0291C20.9771 15.8851 21.3627 17.8131 20.475 19.1793C20.3143 19.4267 20.1267 19.6555 19.9157 19.8616C18.7501 21 16.7839 21 12.8515 21H11.1486C7.21622 21 5.25004 21 4.08447 19.8616C3.87342 19.6555 3.68582 19.4267 3.5251 19.1793C2.63744 17.8131 3.02304 15.8851 3.79424 12.0291Z" stroke="currentColor" stroke-width="1.5"></path>
-                                                <path opacity="0.5" d="M9 6V5C9 3.34315 10.3431 2 12 2C13.6569 2 15 3.34315 15 5V6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
-                                                <path opacity="0.5" d="M9.1709 15C9.58273 16.1652 10.694 17 12.0002 17C13.3064 17 14.4177 16.1652 14.8295 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
-                                            </svg>
-                                        </div>
-                                        <div class="flex flex-auto items-start justify-between font-semibold ltr:ml-4 rtl:mr-4">
-                                            <h6 class="text-[13px] text-white-dark dark:text-white-dark">
-                                                Income <span class="block text-base text-[#515365] dark:text-white-light">$92,600</span>
-                                            </h6>
-                                            <p class="text-secondary ltr:ml-auto rtl:mr-auto">90%</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="rounded border border-[#ebedf2] dark:border-0 dark:bg-[#1b2e4b]">
-                                    <div class="flex items-center justify-between p-4 py-2">
-                                        <div class="grid h-9 w-9 place-content-center rounded-md bg-info-light text-info dark:bg-info dark:text-info-light">
-                                            <svg width="24" height="24" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 shrink-0">
-                                                <path d="M4.72848 16.1369C3.18295 14.5914 2.41018 13.8186 2.12264 12.816C1.83509 11.8134 2.08083 10.7485 2.57231 8.61875L2.85574 7.39057C3.26922 5.59881 3.47597 4.70292 4.08944 4.08944C4.70292 3.47597 5.59881 3.26922 7.39057 2.85574L8.61875 2.57231C10.7485 2.08083 11.8134 1.83509 12.816 2.12264C13.8186 2.41018 14.5914 3.18295 16.1369 4.72848L17.9665 6.55812C20.6555 9.24711 22 10.5916 22 12.2623C22 13.933 20.6555 15.2775 17.9665 17.9665C15.2775 20.6555 13.933 22 12.2623 22C10.5916 22 9.24711 20.6555 6.55812 17.9665L4.72848 16.1369Z" stroke="currentColor" stroke-width="1.5"></path>
-                                                <circle opacity="0.5" cx="8.60699" cy="8.87891" r="2" transform="rotate(-45 8.60699 8.87891)" stroke="currentColor" stroke-width="1.5"></circle>
-                                                <path opacity="0.5" d="M11.5417 18.5L18.5208 11.5208" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
-                                            </svg>
-                                        </div>
-                                        <div class="flex flex-auto items-start justify-between font-semibold ltr:ml-4 rtl:mr-4">
-                                            <h6 class="text-[13px] text-white-dark dark:text-white-dark">
-                                                Profit <span class="block text-base text-[#515365] dark:text-white-light">$37,515</span>
-                                            </h6>
-                                            <p class="text-info ltr:ml-auto rtl:mr-auto">65%</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="rounded border border-[#ebedf2] dark:border-0 dark:bg-[#1b2e4b]">
-                                    <div class="flex items-center justify-between p-4 py-2">
-                                        <div class="grid h-9 w-9 place-content-center rounded-md bg-warning-light text-warning dark:bg-warning dark:text-warning-light">
-                                            <svg width="24" height="24" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 shrink-0">
-                                                <path d="M2 12C2 8.22876 2 6.34315 3.17157 5.17157C4.34315 4 6.22876 4 10 4H14C17.7712 4 19.6569 4 20.8284 5.17157C22 6.34315 22 8.22876 22 12C22 15.7712 22 17.6569 20.8284 18.8284C19.6569 20 17.7712 20 14 20H10C6.22876 20 4.34315 20 3.17157 18.8284C2 17.6569 2 15.7712 2 12Z" stroke="currentColor" stroke-width="1.5"></path>
-                                                <path opacity="0.5" d="M10 16H6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
-                                                <path opacity="0.5" d="M14 16H12.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
-                                                <path opacity="0.5" d="M2 10L22 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
-                                            </svg>
-                                        </div>
-                                        <div class="flex flex-auto items-start justify-between font-semibold ltr:ml-4 rtl:mr-4">
-                                            <h6 class="text-[13px] text-white-dark dark:text-white-dark">
-                                                Expenses <span class="block text-base text-[#515365] dark:text-white-light">$55,085</span>
-                                            </h6>
-                                            <p class="text-warning ltr:ml-auto rtl:mr-auto">80%</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> --> 
-                        <div class="panel mb-5">
-                            <div class="mb-10 flex items-center justify-between">
-                                <h5 class="text-lg font-semibold dark:text-white-light">Pro Plan</h5>
+                            
+                            <div class="panel mb-5">
+                            <div class="mt-10 flex items-center justify-between">
+                                <h5 class="text-lg font-semibold dark:text-white-light"><?= htmlspecialchars($subsData['planName'])?></h5>
                                 <a href="javascript:;" class="btn btn-primary">Renew Now</a>
                             </div>
-                            <div class="group">
-                                <ul class="mb-7 list-inside list-disc space-y-2 font-semibold text-white-dark">
-                                    <li>10,000 Monthly Visitors</li>
-                                    <li>Unlimited Reports</li>
-                                    <li>2 Years Data Storage</li>
+                            <div class="group mt-10">
+                            <ul class="mb-7 list-outside list-disc space-y-2 font-semibold text-white-dark text-left pl-5">
+                            <li class="mt-10"><?= htmlspecialchars($subsData['description'])?></li>
+                                    <?php if($subsData['type'] === 'Yearly'):?>
+                                        <li class="mt-10">1 year of weekly deliveries</li>
+                                    <?php elseif($subsData['type'] === 'Quarterly'):?>
+                                        <li class="mt-10">3 months of weekly deliveries</li> 
+                                    <?php else:?>
+                                        <li class="mt-10">1 month of weekly deliveries</li> 
+                                    <?php endif;?>    
+
                                 </ul>
-                                <div class="mb-4 flex items-center justify-between font-semibold">
+                                <div class="mt-10 flex items-center justify-between font-semibold ">
                                     <p class="flex items-center rounded-full bg-dark px-2 py-1 text-xs font-semibold text-white-light">
                                         <svg width="24" height="24" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 ltr:mr-1 rtl:ml-1">
                                             <circle opacity="0.5" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5"></circle>
                                             <path d="M12 8V12L14.5 14.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                                         </svg>
-                                        5 Days Left
+                                        Date of Expiry: <?=htmlspecialchars(date("D, d M Y"),strtotime($subsData['endDate']))?>
                                     </p>
-                                    <p class="text-info">$25 / month</p>
+                                    <p class="text-info">$ <?= htmlspecialchars(number_format($subsData['price'],2))?> / 
+                                    <?php if($subsData['type'] === 'Yearly'):?>
+                                        Year
+                                    <?php elseif($subsData['type'] === 'Quarterly'):?>
+                                        Quarter 
+                                    <?php else:?>
+                                        Month
+                                    <?php endif;?>
+                                    </p>
                                 </div>
                                 <div class="mb-5 h-2.5 overflow-hidden rounded-full bg-dark-light p-0.5 dark:bg-dark-light/10">
-                                    <div class="relative h-full w-full rounded-full bg-gradient-to-r from-[#f67062] to-[#fc5296]" style="width: 65%"></div>
+                                    <div class="relative h-full w-full rounded-full bg-gradient-to-r from-[#f67062] to-[#fc5296]" style="width: 100%"></div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="panel mb-5">
-                            <div class="mb-5 flex items-center justify-between">
-                                <h5 class="text-lg font-semibold dark:text-white-light">Payment History</h5>
-                            </div>
-                            <div>
-                                <div class="border-b border-[#ebedf2] dark:border-[#1b2e4b]">
-                                    <div class="flex items-center justify-between py-2">
-                                        <h6 class="font-semibold text-[#515365] dark:text-white-dark">
-                                            March<span class="block text-white-dark dark:text-white-light">Pro Membership</span>
-                                        </h6>
-                                        <div class="flex items-start justify-between ltr:ml-auto rtl:mr-auto">
-                                            <p class="font-semibold">90%</p>
-                                            <div x-data="dropdown" @click.outside="open = false" class="dropdown ltr:ml-4 rtl:mr-4">
-                                                <a href="javascript:;" @click="toggle">
-                                                    <svg width="24" height="24" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 opacity-80 hover:opacity-100">
-                                                        <circle cx="5" cy="12" r="2" stroke="currentColor" stroke-width="1.5"></circle>
-                                                        <circle opacity="0.5" cx="12" cy="12" r="2" stroke="currentColor" stroke-width="1.5"></circle>
-                                                        <circle cx="19" cy="12" r="2" stroke="currentColor" stroke-width="1.5"></circle>
-                                                    </svg>
-                                                </a>
-                                                <ul x-cloak="" x-show="open" x-transition="" x-transition.duration.300ms="" class="whitespace-nowrap ltr:right-0 rtl:left-0">
-                                                    <li><a href="javascript:;" @click="toggle">View Invoice</a></li>
-                                                    <li><a href="javascript:;" @click="toggle">Download Invoice</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="border-b border-[#ebedf2] dark:border-[#1b2e4b] mb-5">
-                                    <div class="flex items-center justify-between py-2">
-                                        <h6 class="font-semibold text-[#515365] dark:text-white-dark">
-                                            February <span class="block text-white-dark dark:text-white-light">Pro Membership</span>
-                                        </h6>
-                                        <div class="flex items-start justify-between ltr:ml-auto rtl:mr-auto">
-                                            <p class="font-semibold">90%</p>
-                                            <div x-data="dropdown" @click.outside="open = false" class="dropdown ltr:ml-4 rtl:mr-4">
-                                                <a href="javascript:;" @click="toggle">
-                                                    <svg width="24" height="24" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 opacity-80 hover:opacity-100">
-                                                        <circle cx="5" cy="12" r="2" stroke="currentColor" stroke-width="1.5"></circle>
-                                                        <circle opacity="0.5" cx="12" cy="12" r="2" stroke="currentColor" stroke-width="1.5"></circle>
-                                                        <circle cx="19" cy="12" r="2" stroke="currentColor" stroke-width="1.5"></circle>
-                                                    </svg>
-                                                </a>
-                                                <ul x-cloak="" x-show="open" x-transition="" x-transition.duration.300ms="" class="whitespace-nowrap ltr:right-0 rtl:left-0">
-                                                    <li><a href="javascript:;" @click="toggle">View Invoice</a></li>
-                                                    <li><a href="javascript:;" @click="toggle">Download Invoice</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div class="flex items-center justify-between py-2 mb-5">
-                                        <h6 class="font-semibold text-[#515365] dark:text-white-dark">
-                                            January<span class="block text-white-dark dark:text-white-light">Pro Membership</span>
-                                        </h6>
-                                        <div class="flex items-start justify-between ltr:ml-auto rtl:mr-auto">
-                                            <p class="font-semibold">90%</p>
-                                            <div x-data="dropdown" @click.outside="open = false" class="dropdown ltr:ml-4 rtl:mr-4">
-                                                <a href="javascript:;" @click="toggle">
-                                                    <svg width="24" height="24" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 opacity-80 hover:opacity-100">
-                                                        <circle cx="5" cy="12" r="2" stroke="currentColor" stroke-width="1.5"></circle>
-                                                        <circle opacity="0.5" cx="12" cy="12" r="2" stroke="currentColor" stroke-width="1.5"></circle>
-                                                        <circle cx="19" cy="12" r="2" stroke="currentColor" stroke-width="1.5"></circle>
-                                                    </svg>
-                                                </a>
-                                                <ul x-cloak="" x-show="open" x-transition="" x-transition.duration.300ms="" class="whitespace-nowrap ltr:right-0 rtl:left-0">
-                                                    <li><a href="javascript:;" @click="toggle">View Invoice</a></li>
-                                                    <li><a href="javascript:;" @click="toggle">Download Invoice</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
+                        </div> 
                         
-            <!-- end main content section -->
+                        </div>
 
-        </div>
 
-        <div class="panel mb-5">
-                            <div class="mb-5 flex items-center justify-between">
-                                <h5 class="text-lg font-semibold dark:text-white-light">Card Details</h5>
+                    <div class="mb-5 grid grid-cols-1 gap-5 lg:grid-cols-3 xl:grid-cols-4">
+                        
+                    <div class="panel lg:col-span-2 ">
+                                <div x-data="multipleTable">
+                        
+                                    <div class="panel mt-6">
+                                        <h5 class="mb-5 text-lg font-semibold dark:text-white-light md:absolute md:top-[25px] md:mb-0">Payment History</h5>
+                                        <table id="myTable2" class="whitespace-nowrap"></table>
+                                    </div>
+                                
+                                </div>
+                                </div>                   
+                        <div class="panel lg:col-span-2">
+                            <div class="mb-5">
+                            <div x-data="multipleTable">
+                        
+                                <div class="panel mt-6">
+                                    <h5 class="mb-5 text-lg font-semibold dark:text-white-light md:absolute md:top-[25px] md:mb-0">Orders</h5>
+                                    <table id="myTable1" class="whitespace-nowrap"></table>
+                                </div>
+                            
                             </div>
-                            <div>
-                                <div class="border-b border-[#ebedf2] dark:border-[#1b2e4b]">
-                                    <div class="flex items-center justify-between py-2">
-                                        <div class="flex-none">
-                                            <img src="assets/images/card-americanexpress.svg" alt="image">
-                                        </div>
-                                        <div class="flex flex-auto items-center justify-between ltr:ml-4 rtl:mr-4">
-                                            <h6 class="font-semibold text-[#515365] dark:text-white-dark">
-                                                American Express <span class="block text-white-dark dark:text-white-light">Expires on 12/2025</span>
-                                            </h6>
-                                            <span class="badge bg-success ltr:ml-auto rtl:mr-auto">Primary</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="border-b border-[#ebedf2] dark:border-[#1b2e4b]">
-                                    <div class="flex items-center justify-between py-2">
-                                        <div class="flex-none">
-                                            <img src="assets/images/card-mastercard.svg" alt="image">
-                                        </div>
-                                        <div class="flex flex-auto items-center justify-between ltr:ml-4 rtl:mr-4">
-                                            <h6 class="font-semibold text-[#515365] dark:text-white-dark">
-                                                Mastercard <span class="block text-white-dark dark:text-white-light">Expires on 03/2025</span>
-                                            </h6>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div class="flex items-center justify-between py-2">
-                                        <div class="flex-none">
-                                            <img src="assets/images/card-visa.svg" alt="image">
-                                        </div>
-                                        <div class="flex flex-auto items-center justify-between ltr:ml-4 rtl:mr-4">
-                                            <h6 class="font-semibold text-[#515365] dark:text-white-dark">
-                                                Visa <span class="block text-white-dark dark:text-white-light">Expires on 10/2025</span>
-                                            </h6>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
+                    <!-- NAKATAGONG SUMMARY -->
+
+                        
+                        
+                        <!-- end main content section -->
+
                 </div>
+
+                 
+                    </div>
+                
             </div>
 
-        <!-- start footer section -->
+   
+
+        <!-- start footer tion -->
         <div class="p-6 pt-0 mt-auto text-center dark:text-white-dark ltr:sm:text-left rtl:sm:text-right">
             © <span id="footer-year">2022</span>. Jassa Rich All rights reserved.
         </div>
@@ -442,6 +216,9 @@
 
 
 <script>
+    const paymentData = <?= json_encode($paymentData)?>;
+    const orderData = <?= json_encode($orderData)?>;
+
     document.addEventListener('alpine:init', () => {
         // main section
         Alpine.data('scrollToTop', () => ({
@@ -490,6 +267,185 @@
                 }
             },
         }));
+
+        Alpine.data('multipleTable', () => ({
+              datatable1: null,
+              datatable2: null,
+              init() {
+                this.datatable1 = new simpleDatatables.DataTable('#myTable2', {
+                      data: {
+                          headings: ['ID','Payment Date', 'Amount'],
+                          data: paymentData.map(payment => [
+                            payment.paymentID,
+                            payment.created_at,
+                            payment.Amount
+                          ]),
+                      },
+                      searchable: true,
+                      perPage: 10,
+                      perPageSelect: [10, 20, 30, 50, 100],
+                      columns: [
+                          {
+                              select: 0,
+                              render: (data, cell, row) => {
+                                  return `<a href="../public/index.php?action=paymentdetails&paymentID=${data}"><div class="flex items-center w-max">${data}</div></a>`;
+                              },
+                              sort: 'asc',
+                          },
+                        //   {
+                        //       select: 12,
+                        //       sortable: false,
+                        //       render: (data, cell, row) => {
+                        //           return `<div class="w-4/5 min-w-[100px] h-2.5 bg-[#ebedf2] dark:bg-dark/40 rounded-full flex"> <div class="bg-${this.randomColor()} h-2.5 rounded-full rounded-bl-full text-center text-white text-xs" style="width:${parseInt(data)}%"></div> </div>`;
+                        //       },
+                        //   },
+                        //      {
+                        //       select: 1,
+                        //       render: (data, cell, row) => {
+                        //           return this.formatDate(data);
+                        //       },
+                        //   },
+                        //   {
+                        //       select: 6,
+                        //       sortable: false,
+                        //       render: (data, cell, row) => {
+                        //           return `<div class="flex items-center">
+                        //               <button type="button" class="ltr:mr-2 rtl:ml-2" x-tooltip="Edit">
+                        //                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-4.5 h-4.5">
+                        //                       <path d="M15.2869 3.15178L14.3601 4.07866L5.83882 12.5999L5.83881 12.5999C5.26166 13.1771 4.97308 13.4656 4.7249 13.7838C4.43213 14.1592 4.18114 14.5653 3.97634 14.995C3.80273 15.3593 3.67368 15.7465 3.41556 16.5208L2.32181 19.8021L2.05445 20.6042C1.92743 20.9852 2.0266 21.4053 2.31063 21.6894C2.59466 21.9734 3.01478 22.0726 3.39584 21.9456L4.19792 21.6782L7.47918 20.5844L7.47919 20.5844C8.25353 20.3263 8.6407 20.1973 9.00498 20.0237C9.43469 19.8189 9.84082 19.5679 10.2162 19.2751C10.5344 19.0269 10.8229 18.7383 11.4001 18.1612L11.4001 18.1612L19.9213 9.63993L20.8482 8.71306C22.3839 7.17735 22.3839 4.68748 20.8482 3.15178C19.3125 1.61607 16.8226 1.61607 15.2869 3.15178Z" stroke="currentColor" stroke-width="1.5" />
+                        //                       <path opacity="0.5" d="M14.36 4.07812C14.36 4.07812 14.4759 6.04774 16.2138 7.78564C17.9517 9.52354 19.9213 9.6394 19.9213 9.6394M4.19789 21.6777L2.32178 19.8015" stroke="currentColor" stroke-width="1.5" />
+                        //                   </svg>
+                        //               </button>
+                        //               <button type="button" x-tooltip="Delete">
+                        //                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5">
+                        //                       <path opacity="0.5" d="M9.17065 4C9.58249 2.83481 10.6937 2 11.9999 2C13.3062 2 14.4174 2.83481 14.8292 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                        //                       <path d="M20.5001 6H3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                        //                       <path d="M18.8334 8.5L18.3735 15.3991C18.1965 18.054 18.108 19.3815 17.243 20.1907C16.378 21 15.0476 21 12.3868 21H11.6134C8.9526 21 7.6222 21 6.75719 20.1907C5.89218 19.3815 5.80368 18.054 5.62669 15.3991L5.16675 8.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                        //                       <path opacity="0.5" d="M9.5 11L10 16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                        //                       <path opacity="0.5" d="M14.5 11L14 16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                        //                   </svg>
+                        //               </button>
+                        //           </div>`;
+                        //       },
+                        //   },
+                      ],
+                      firstLast: true,
+                      firstText:
+                          '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-4.5 h-4.5 rtl:rotate-180"> <path d="M13 19L7 12L13 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> <path opacity="0.5" d="M16.9998 19L10.9998 12L16.9998 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> </svg>',
+                      lastText:
+                          '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-4.5 h-4.5 rtl:rotate-180"> <path d="M11 19L17 12L11 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> <path opacity="0.5" d="M6.99976 19L12.9998 12L6.99976 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> </svg>',
+                      prevText:
+                          '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-4.5 h-4.5 rtl:rotate-180"> <path d="M15 5L9 12L15 19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> </svg>',
+                      nextText:
+                          '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-4.5 h-4.5 rtl:rotate-180"> <path d="M9 5L15 12L9 19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> </svg>',
+                      labels: {
+                          perPage: '{select}',
+                      },
+                      layout: {
+                          top: '{search}',
+                          bottom: '{info}{select}{pager}',
+                      },
+                  });  
+                
+
+                  this.datatable2 = new simpleDatatables.DataTable('#myTable1', {
+                      data: {
+                          headings: ['ID','DeliveryDate', 'Status'],
+                          data: orderData.map(order => [
+                            order.orderID,
+                            order.requiredDate,
+                            order.status
+                          ]),
+                      },
+                      searchable: true,
+                      perPage: 10,
+                      perPageSelect: [10, 20, 30, 50, 100],
+                      columns: [
+                          {
+                              select: 0,
+                              render: (data, cell, row) => {
+                                  return `<a href="../public/index.php?action=orderdetails&orderID=${data}"><div class="flex items-center w-max">${data}</div></a>`;
+                              },
+                              sort: 'asc',
+                          },
+                        //   {
+                        //       select: 12,
+                        //       sortable: false,
+                        //       render: (data, cell, row) => {
+                        //           return `<div class="w-4/5 min-w-[100px] h-2.5 bg-[#ebedf2] dark:bg-dark/40 rounded-full flex"> <div class="bg-${this.randomColor()} h-2.5 rounded-full rounded-bl-full text-center text-white text-xs" style="width:${parseInt(data)}%"></div> </div>`;
+                        //       },
+                        //   },
+                        //      {
+                        //       select: 1,
+                        //       render: (data, cell, row) => {
+                        //           return this.formatDate(data);
+                        //       },
+                        //   },
+                        //   {
+                        //       select: 6,
+                        //       sortable: false,
+                        //       render: (data, cell, row) => {
+                        //           return `<div class="flex items-center">
+                        //               <button type="button" class="ltr:mr-2 rtl:ml-2" x-tooltip="Edit">
+                        //                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-4.5 h-4.5">
+                        //                       <path d="M15.2869 3.15178L14.3601 4.07866L5.83882 12.5999L5.83881 12.5999C5.26166 13.1771 4.97308 13.4656 4.7249 13.7838C4.43213 14.1592 4.18114 14.5653 3.97634 14.995C3.80273 15.3593 3.67368 15.7465 3.41556 16.5208L2.32181 19.8021L2.05445 20.6042C1.92743 20.9852 2.0266 21.4053 2.31063 21.6894C2.59466 21.9734 3.01478 22.0726 3.39584 21.9456L4.19792 21.6782L7.47918 20.5844L7.47919 20.5844C8.25353 20.3263 8.6407 20.1973 9.00498 20.0237C9.43469 19.8189 9.84082 19.5679 10.2162 19.2751C10.5344 19.0269 10.8229 18.7383 11.4001 18.1612L11.4001 18.1612L19.9213 9.63993L20.8482 8.71306C22.3839 7.17735 22.3839 4.68748 20.8482 3.15178C19.3125 1.61607 16.8226 1.61607 15.2869 3.15178Z" stroke="currentColor" stroke-width="1.5" />
+                        //                       <path opacity="0.5" d="M14.36 4.07812C14.36 4.07812 14.4759 6.04774 16.2138 7.78564C17.9517 9.52354 19.9213 9.6394 19.9213 9.6394M4.19789 21.6777L2.32178 19.8015" stroke="currentColor" stroke-width="1.5" />
+                        //                   </svg>
+                        //               </button>
+                        //               <button type="button" x-tooltip="Delete">
+                        //                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5">
+                        //                       <path opacity="0.5" d="M9.17065 4C9.58249 2.83481 10.6937 2 11.9999 2C13.3062 2 14.4174 2.83481 14.8292 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                        //                       <path d="M20.5001 6H3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                        //                       <path d="M18.8334 8.5L18.3735 15.3991C18.1965 18.054 18.108 19.3815 17.243 20.1907C16.378 21 15.0476 21 12.3868 21H11.6134C8.9526 21 7.6222 21 6.75719 20.1907C5.89218 19.3815 5.80368 18.054 5.62669 15.3991L5.16675 8.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                        //                       <path opacity="0.5" d="M9.5 11L10 16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                        //                       <path opacity="0.5" d="M14.5 11L14 16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                        //                   </svg>
+                        //               </button>
+                        //           </div>`;
+                        //       },
+                        //   },
+                      ],
+                      firstLast: true,
+                      firstText:
+                          '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-4.5 h-4.5 rtl:rotate-180"> <path d="M13 19L7 12L13 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> <path opacity="0.5" d="M16.9998 19L10.9998 12L16.9998 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> </svg>',
+                      lastText:
+                          '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-4.5 h-4.5 rtl:rotate-180"> <path d="M11 19L17 12L11 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> <path opacity="0.5" d="M6.99976 19L12.9998 12L6.99976 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> </svg>',
+                      prevText:
+                          '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-4.5 h-4.5 rtl:rotate-180"> <path d="M15 5L9 12L15 19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> </svg>',
+                      nextText:
+                          '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-4.5 h-4.5 rtl:rotate-180"> <path d="M9 5L15 12L9 19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> </svg>',
+                      labels: {
+                          perPage: '{select}',
+                      },
+                      layout: {
+                          top: '{search}',
+                          bottom: '{info}{select}{pager}',
+                      },
+                  });
+              },
+
+              formatDate(date) {
+                  if (date) {
+                      const dt = new Date(date);
+                      const month = dt.getMonth() + 1 < 10 ? '0' + (dt.getMonth() + 1) : dt.getMonth() + 1;
+                      const day = dt.getDate() < 10 ? '0' + dt.getDate() : dt.getDate();
+                      return day + '/' + month + '/' + dt.getFullYear();
+                  }
+                  return '';
+              },
+
+              randomColor() {
+                  const color = ['primary', 'secondary', 'success', 'danger', 'warning', 'info'];
+                  const random = Math.floor(Math.random() * color.length);
+                  return color[random];
+              },
+
+              randomStatus() {
+                  const status = ['PAID', 'APPROVED', 'FAILED', 'CANCEL', 'SUCCESS', 'PENDING', 'COMPLETE'];
+                  const random = Math.floor(Math.random() * status.length);
+                  return status[random];
+              },
+          }));
 
         // header section
         Alpine.data('header', () => ({
