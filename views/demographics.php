@@ -86,7 +86,7 @@
                                                 </svg>
                                             </a>
                                             <ul x-cloak="" x-show="open" x-transition="" x-transition.duration.300ms="" class="ltr:right-0 rtl:left-0">
-                                                <li><a href="javascript:;">See Details</a></li>
+                                                <li><a href="../public/index.php?action=genders">See Details</a></li>
                                             </ul>
                                             </div>
 

@@ -39,15 +39,25 @@
           </div>
 
             <div class="mb-3">
-            <label class="form-label d-block">Sex</label>
+            <label class="form-label d-block">Gender</label>
             <div class="form-check form-check-inline">
               <input class="form-check-input" type="radio" name="sex" id="male" value="male" required style="outline: 2px solid #e58f3c; outline-offset: 2px;">
-              <label class="form-check-label" for="male">Male</label>
+              <label class="form-check-label" for="Male">Male</label>
             </div>
 
             <div class="form-check form-check-inline">
               <input class="form-check-input" type="radio" name="sex" id="female" value="female" required style="outline: 2px solid #e58f3c; outline-offset: 2px;">
-              <label class="form-check-label" for="female">Female</label>
+              <label class="form-check-label" for="Female">Female</label>
+            </div>
+
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="sex" id="female" value="female" required style="outline: 2px solid #e58f3c; outline-offset: 2px;">
+              <label class="form-check-label" for="Female">Non-binary</label>
+            </div>
+
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="sex" id="female" value="female" required style="outline: 2px solid #e58f3c; outline-offset: 2px;">
+              <label class="form-check-label" for="Female">None</label>
             </div>
             </div>
 

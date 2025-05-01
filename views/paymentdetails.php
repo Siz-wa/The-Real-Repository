@@ -60,7 +60,7 @@
                         </div>
                         <div class="panel">
                             <div class="flex flex-wrap justify-between gap-4 px-4">
-                                <div class="text-2xl font-semibold uppercase">Order Details</div>
+                                <div class="text-2xl font-semibold uppercase">Invoice</div>
                                 <div class="shrink-0">
                                     <img src="../public/assets/img/thc logo.png" alt="image" class="w-14 ltr:ml-auto rtl:mr-auto rounded-full">
                                 </div>
@@ -142,8 +142,8 @@
                                                 <td x-text="item.paymentID"></td>
                                                 <td x-text="item.planName"></td>
                                                
-                                                <td class="ltr:text-right rtl:text-left" x-text="`$${item.price}`"></td>
-                                                <td class="ltr:text-right rtl:text-left" x-text="`$${item.amount}`"></td>
+                                                <td class="ltr:text-right rtl:text-left" x-text="`₱${item.price}`"></td>
+                                                <td class="ltr:text-right rtl:text-left" x-text="`₱${item.amount}`"></td>
                                             </tr>
                                         </template>
                                     </tbody>
@@ -152,25 +152,10 @@
                             <div class="mt-6 grid grid-cols-1 px-4 sm:grid-cols-2">
                                 <div></div>
                                 <div class="space-y-2 ltr:text-right rtl:text-left">
-                                    <div class="flex items-center">
-                                        <div class="flex-1">Subtotal</div>
-                                        <div class="w-[37%]">$3255</div>
-                                    </div>
-                                    <div class="flex items-center">
-                                        <div class="flex-1">Tax</div>
-                                        <div class="w-[37%]">$700</div>
-                                    </div>
-                                    <div class="flex items-center">
-                                        <div class="flex-1">Shipping Rate</div>
-                                        <div class="w-[37%]">$0</div>
-                                    </div>
-                                    <div class="flex items-center">
-                                        <div class="flex-1">Discount</div>
-                                        <div class="w-[37%]">$10</div>
-                                    </div>
+                            
                                     <div class="flex items-center text-lg font-semibold">
                                         <div class="flex-1">Grand Total</div>
-                                        <div class="w-[37%]">$3945</div>
+                                        <div class="w-[37%]">₱<?= htmlspecialchars(number_format($paymentDetails['Amount'],2)) ?></div>
                                     </div>
                                 </div>
                             </div>

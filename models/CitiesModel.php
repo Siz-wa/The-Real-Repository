@@ -23,7 +23,7 @@ class CitiesModel{
             FROM 
                 customer
             GROUP BY 
-                COALESCE(NULLIF(city, ''), 'Others')
+                COALESCE(NULLIF(city, ''), 'Users with undefined city')
             ORDER BY 
                 totalCustomers DESC
         ";

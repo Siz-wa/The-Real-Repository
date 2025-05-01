@@ -23,11 +23,10 @@
                             </div>
                             <div class="mb-5">
                                 <div class="flex flex-col items-center justify-center">
-                                    <?php if(empty($pfPicture)):?>
-                                        <img src="<?= $pfPicture ?>" alt="image" class="mb-5 h-24 w-24 rounded-full object-cover">
-                                    <?php else:?>
-                                        <img src="../public/assetsD/images/user-profile.jpeg" alt="nigga" class="mb-5 h-24 w-24 rounded-full object-cover">
-                                    <?php endif;?>    
+                                  
+                                <img src="<?= !empty($pfPicture) ? $pfPicture : '../public/assetsD/images/user-profile.jpeg' ?>" alt="image" class="mb-5 h-24 w-24 rounded-full object-cover">
+
+                               
                                     <p class="text-xl font-semibold text-primary"><?= htmlspecialchars($fname.' '.$lname)?></p>
                                 </div>
                                 <ul class="m-auto mt-5 flex max-w-[160px] flex-col space-y-4 font-semibold text-white-dark">
