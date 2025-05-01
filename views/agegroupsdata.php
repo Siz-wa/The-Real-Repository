@@ -12,7 +12,7 @@
                     <a href="javascript:;" class="text-primary hover:underline">Dashboard</a>
                 </li>
                 <li class="before:mr-1 before:content-['/'] rtl:before:ml-1">
-                    <span><?php echo htmlspecialchars($_GET['gender'])?> Demographics</span>
+                    <span><?php echo htmlspecialchars($_GET['ageGroup'])?> Demographics</span>
                 </li>
             </ul>
 
@@ -20,7 +20,7 @@
 
                 <div class="panel h-full lg:col-span-2">
                                     <div class="mb-5 flex items-center dark:text-white-light">
-                                        <h5 class="text-lg font-semibold">Revenue from <?= htmlspecialchars($_GET['gender'])?></h5>
+                                        <h5 class="text-lg font-semibold">Revenue from <?= htmlspecialchars($_GET['ageGroup'])?></h5>
                                         <div x-data="dropdown" @click.outside="open = false" class="dropdown ltr:ml-auto rtl:mr-auto">
                                             <a href="javascript:;" @click="toggle">
                                                 <svg class="h-5 w-5 text-black/70 hover:!text-primary dark:text-white/70" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -49,7 +49,7 @@
 
                                 <div class="panel h-full">
                             <div class="mb-5 flex items-center">
-                                <h5 class="text-lg font-semibold dark:text-white-light"><?php echo htmlspecialchars($_GET['gender'])?>Age Groups</h5>
+                                <h5 class="text-lg font-semibold dark:text-white-light"><?php echo htmlspecialchars($_GET['ageGroup'])?> Age Groups</h5>
 
                                 <div x-data="dropdown" @click.outside="open = false" class="dropdown ltr:ml-auto rtl:mr-auto">
                                 <a href="javascript:;" @click="toggle">
@@ -87,7 +87,7 @@
                 <div x-data="multipleTable">
                         
                         <div class="panel mt-6">
-                            <h5 class="mb-5 text-lg font-semibold dark:text-white-light md:absolute md:top-[25px] md:mb-0"><?=htmlspecialchars($_GET['gender'])?> Users</h5>
+                            <h5 class="mb-5 text-lg font-semibold dark:text-white-light md:absolute md:top-[25px] md:mb-0"><?=htmlspecialchars($_GET['ageGroup'])?> Users</h5>
                             <table id="myTable1" class="whitespace-nowrap"></table>
                         </div>
                        
@@ -106,7 +106,7 @@
     <!-- end footer section -->
 </div>
 </div>
-
+<?=var_dump($genderPercentage)?>
 <script>
 // For age group danut chart\
 
@@ -129,9 +129,7 @@
 const monthlyCitySpendingpData = <?= json_encode($monthlyCitySpending)?>;
 const maxSpending = monthlyCitySpendingpData.indexOf(Math.max(...monthlyCitySpendingpData));
 
-const ageGroup = <?= json_encode($ageGroup)?>;
-const ageGroupPercentage = <?= json_encode($ageGroupPercentage)?>;
-let formattedAgeGroupPercentage = ageGroupPercentage.map(val2 => parseFloat(val2));
+
 
 // Visitors by genders
 const gender = <?php echo json_encode($gender); ?>;
@@ -510,7 +508,7 @@ document.addEventListener('alpine:init', () => {
             const referral = null;
             const customerByAge = null;
             const customerByCity = null;
-            
+           
             const engagement = null;
             const revenueChart = null;
             
@@ -583,7 +581,7 @@ document.addEventListener('alpine:init', () => {
 
         get customerByAgeOptions() {
             return {
-                series: formattedAgeGroupPercentage,
+                series: formattedGenderPercentage,
                 chart: {
                     type: 'donut',
                     height: 460,
@@ -662,7 +660,7 @@ document.addEventListener('alpine:init', () => {
                         },
                     },
                 },
-                labels:ageGroup,
+                labels:gender,
                 states: {
                     hover: {
                         filter: {

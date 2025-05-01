@@ -36,6 +36,8 @@ $router->addroute('orderdetails','OrderDetailsController','OrderDetails');
 $router->addroute('paymentdetails','PaymentDetailsController','PaymentDetails');
 $router->addroute('genders','GendersController','Genders');
 $router->addroute('genderdata','GenderDataController','GenderData');
+$router->addroute('agegroups','AgeGroupsController','AgeGroups');
+$router->addroute('agegroupsdata','AgeGroupsDataController','AgeGroupsData');
 
 
 
