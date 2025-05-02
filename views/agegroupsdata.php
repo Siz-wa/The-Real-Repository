@@ -49,7 +49,7 @@
 
                                 <div class="panel h-full">
                             <div class="mb-5 flex items-center">
-                                <h5 class="text-lg font-semibold dark:text-white-light"><?php echo htmlspecialchars($_GET['ageGroup'])?> Age Groups</h5>
+                                <h5 class="text-lg font-semibold dark:text-white-light"><?php echo htmlspecialchars($_GET['ageGroup'])?> Gender</h5>
 
                                 <div x-data="dropdown" @click.outside="open = false" class="dropdown ltr:ml-auto rtl:mr-auto">
                                 <a href="javascript:;" @click="toggle">

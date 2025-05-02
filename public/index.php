@@ -38,6 +38,7 @@ $router->addroute('genders','GendersController','Genders');
 $router->addroute('genderdata','GenderDataController','GenderData');
 $router->addroute('agegroups','AgeGroupsController','AgeGroups');
 $router->addroute('agegroupsdata','AgeGroupsDataController','AgeGroupsData');
+$router->addroute('administrator','AdministratorController','Administrator');
 
 
 

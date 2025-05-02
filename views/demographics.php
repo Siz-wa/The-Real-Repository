@@ -20,7 +20,7 @@
                                 <div class="panel h-full">
                                         <div class="mb-5 flex items-center">
                                             <h5 class="text-lg font-semibold dark:text-white-light">Customers By Age</h5>
-                                            <div x-data="dropdown" @click.outside="open = false" class="dropdown ltr:ml-auto rtl:mr-auto">
+                                            <div x-data="dropdown" @click.outside="open = false" class="dropdown ltr:ml-auto rtl:mr-auto text-sm">
                                             <a href="javascript:;" @click="toggle">
                                                 <svg class="h-5 w-5 text-black/70 hover:!text-primary dark:text-white/70" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <circle cx="5" cy="12" r="2" stroke="currentColor" stroke-width="1.5"></circle>
@@ -29,7 +29,10 @@
                                                 </svg>
                                             </a>
                                             <ul x-cloak="" x-show="open" x-transition="" x-transition.duration.300ms="" class="ltr:right-0 rtl:left-0">
-                                                <li><a href="../public/index.php?action=agegroups">See Details</a></li>
+                                                <?php foreach($ageGroup as $group):?>
+                                                    <li><a href="../public/index.php?action=agegroupsdata&ageGroup=<?=urlencode($group)?>">See <?= htmlspecialchars($group)?> Details</a></li>
+                                                <?php endforeach; ?>    
+                                                <li><a href="../public/index.php?action=agegroups">See All Details</a></li>
                                             </ul>
                                             </div>
                                             
@@ -48,7 +51,7 @@
                                         <div class="mb-5 flex items-center">
                                             <h5 class="text-lg font-semibold dark:text-white-light">Customers By Top Cities</h5>
 
-                                            <div x-data="dropdown" @click.outside="open = false" class="dropdown ltr:ml-auto rtl:mr-auto">
+                                            <div x-data="dropdown" @click.outside="open = false" class="dropdown ltr:ml-auto rtl:mr-auto text-sm">
                                             <a href="javascript:;" @click="toggle">
                                                 <svg class="h-5 w-5 text-black/70 hover:!text-primary dark:text-white/70" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <circle cx="5" cy="12" r="2" stroke="currentColor" stroke-width="1.5"></circle>
@@ -57,6 +60,9 @@
                                                 </svg>
                                             </a>
                                             <ul x-cloak="" x-show="open" x-transition="" x-transition.duration.300ms="" class="ltr:right-0 rtl:left-0">
+                                                <?php foreach($cities as $city):?>
+                                                    <li><a href="../public/index.php?action=citydata&cityName=<?=urlencode($city)?>">See <?= htmlspecialchars($city)?> Details</a></li>
+                                                <?php endforeach; ?>    
                                                 <li><a href="../public/index.php?action=cities">See Details</a></li>
                                             </ul>
                                             </div>
@@ -86,6 +92,10 @@
                                                 </svg>
                                             </a>
                                             <ul x-cloak="" x-show="open" x-transition="" x-transition.duration.300ms="" class="ltr:right-0 rtl:left-0">
+                                            <div x-data="dropdown" @click.outside="open = false" class="dropdown ltr:ml-auto rtl:mr-auto text-sm">
+                                                <?php foreach($gender as $genderd):?>
+                                                    <li><a href="../public/index.php?action=genderdata&gender=<?=urlencode($genderd)?>">See <?= htmlspecialchars($genderd)?> Details</a></li>
+                                                <?php endforeach; ?>    
                                                 <li><a href="../public/index.php?action=genders">See Details</a></li>
                                             </ul>
                                             </div>
@@ -117,7 +127,7 @@
                 <!-- end footer section -->
             </div>
         </div>
-        <?php var_dump($cities,$cityPercentage)?>
+    
         <script>
             // For age group danut chart\
             const ageGroup = <?= json_encode($ageGroup)?>;
