@@ -1,5 +1,5 @@
 <?php 
-require_once '../controllers/EmployeesController.php';
+require_once '../controllers/AdministratorController.php';
 
 $controller = new AdministratorController();
 

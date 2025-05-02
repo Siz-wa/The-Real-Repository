@@ -18,7 +18,7 @@
                                         <path opacity="0.5" d="M18 17.5C18 19.9853 18 22 10 22C2 22 2 19.9853 2 17.5C2 15.0147 5.58172 13 10 13C14.4183 13 18 15.0147 18 17.5Z" stroke="currentColor" stroke-width="1.5"></path>
                                         <path d="M21 10H19M19 10H17M19 10L19 8M19 10L19 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
                                     </svg>
-                                    Add Contact
+                                    Add Employee Account
                                 </button>
                                 <div class="fixed inset-0 z-[999] hidden overflow-y-auto bg-[black]/60" :class="addContactModal && '!block'">
                                     <div class="flex min-h-screen items-center justify-center px-4" @click.self="addContactModal = false">
@@ -86,7 +86,7 @@
                         </div>
 
                         <div class="relative">
-                            <input type="text" placeholder="Search Contacts" class="peer form-input py-2 ltr:pr-11 rtl:pl-11" x-model="searchUser" @keyup="searchContacts">
+                            <input type="text" placeholder="Search" class="peer form-input py-2 ltr:pr-11 rtl:pl-11" x-model="searchUser" @keyup="searchContacts">
                             <div class="absolute top-1/2 -translate-y-1/2 peer-focus:text-primary ltr:right-[11px] rtl:left-[11px]">
                                 <svg class="mx-auto" width="16" height="16" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <circle cx="11.5" cy="11.5" r="9.5" stroke="currentColor" stroke-width="1.5" opacity="0.5"></circle>

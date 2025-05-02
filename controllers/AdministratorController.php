@@ -20,7 +20,7 @@ class AdministratorController extends Controller{
         $employeesData = $this->administratorModel->EmployeesHandler();
 
         
-        $this->loadAdmin('employees', [
+        $this->loadAdmin('administrator', [
             'adminInfo' => $employeesData['adminInfo']
         ]);
     }
