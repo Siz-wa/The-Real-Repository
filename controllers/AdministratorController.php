@@ -10,10 +10,10 @@ class AdministratorController extends Controller{
     }
     public function Administrator(){
         if (isset($_SESSION['user']['user_id']) && $_SESSION['user']['admin'] === false ) {
-            header("Location: ../public/index.php?action=dashboarduser");
+            header("Location: ?action=dashboarduser");
             exit();
         }elseif(!isset($_SESSION['user']['user_id'])){
-            header("Location: ../public/index.php?action=home");
+            header("Location: ?action=home");
             exit;
         }
 

@@ -12,7 +12,7 @@ class RegisterController extends Controller{
     public function Register(){
 
       if (isset($_SESSION['user']['user_id'])) {
-        header("Location: ../public/index.php?action=dashboarduser");
+        header("Location: ?action=dashboarduser");
         exit();
     }
 
@@ -28,7 +28,7 @@ class RegisterController extends Controller{
             $token = bin2hex(random_bytes(32));
             $expirydate = date('Y-m-d H:i:s', strtotime('+1 hour'));
             $subject = 'Password Reset Request';
-            $resetLink = "http://localhost/../public/index.php?action=changepw&token=" . urlencode($token);
+            $resetLink = "http://" . $_SERVER['SERVER_ADDR'] . "/?action=changepw&token=".urlencode($token);
             $mailbody = "
             <html>
               <head>

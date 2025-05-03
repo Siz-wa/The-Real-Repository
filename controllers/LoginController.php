@@ -32,7 +32,7 @@ class LoginController extends Controller{
         }
 
         if (isset($_SESSION['user']['user_id'])) {
-            header("Location: ../public/index.php?action=dashboarduser");
+            header("Location: ?action=dashboarduser");
             exit();
         }
     
@@ -68,10 +68,10 @@ class LoginController extends Controller{
             ];
 
             if($result['admin']){
-                header("Location: ../public/index.php?action=admindashboard");
+                header("Location: ?action=admindashboard");
                 exit();
             }else{
-                header("Location: ../public/index.php?action=dashboarduser");
+                header("Location: ?action=dashboarduser");
                 exit();
             }
 

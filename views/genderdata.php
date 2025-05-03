@@ -412,7 +412,7 @@ document.addEventListener('alpine:init', () => {
                           {
                               select: 0,
                               render: (data, cell, row) => {
-                                  return `<a href="../public/index.php?action=users&userID=${encodeURIComponent(data)}"><div class="flex items-center w-max">${data}</div></a>`;
+                                  return `<a href="?action=users&userID=${encodeURIComponent(data)}"><div class="flex items-center w-max">${data}</div></a>`;
                               },
                               sort: 'asc',
                           },

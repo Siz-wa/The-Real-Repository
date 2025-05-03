@@ -39,7 +39,7 @@
     </div>
 
     <div class="text-center mt-3">
-    <p><a href="../public/index.php?action=login" class="text-decoration-none">Go back</a></p>
+    <p><a href="?action=login" class="text-decoration-none">Go back</a></p>
     </div>
     
     </div>

@@ -9,7 +9,7 @@ class DemographicsController extends Controller{
 
     public function Demographics(){
         if (isset($_SESSION['user']['user_id']) && $_SESSION['user']['admin'] === false) {
-            header("Location: ../public/index.php?action=dashboarduser");
+            header("Location: ?action=dashboarduser");
             exit();
         }
 

@@ -39,15 +39,15 @@
       </form>
 
         <div class="text-center mt-3">
-        <p><a href="../public/index.php?action=register" class="text-decoration-none">Dont Have an Account ?</a></p>
+        <p><a href="?action=register" class="text-decoration-none">Dont Have an Account ?</a></p>
         </div>
        
 
         <div class="text-center mt-3">
-        <p><a href="../public/index.php?action=forgotpw" class="text-decoration-none">Forgot Password ?</a></p>
+        <p><a href="?action=forgotpw" class="text-decoration-none">Forgot Password ?</a></p>
         </div>
         <div class="text-center mt-3">
-    <p><a href="../public/index.php?action=login" class="text-decoration-none">Go back</a></p>
+    <p><a href="?action=login" class="text-decoration-none">Go back</a></p>
     </div>
       
     </div>

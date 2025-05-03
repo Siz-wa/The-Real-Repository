@@ -49,7 +49,7 @@
               <h4>Questions?  </h4>
               <p>
                 <strong>FAQ:</strong> <span>
-                  <a href="../public/index.php?action=faqs" aaction = 'faqs'>Faqs</a>
+                  <a href="?action=faqs" aaction = 'faqs'>Faqs</a>
                 </span><br>
               </p>
             </div>

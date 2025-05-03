@@ -14,7 +14,7 @@
             <h1 data-aos="fade-up">Sweetest Delights<br>Cookies</h1>
             <p data-aos="fade-up" data-aos-delay="100">Two Hearts Confections is a home-based online bakeshop. Each treat is lovingly crafted with care and passion to bring you the sweetest delights.</p>
             <div class="d-flex" data-aos="fade-up" data-aos-delay="200">
-              <a href="../public/index.php?action=services1" class="btn-get-started">Subscribe</a>
+              <a href="?action=services1" class="btn-get-started">Subscribe</a>
               <a href="assets/videos/FSave.Io_-yF48ye.mp4" class="glightbox btn-watch-video d-flex align-items-center"><i class="bi bi-play-circle"></i><span>Watch Video</span></a>
             </div>
           </div>

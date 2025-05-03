@@ -30,9 +30,9 @@
                                             </a>
                                             <ul x-cloak="" x-show="open" x-transition="" x-transition.duration.300ms="" class="ltr:right-0 rtl:left-0">
                                                 <?php foreach($ageGroup as $group):?>
-                                                    <li><a href="../public/index.php?action=agegroupsdata&ageGroup=<?=urlencode($group)?>">See <?= htmlspecialchars($group)?> Details</a></li>
+                                                    <li><a href="?action=agegroupsdata&ageGroup=<?=urlencode($group)?>">See <?= htmlspecialchars($group)?> Details</a></li>
                                                 <?php endforeach; ?>    
-                                                <li><a href="../public/index.php?action=agegroups">See All Details</a></li>
+                                                <li><a href="?action=agegroups">See All Details</a></li>
                                             </ul>
                                             </div>
                                             
@@ -61,9 +61,9 @@
                                             </a>
                                             <ul x-cloak="" x-show="open" x-transition="" x-transition.duration.300ms="" class="ltr:right-0 rtl:left-0">
                                                 <?php foreach($cities as $city):?>
-                                                    <li><a href="../public/index.php?action=citydata&cityName=<?=urlencode($city)?>">See <?= htmlspecialchars($city)?> Details</a></li>
+                                                    <li><a href="?action=citydata&cityName=<?=urlencode($city)?>">See <?= htmlspecialchars($city)?> Details</a></li>
                                                 <?php endforeach; ?>    
-                                                <li><a href="../public/index.php?action=cities">See Details</a></li>
+                                                <li><a href="?action=cities">See Details</a></li>
                                             </ul>
                                             </div>
 
@@ -94,9 +94,9 @@
                                             <ul x-cloak="" x-show="open" x-transition="" x-transition.duration.300ms="" class="ltr:right-0 rtl:left-0">
                                             <div x-data="dropdown" @click.outside="open = false" class="dropdown ltr:ml-auto rtl:mr-auto text-sm">
                                                 <?php foreach($gender as $genderd):?>
-                                                    <li><a href="../public/index.php?action=genderdata&gender=<?=urlencode($genderd)?>">See <?= htmlspecialchars($genderd)?> Details</a></li>
+                                                    <li><a href="?action=genderdata&gender=<?=urlencode($genderd)?>">See <?= htmlspecialchars($genderd)?> Details</a></li>
                                                 <?php endforeach; ?>    
-                                                <li><a href="../public/index.php?action=genders">See Details</a></li>
+                                                <li><a href="?action=genders">See Details</a></li>
                                             </ul>
                                             </div>
 

@@ -63,7 +63,7 @@
 
           <button type="submit" name="submit" class="btn w-100 text-white" style="background-color: #e58f3c; transition: 0.3s;">Register</button>
           <div class="text-center mt-3">
-             <a href="../public/index.php?action=login" class="text-decoration-none">Already Have an Account ?</a>
+             <a href="?action=login" class="text-decoration-none">Already Have an Account ?</a>
           </div>
         </form>
       </div>

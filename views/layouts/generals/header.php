@@ -10,11 +10,11 @@
 
     <nav id="navmenu" class="navmenu">
       <ul>
-        <li><a href="../public/index.php?action=home" class="active">Home<br></a></li>
-        <li><a href="../public/index.php?action=aboutus">About</a></li>
-        <li><a href="../public/index.php?action=services1">Services</a></li>
+        <li><a href="?action=home" class="active">Home<br></a></li>
+        <li><a href="?action=aboutus">About</a></li>
+        <li><a href="?action=services1">Services</a></li>
         <li><a href="#menu">Menu</a></li>
-        <li><a href="../public/index.php?action=contact">Contact</a></li>
+        <li><a href="?action=contact">Contact</a></li>
       </ul>
       <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
     </nav>
@@ -30,13 +30,13 @@
             <p class="mb-0"><strong><?php echo htmlspecialchars($_SESSION['user']['fname']) . ' ' . htmlspecialchars($_SESSION['user']['lname']); ?></strong></p>
           </li>
           <li><hr class="dropdown-divider"></li>
-          <li><a class="dropdown-item bi bi-person-fill" href="../public/index.php?action=profile"> View Profile</a></li>
-          <li><a class="dropdown-item bi bi-grid-fill" href="../public/index.php?action=admindashboard"> Dashboard</a></li>
-          <li><a class="dropdown-item bi-door-open-fill" href="../public/index.php?action=logout"> Log Out</a></li>
+          <li><a class="dropdown-item bi bi-person-fill" href="?action=profile"> View Profile</a></li>
+          <li><a class="dropdown-item bi bi-grid-fill" href="?action=admindashboard"> Dashboard</a></li>
+          <li><a class="dropdown-item bi-door-open-fill" href="?action=logout"> Log Out</a></li>
         </ul>
       </div>
     <?php else: ?>
-      <a href="../public/index.php?action=login" class="btn-getstarted">Login</a>
+      <a href="?action=login" class="btn-getstarted">Login</a>
     <?php endif; ?>
 
   </div>

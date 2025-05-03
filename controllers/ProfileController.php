@@ -6,7 +6,7 @@ class ProfileController extends Controller{
 
     public function Profile(){
         if(!isset( $_SESSION['user']['user_id'])) {
-            header("Location: ../public/index.php?action=home");
+            header("Location: ?action=home");
             exit;
         }
 

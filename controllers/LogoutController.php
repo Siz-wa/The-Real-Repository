@@ -9,7 +9,7 @@ class LogoutController extends Controller{
         session_unset();
         session_destroy();
 
-        header("Location: ../public/index.php?action=home");
+        header("Location: ?action=home");
         exit;
     }
 }
