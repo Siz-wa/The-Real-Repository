@@ -4,7 +4,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 require '../vendor/autoload.php';
 
-class Controller {
+abstract class Controller {
     private $host = 'smtp.gmail.com';
     private $smtpAuth = true;
     private $username ='gordora.joey25@gmail.com';

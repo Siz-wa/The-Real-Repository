@@ -42,6 +42,7 @@ $router->addroute('administrator','AdministratorController','Administrator');
 $router->addroute('employees','EmployeesController','Employee');
 $router->addroute('product','ProductController','Product');
 $router->addroute('category','CategoryController','Category');
+$router->addroute('plans','PlansController','Plans');
 
 
 

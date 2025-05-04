@@ -339,6 +339,9 @@
                                             <li>
                                                 <a href="?action=category">Category</a>
                                             </li>
+                                            <li>
+                                                <a href="?action=plans">Subscription Plans</a>
+                                            </li>
                                             
                                         </ul>
                                     </li>
