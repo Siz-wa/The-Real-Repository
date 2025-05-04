@@ -30,7 +30,7 @@
                                     </div>
                                     <div class="mb-5">
                                         <div class="flex flex-col items-center justify-center">
-                                        <img src="<?php echo $_SESSION['user']['pfPicture'] ? $_SESSION['user']['pfPicture'] : '../public/assetsD/images/user-profile.jpeg'; ?>" alt="image" class="mb-5 h-24 w-24 rounded-full object-cover">
+                                        <img src="<?php echo $_SESSION['user']['pfPicture'] ? $_SESSION['user']['pfPicture'] : 'assetsD/images/user-profile.jpeg'; ?>" alt="image" class="mb-5 h-24 w-24 rounded-full object-cover">
                                         <p class="text-xl font-semibold text-primary"><?php echo $_SESSION['user']['fname'].' '.$_SESSION['user']['lname'] ?></p>
                                         </div>
                                         <ul class="m-auto mt-5 flex max-w-[160px] flex-col space-y-4 font-semibold text-white-dark">

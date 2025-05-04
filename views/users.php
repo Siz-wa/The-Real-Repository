@@ -24,7 +24,7 @@
                             <div class="mb-5">
                                 <div class="flex flex-col items-center justify-center">
                                   
-                                <img src="<?= !empty($pfPicture) ? $pfPicture : '../public/assetsD/images/user-profile.jpeg' ?>" alt="image" class="mb-5 h-24 w-24 rounded-full object-cover">
+                                <img src="<?= !empty($pfPicture) ? $pfPicture : 'assetsD/images/user-profile.jpeg' ?>" alt="image" class="mb-5 h-24 w-24 rounded-full object-cover">
 
                                
                                     <p class="text-xl font-semibold text-primary"><?= htmlspecialchars($fname.' '.$lname)?></p>

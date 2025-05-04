@@ -36,7 +36,7 @@
                                                         <label for="name">Name</label>
                                                         <input id="name" type="text" placeholder="Enter Name" class="form-input" x-model="params.name">
                                                     </div>
-                                                    <div class="mb-5">
+                                                    <!-- <div class="mb-5">
                                                         <label for="email">Email</label>
                                                         <input id="email" type="email" placeholder="Enter Email" class="form-input" x-model="params.email">
                                                     </div>
@@ -47,7 +47,7 @@
                                                     <div class="mb-5">
                                                         <label for="number">Location</label>
                                                         <input id="location" type="text" placeholder="Enter Location eg.(City, Province)" class="form-input" x-model="params.location">
-                                                    </div>
+                                                    </div> -->
                                                    
                                                     <div class="mt-8 flex items-center justify-end">
                                                         <button type="button" class="btn btn-outline-danger" @click="addContactModal = false">
@@ -115,7 +115,7 @@
                                             <td>
                                                 <div class="flex w-max items-center">
                                                     <div class="flex-none mr-3">
-                                                        <div class="p-1 bg-white-dark/30 rounded-full"><img class="h-8 w-8 rounded-full object-cover" :src="contact.path" /></div>
+                                                        <div class="p-1 bg-white-dark/30 rounded-full"></div>
                                                     </div>
                                                     <div x-show="!contact.path && contact.name" class="grid h-8 w-8 place-content-center rounded-full bg-primary text-sm font-semibold text-white ltr:mr-2 rtl:ml-2" x-text="contact.name.charAt(0) + '' + contact.name.charAt(contact.name.indexOf(' ') + 1)"></div>
                                                     <div x-show="!contact.path && !contact.name" class="rounded-full border border-gray-300 p-2 ltr:mr-2 rtl:ml-2 dark:border-gray-800">
@@ -164,7 +164,7 @@
                                         
                                     </div>
                                     <div class="mt-6 grid grid-cols-1 gap-4 ltr:text-left rtl:text-right">
-                                        <div class="flex items-center">
+                                        <!-- <div class="flex items-center">
                                             <div class="flex-none ltr:mr-2 rtl:ml-2">Email :</div>
                                             <div class="truncate text-white-dark" x-text="contact.email"></div>
                                         </div>
@@ -175,7 +175,7 @@
                                         <div class="flex items-center">
                                             <div class="flex-none ltr:mr-2 rtl:ml-2">Address :</div>
                                             <div class="text-white-dark" x-text="contact.location"></div>
-                                        </div>
+                                        </div> -->
                                     </div>
                                 </div>
                                 <div class="absolute bottom-0 mt-6 flex w-full gap-4 p-6 ltr:left-0 rtl:right-0">
@@ -198,14 +198,10 @@
         <!-- end footer section -->
     </div>
 </div>
-<?=
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-?>
+
 <script>
 
-    const adminInfo = <?= json_encode($adminInfo)?>;
+    const categoryData = <?= json_encode($categoryData)?>;
  
     document.addEventListener('alpine:init', () => {
         // main section
@@ -440,13 +436,13 @@ error_reporting(E_ALL);
             },
             filterdContactsList: [],
             searchUser: '',
-            contactList:adminInfo.map((employee) => ({
-                id: employee.customerID,
-                path: `data:image/jpeg;base64,${employee.pfPicture}`,
-                name: `${employee.fname} ${employee.lname}`,
-                email: employee.email,
-                phone: employee.phoneNo,
-                location: `${employee.city}, ${employee.province}`
+            contactList:categoryData.map((category) => ({
+                id: category.categoryID,
+                // path: `data:image/jpeg;base64,${employee.pfPicture}`,
+                name: category.name
+                // email: employee.email,
+                // phone: employee.phoneNo,
+                // location: `${employee.city}, ${employee.province}`
             })),
 
             init() {
@@ -467,12 +463,12 @@ error_reporting(E_ALL);
             },
 
             saveUser() {
-                if (!this.params.name || !this.params.email || !this.params.phone || !this.params.location) {
+                if (!this.params.name) {
                 this.showMessage('All fields are required.', 'error');
                 return true;
             }
 
-            const endpoint = this.params.id ?  '/API/updateUser.php' : '/API/addUser.php';
+            const endpoint = this.params.id ?  '/API/updateCat.php' : '/API/addCat.php';
 
             fetch(endpoint, {
                 method: 'POST',
@@ -507,7 +503,7 @@ error_reporting(E_ALL);
             },
 
             deleteUser(user) {
-            fetch('/API/deleteUser.php', {
+            fetch('/API/deleteCat.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

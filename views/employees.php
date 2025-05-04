@@ -472,12 +472,12 @@
             },
 
             editUser(user) {
-                this.params = this.defaultParams;
-                if (user) {
-                    this.params = JSON.parse(JSON.stringify(user));
-                }
-
-                this.addContactModal = true;
+            this.params = { ...this.defaultParams }; // Reset
+            if (user) {
+                this.params = { ...user }; // Properly assign all fields
+                this.params.id = user.id; // ✅ Make sure ID is preserved
+            }
+            this.addContactModal = true;
             },
 
             saveUser() {
@@ -486,7 +486,7 @@
                 return true;
             }
 
-            const endpoint = this.params.id ? '../API/updateEmployee.php' : '../API/addEmployee.php';
+            const endpoint = this.params.id ? '/API/updateEmployee.php' : '/API/addEmployee.php';
 
             fetch(endpoint, {
                 method: 'POST',
@@ -502,7 +502,7 @@
                         const newUser = {
                             ...this.params,
                             id: maxId + 1,
-                            path: '../public/assesD/images/user-profile.jpeg'
+                            path: 'assesD/images/user-profile.jpeg'
                         };
                         this.contactList.unshift(newUser);
                     } else {
@@ -521,7 +521,7 @@
             },
 
             deleteUser(user) {
-        fetch('../API/deleteEmployee.php', {
+        fetch('/API/deleteEmployee.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

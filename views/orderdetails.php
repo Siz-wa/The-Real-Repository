@@ -13,7 +13,7 @@
                             <div class="flex flex-wrap justify-between gap-4 px-4">
                                 <div class="text-2xl font-semibold uppercase">Order Details</div>
                                 <div class="shrink-0">
-                                    <img src="../public/assets/img/thc logo.png" alt="image" class="w-14 ltr:ml-auto rtl:mr-auto rounded-full">
+                                    <img src="assets/img/thc logo.png" alt="image" class="w-14 ltr:ml-auto rtl:mr-auto rounded-full">
                                 </div>
                             </div>
                             <div class="px-4 ltr:text-right rtl:text-left">

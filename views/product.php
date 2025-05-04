@@ -1,5 +1,3 @@
-
-
 <body x-data="main" class="relative overflow-x-hidden font-nunito text-sm font-normal antialiased" :class="[ $store.app.sidebar ? 'toggle-sidebar' : '', $store.app.theme === 'dark' || $store.app.isDarkMode ?  'dark' : '', $store.app.menu, $store.app.layout,$store.app.rtlClass]">
     <div class="main-content flex flex-col min-h-screen">
 
@@ -8,7 +6,7 @@
 
             <div x-data="contacts">
                 <div class="flex flex-wrap items-center justify-between gap-4">
-                    <h2 class="text-xl">Administrators</h2>
+                    <h2 class="text-xl">Bakery Products</h2>
                     <div class="flex w-full flex-col gap-4 sm:w-auto sm:flex-row sm:items-center sm:gap-3">
                         <div class="flex gap-3">
                             <div>
@@ -18,7 +16,7 @@
                                         <path opacity="0.5" d="M18 17.5C18 19.9853 18 22 10 22C2 22 2 19.9853 2 17.5C2 15.0147 5.58172 13 10 13C14.4183 13 18 15.0147 18 17.5Z" stroke="currentColor" stroke-width="1.5"></path>
                                         <path d="M21 10H19M19 10H17M19 10L19 8M19 10L19 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
                                     </svg>
-                                    Add Employee Account
+                                    Add Products
                                 </button>
                                 <div class="fixed inset-0 z-[999] hidden overflow-y-auto bg-[black]/60" :class="addContactModal && '!block'">
                                     <div class="flex min-h-screen items-center justify-center px-4" @click.self="addContactModal = false">
@@ -29,27 +27,51 @@
                                                     <line x1="6" y1="6" x2="18" y2="18"></line>
                                                 </svg>
                                             </button>
-                                            <h3 class="bg-[#fbfbfb] py-3 text-lg font-medium ltr:pl-5 ltr:pr-[50px] rtl:pr-5 rtl:pl-[50px] dark:bg-[#121c2c]" x-text="params.id ? 'Edit Contact' : 'Add Contact'"></h3>
+                                            <h3 class="bg-[#fbfbfb] py-3 text-lg font-medium ltr:pl-5 ltr:pr-[50px] rtl:pr-5 rtl:pl-[50px] dark:bg-[#121c2c]" x-text="params.id ? 'Edit Product' : 'Add Product'"></h3>
                                             <div class="p-5">
                                                 <form @submit.prevent="saveUser">
                                                     <div class="mb-5">
-                                                        <label for="name">Name</label>
-                                                        <input id="name" type="text" placeholder="Enter Name" class="form-input" x-model="params.name">
+                                                        <label for="productImage">Product Image</label>
+                                                        <input name="imageFile" id="imageFile" type="file" class="form-input" @change="handleImageUpload" x-model="params.path">
+                                                        <div class="mt-3">
+                                                            <img class="mx-auto max-h-40 w-4/5 object-contain" :src="params.path || 'assetsD/images/default.png'" alt="Product Image">
+                                                        </div>
                                                     </div>
                                                     <div class="mb-5">
-                                                        <label for="email">Email</label>
-                                                        <input id="email" type="email" placeholder="Enter Email" class="form-input" x-model="params.email">
+                                                        <label for="name">Product Name</label>
+                                                        <input name="name" id="name" type="text" placeholder="Enter Name" class="form-input" x-model="params.name">
                                                     </div>
                                                     <div class="mb-5">
+                                                        <label for="description">Description</label>
+                                                        <textarea name="email" id="description" placeholder="Enter Description" class="form-input" x-model="params.email"></textarea>
+                                                    </div>
+
+                                                    <div class="mb-5">
+                                                        <label for="role">Product Category</label>
+                                                        <select name="role" id="role" class="form-input" x-model="params.role">
+                                                        <option value="" >Select Category</option>
+                                                            <?php foreach($cats as $cat):?>
+                                                                <option value="<?=htmlspecialchars($cat['categoryID'])?>" ><?=htmlspecialchars($cat['name'])?></option>
+                                                             <?php endforeach; ?>       
+                                                        </select>
+                                                    </div>    
+
+                                                    <div >
+                                                        <input id="number" name="phone" type="text" placeholder="Enter Phone Number" class="form-input invisible" x-model="params.phone">
+                                                        <textarea name="id" id="id" placeholder="Enter Description" class="form-input invisible" x-model="params.id"></textarea>
+                                                    </div>
+                                                    <!-- <div class="mb-5">
                                                         <label for="number">Phone Number</label>
                                                         <input id="number" type="text" placeholder="Enter Phone Number" class="form-input" x-model="params.phone">
-                                                    </div>
-                                                    <div class="mb-5">
+                                                    </div> -->
+                                                   
+                                                    <!-- <div class="mb-5">
                                                         <label for="number">Location</label>
                                                         <input id="location" type="text" placeholder="Enter Location eg.(City, Province)" class="form-input" x-model="params.location">
                                                     </div>
-                                                   
+                                                    -->
                                                     <div class="mt-8 flex items-center justify-end">
+                                                  
                                                         <button type="button" class="btn btn-outline-danger" @click="addContactModal = false">
                                                             Cancel
                                                         </button>
@@ -103,9 +125,9 @@
                                 <thead>
                                     <tr>
                                         <th>Name</th>
-                                        <th>Email</th>
-                                        <th>Location</th>
-                                        <th>Phone</th>
+                                        <th>Description</th>
+                                        <!-- <th>Location</th>
+                                        <th>Phone</th> -->
                                         <th class="!text-center">Actions</th>
                                     </tr>
                                 </thead>
@@ -125,13 +147,17 @@
                                                         </svg>
                                                     </div>
                                                     <div x-text="contact.name"></div>
+                                                    <div class="text-white-dark" x-text="contact.jobTitle"></div>
+                                                    
+                                                    
                                                 </div>
                                             </td>
                                             <td x-text="contact.email"></td>
-                                            <td x-text="contact.location" class="whitespace-nowrap"></td>
-                                            <td x-text="contact.phone" class="whitespace-nowrap"></td>
+                                            <!-- <td x-text="contact.location" class="whitespace-nowrap"></td>
+                                            <td x-text="contact.phone" class="whitespace-nowrap"></td> -->
                                             <td>
                                                 <div class="flex items-center justify-center gap-4">
+                                              
                                                     <button type="button" class="btn btn-sm btn-outline-primary" @click="editUser(contact)">
                                                         Edit
                                                     </button>
@@ -165,17 +191,17 @@
                                     </div>
                                     <div class="mt-6 grid grid-cols-1 gap-4 ltr:text-left rtl:text-right">
                                         <div class="flex items-center">
-                                            <div class="flex-none ltr:mr-2 rtl:ml-2">Email :</div>
-                                            <div class="truncate text-white-dark" x-text="contact.email"></div>
+                                            <div class="flex-none ltr:mr-2 rtl:ml-2"></div>
+                                            <div class="break-words text-white-dark" x-text="contact.email"></div>
                                         </div>
-                                        <div class="flex items-center">
-                                            <div class="flex-none ltr:mr-2 rtl:ml-2">Phone :</div>
-                                            <div class="text-white-dark" x-text="contact.phone"></div>
-                                        </div>
-                                        <div class="flex items-center">
+                                        <!-- <div class="flex items-center">
+                                            <div class="flex-none ltr:mr-2 rtl:ml-2">Product Category :</div>
+                                            <div class="text-white-dark" x-text="contact.role"></div>
+                                        </div> -->
+                                        <!-- <div class="flex items-center">
                                             <div class="flex-none ltr:mr-2 rtl:ml-2">Address :</div>
                                             <div class="text-white-dark" x-text="contact.location"></div>
-                                        </div>
+                                        </div> -->
                                     </div>
                                 </div>
                                 <div class="absolute bottom-0 mt-6 flex w-full gap-4 p-6 ltr:left-0 rtl:right-0">
@@ -194,18 +220,18 @@
         <!-- start footer section -->
         <div class="p-6 pt-0 mt-auto text-center dark:text-white-dark ltr:sm:text-left rtl:sm:text-right">
             © <span id="footer-year">2022</span>. kyuuush All rights reserved.
+          
         </div>
         <!-- end footer section -->
     </div>
 </div>
-<?=
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-?>
+
+      <!-- static -->
+      
+
 <script>
 
-    const adminInfo = <?= json_encode($adminInfo)?>;
+    const productInfo = <?= json_encode($productInfo)?>;
  
     document.addEventListener('alpine:init', () => {
         // main section
@@ -420,6 +446,12 @@ error_reporting(E_ALL);
         }));
         //contacts
         Alpine.data('contacts', () => ({
+
+            imageFile: null,
+
+            handleImageUpload(event) {
+                this.imageFile = event.target.files[0];
+            },
             defaultParams: {
                 id: null,
                 name: '',
@@ -440,13 +472,14 @@ error_reporting(E_ALL);
             },
             filterdContactsList: [],
             searchUser: '',
-            contactList:adminInfo.map((employee) => ({
-                id: employee.customerID,
-                path: `data:image/jpeg;base64,${employee.pfPicture}`,
-                name: `${employee.fname} ${employee.lname}`,
-                email: employee.email,
-                phone: employee.phoneNo,
-                location: `${employee.city}, ${employee.province}`
+            contactList:productInfo.map((product) => ({
+                id: product.productID,
+                path: `data:image/jpeg;base64,${product.image}`,
+                name: product.productName,
+                role: product.name,
+                email: product.description,
+                phone: product.categoryID,
+                // location: `${product.city}, ${product.province}`
             })),
 
             init() {
@@ -467,66 +500,60 @@ error_reporting(E_ALL);
             },
 
             saveUser() {
-                if (!this.params.name || !this.params.email || !this.params.phone || !this.params.location) {
-                this.showMessage('All fields are required.', 'error');
-                return true;
-            }
 
-            const endpoint = this.params.id ?  '/API/updateUser.php' : '/API/addUser.php';
 
-            fetch(endpoint, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(this.params)
-            })
-            .then(res => res.json())
-            .then(data => {
-                if (data.message.includes('added') || data.message.includes('updated')) {
-                    if (!this.params.id) {
-                        // Add locally
-                        const maxId = this.contactList.length ? Math.max(...this.contactList.map(u => u.id)) : 0;
-                        const newUser = {
-                            ...this.params,
-                            id: maxId + 1,
-                            path: '../public/assesD/images/user-profile.jpeg'
-                        };
-                        this.contactList.unshift(newUser);
-                    } else {
-                        const user = this.contactList.find(d => d.id === this.params.id);
-                        Object.assign(user, this.params);
-                    }
-
-                    this.searchContacts();
-                    this.showMessage(data.message);
-                    this.addContactModal = false;
-                } else {
-                    this.showMessage(data.message, 'error');
+                if (!this.params.name || !this.params.email || !this.imageFile || !this.params.role) {
+                    this.showMessage('All fields are required.', 'error');
+                    return true;
                 }
-            })
-            .catch(() => this.showMessage('Server error. Could not save user.', 'error'));
+
+                const formData = new FormData();
+                formData.append('name', this.params.name);
+                formData.append('email', this.params.email);
+                formData.append('role', this.params.role);
+                formData.append('id', this.params.id ?? '');
+                formData.append('categoryID', this.params.phone);
+                formData.append('image', this.imageFile);
+
+                const endpoint = this.params.id ? '/API/updateProduct.php' : '/API/addProduct.php';
+
+                fetch(endpoint, {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.message.includes('added') || data.message.includes('updated')) {
+                        this.searchContacts();
+                        this.showMessage(data.message);
+                        this.addContactModal = false;
+                    } else {
+                        this.showMessage(data.message, 'error');
+                    }
+                })
+                .catch(() => this.showMessage('Server error. Could not save user.', 'error'));
             },
 
-            deleteUser(user) {
-            fetch('/API/deleteUser.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ id: user.id }),
-            })
-            .then(res => res.json())
-            .then(data => {
-                if (data.message === 'User deleted') {
-                    this.contactList = this.contactList.filter((d) => d.id !== user.id);
-                    this.searchContacts();
-                    this.showMessage('User has been deleted successfully.');
-                } else {
-                    this.showMessage(data.message, 'error');
+
+            deleteUser(contact) {
+                if (!confirm(`Are you sure you want to take ${contact.name}?`)) {
+                    return;
                 }
-            })
-            .catch(() => {
-                this.showMessage('Server error. Could not delete user.', 'error');
-            });
+
+                // Proceed with deletion logic, e.g.:
+                fetch('/API/deleteProduct.php', {
+                    method: 'POST',
+                    body: JSON.stringify({ id: contact.id }),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then(res => res.json())
+                .then(data => {
+                    this.showMessage(data.message); // Optional message function
+                    this.searchContacts(); // Refresh list
+                })
+                .catch(() => this.showMessage('Failed to delete user.', 'error'));
             },
 
             setDisplayType(type) {
@@ -547,6 +574,37 @@ error_reporting(E_ALL);
                 });
             },
         }));
+
+        // Alpine.data('modals', () => ({
+        //             init() {
+        //                 const swiper1 = new Swiper('#slider1', {
+        //                     navigation: {
+        //                         nextEl: '.swiper-button-next-ex',
+        //                         prevEl: '.swiper-button-prev-ex',
+        //                     },
+        //                     pagination: {
+        //                         el: '.swiper-pagination',
+        //                         clickable: true,
+        //                     },
+        //                 });
+        //             },
+
+        //             // highlightjs
+        //             codeArr: [],
+        //             toggleCode(name) {
+        //                 if (this.codeArr.includes(name)) {
+        //                     this.codeArr = this.codeArr.filter((d) => d != name);
+        //                 } else {
+        //                     this.codeArr.push(name);
+
+        //                     setTimeout(() => {
+        //                         document.querySelectorAll('pre.code').forEach((el) => {
+        //                             hljs.highlightElement(el);
+        //                         });
+        //                     });
+        //                 }
+        //             },
+        //         }));
     });
 </script>
 </body>

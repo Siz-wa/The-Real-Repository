@@ -40,6 +40,8 @@ $router->addroute('agegroups','AgeGroupsController','AgeGroups');
 $router->addroute('agegroupsdata','AgeGroupsDataController','AgeGroupsData');
 $router->addroute('administrator','AdministratorController','Administrator');
 $router->addroute('employees','EmployeesController','Employee');
+$router->addroute('product','ProductController','Product');
+$router->addroute('category','CategoryController','Category');
 
 
 

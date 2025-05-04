@@ -4,66 +4,27 @@
       <div class="container">
         <div class="row justify-content-center">
         
-  
-          <!-- Standard Plan -->
+          <?php foreach($plans as $plan):?>
           <div class="col-lg-3 mb-4">
             <a href="Services.html" style="text-decoration: none;">
               <div class="card h-100 text-center border-0 shadow" style="transition: all 0.4s ease; border-radius: 20px; overflow: hidden; cursor: pointer;">
                 <div class="card-header text-white" style="background-color: #f4b89e;">
                   <div class="py-3">
                     🍫
-                    <h4 class="my-2">Standard</h4>
+                    <h4 class="my-2"><?= htmlspecialchars($plan['planName'])?></h4>
                   </div>
                 </div>
                 <div class="card-body">
-                  <h2 class="card-title pricing-card-title">₱2,179 <small class="text-muted">/ mo</small></h2>
+                  <h2 class="card-title pricing-card-title">₱ <?= htmlspecialchars($plan['price'])?> <small class="text-muted">/ <br> <?= htmlspecialchars($plan['type'])?></small></h2>
                   <ul class="list-unstyled mt-3 mb-4">
-                    <p>Great for those who love a mix of classic and premium cookies.</p>
+                    <p><?= htmlspecialchars($plan['description'])?></p>
                   </ul>
                 </div>
               </div>
             </a>
           </div>
-  
-          <!-- Premium Plan -->
-          <div class="col-lg-3 mb-4">
-            <a href="Services.html" style="text-decoration: none;">
-              <div class="card h-100 text-center border-0 shadow" style="transition: all 0.4s ease; border-radius: 20px; overflow: hidden; cursor: pointer;">
-                <div class="card-header text-white" style="background-color: #f4b89e;">
-                  <div class="py-3">
-                    🍩
-                    <h4 class="my-2">Premium</h4>
-                  </div>
-                </div>
-                <div class="card-body">
-                  <h2 class="card-title pricing-card-title">₱2,899 <small class="text-muted">/ mo</small></h2>
-                  <ul class="list-unstyled mt-3 mb-4">
-                    <p>For cookie enthusiasts who want gourmet and specialty flavors.</p>
-                  </ul>
-                </div>
-              </div>
-            </a>
-          </div>
-  
-          <!-- Ultimate Plan -->
-          <div class="col-lg-3 mb-4">
-            <a href="Services.html" style="text-decoration: none;">
-              <div class="card h-100 text-center border-0 shadow" style="transition: all 0.4s ease; border-radius: 20px; overflow: hidden; cursor: pointer;">
-                <div class="card-header text-white" style="background-color: #f4b89e;">
-                  <div class="py-3">
-                    🍰
-                    <h4 class="my-2">Ultimate</h4>
-                  </div>
-                </div>
-                <div class="card-body">
-                  <h2 class="card-title pricing-card-title">₱3,819 <small class="text-muted">/ mo</small></h2>
-                  <ul class="list-unstyled mt-3 mb-4">
-                    <p>The ultimate experience for true cookie lovers, with access to all our flavors!</p>
-                  </ul>
-                </div>
-              </div>
-            </a>
-          </div>
+          <?php endforeach;?>
+
   
         </div>
       </div>

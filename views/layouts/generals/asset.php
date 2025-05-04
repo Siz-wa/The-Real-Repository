@@ -1,4 +1,4 @@
-  <link rel="icon" type="image/x-icon" href="../public/assets/img/thc logo.png">  
+    <link rel="icon" type="image/x-icon" href="assets/img/thclogo.png">  
   
 
   <!-- Fonts -->
