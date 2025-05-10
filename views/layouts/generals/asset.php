@@ -1,4 +1,4 @@
-    <link rel="icon" type="image/x-icon" href="assets/img/thclogo.png">  
+  <link rel="icon" type="image/x-icon" href="assets/img/thclogo.png">  
   
 
   <!-- Fonts -->
@@ -12,6 +12,8 @@
   <link href="assets/vendor/aos/aos.css" rel="stylesheet">
   <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
   <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  
+
 
   <!-- Main CSS File -->
   <link href="assets/css/main.css" rel="stylesheet">

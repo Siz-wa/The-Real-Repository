@@ -56,20 +56,36 @@
                                                         </select>
                                                     </div>    
 
-                                                    <div >
+                                                   
+                                                    <div class="mb-5">
+                                                        <label for="qty_per_package">Quantity Per Package</label>
+                                                        <input id="qty_per_package" name="qty_per_package" type="text" placeholder="Enter Quantity/Package" class="form-input" x-model="params.qty_per_package">
+                                                    </div>
+                                                   
+                                                    <div class="mb-5">
+                                                        <label for="location">Plan</label>
+                                                         <select name="location" id="location" class="form-input" x-model="params.location">
+                                                        <option value="" >Select Category</option>
+                                                            <?php foreach($plans as $plan):?>
+                                                                <option value="<?=htmlspecialchars($plan['planID'])?>" ><?=htmlspecialchars($plan['planName'])?></option>
+                                                             <?php endforeach; ?>       
+                                                        </select>
+                                                       
+                                                    </div>
+                                                    <div class="mb-5">
+                                                        <label for="availability">Availability</label>
+                                                        <select name="availability" id="availability" class="form-input" x-model="params.availability">
+                                                        <option value="" >Select Category</option>
+                                                        <option value="1" >Available</option>
+                                                        <option value="0" >Unavailable</option>
+                                                        </select>  
+                                                    </div>
+                                                     <div >
                                                         <input id="number" name="phone" type="text" placeholder="Enter Phone Number" class="form-input invisible" x-model="params.phone">
                                                         <textarea name="id" id="id" placeholder="Enter Description" class="form-input invisible" x-model="params.id"></textarea>
                                                     </div>
-                                                    <!-- <div class="mb-5">
-                                                        <label for="number">Phone Number</label>
-                                                        <input id="number" type="text" placeholder="Enter Phone Number" class="form-input" x-model="params.phone">
-                                                    </div> -->
+                                                    
                                                    
-                                                    <!-- <div class="mb-5">
-                                                        <label for="number">Location</label>
-                                                        <input id="location" type="text" placeholder="Enter Location eg.(City, Province)" class="form-input" x-model="params.location">
-                                                    </div>
-                                                    -->
                                                     <div class="mt-8 flex items-center justify-end">
                                                   
                                                         <button type="button" class="btn btn-outline-danger" @click="addContactModal = false">
@@ -194,6 +210,15 @@
                                             <div class="flex-none ltr:mr-2 rtl:ml-2"></div>
                                             <div class="break-words text-white-dark" x-text="contact.email"></div>
                                         </div>
+                                        <p>
+                                        <Strong>Quantity Per Package pc/s: </strong>
+                                            <span class="break-words text-white-dark" x-text="contact.qty_per_package"> </div>
+                                        </p>    
+                                        <div class="mt-6 grid grid-cols-1 gap-4 ltr:text-left rtl:text-right">
+                                        <p>    
+                                        <strong>Availability:</strong>
+                                        <span :class="contact.availabilityColor" x-text="contact.availabilityLabel"></span>
+                                        </p>
                                         <!-- <div class="flex items-center">
                                             <div class="flex-none ltr:mr-2 rtl:ml-2">Product Category :</div>
                                             <div class="text-white-dark" x-text="contact.role"></div>
@@ -459,6 +484,8 @@
                 role: '',
                 phone: '',
                 location: '',
+                qty_per_package: '',
+                availability: '',
             },
             displayType: 'list',
             addContactModal: false,
@@ -469,6 +496,8 @@
                 role: '',
                 phone: '',
                 location: '',
+                qty_per_package: '',
+                availability: '',
             },
             filterdContactsList: [],
             searchUser: '',
@@ -476,10 +505,14 @@
                 id: product.productID,
                 path: `data:image/jpeg;base64,${product.image}`,
                 name: product.productName,
-                role: product.name,
+                role: product.categoryID,
                 email: product.description,
                 phone: product.categoryID,
-                // location: `${product.city}, ${product.province}`
+                location: product.planID,
+                qty_per_package: product.qty_per_package,
+                availability: product.availability,
+                availabilityLabel: product.availability ? 'Available' : 'Out of Stock',
+                availabilityColor: product.availability ? 'text-green-600' : 'text-red-600'
             })),
 
             init() {
@@ -502,7 +535,8 @@
             saveUser() {
 
 
-                if (!this.params.name || !this.params.email || !this.imageFile || !this.params.role) {
+                if (!this.params.name || !this.params.email || !this.imageFile || !this.params.role || !this.params.location 
+                    || !this.params.phone || !this.params.qty_per_package || !this.params.availability) {
                     this.showMessage('All fields are required.', 'error');
                     return true;
                 }
@@ -513,7 +547,10 @@
                 formData.append('role', this.params.role);
                 formData.append('id', this.params.id ?? '');
                 formData.append('categoryID', this.params.phone);
+                formData.append('location', this.params.location);
+                formData.append('qty_per_package', this.params.qty_per_package);
                 formData.append('image', this.imageFile);
+                formData.append('availability', this.params.availability);
 
                 const endpoint = this.params.id ? '/API/updateProduct.php' : '/API/addProduct.php';
 

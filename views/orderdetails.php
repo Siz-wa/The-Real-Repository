@@ -23,7 +23,7 @@
                                     <div>+099915006728</div>
                                 </div>
                             </div>
-
+                        
                             <hr class="my-6 border-[#e0e6ed] dark:border-[#1b2e4b]">
                             <div class="flex flex-col flex-wrap justify-between gap-6 lg:flex-row">
                                 <div class="flex-1">
@@ -47,7 +47,7 @@
                                         </div>
                                         <div class="mb-2 flex w-full items-center justify-between">
                                             <div class="text-white-dark">Delivery Date :</div>
-                                            <div><?= htmlspecialchars(date("D, d M Y",strtotime($orderDetails['requiredDate'])))?>></div>
+                                            <div><?= htmlspecialchars(date("D, d M Y",strtotime($orderDetails['requiredDate'])))?></div>
                                         </div>
                                         <div class="flex w-full items-center justify-between">
                                             <div class="text-white-dark">Order ID :</div>
@@ -57,7 +57,7 @@
                                     <div class="xl:1/3 sm:w-1/2 lg:w-2/5">
                                         <div class="mb-2 flex w-full items-center justify-between">
                                             <div class="text-white-dark">Quantity :</div>
-                                            <div class="whitespace-nowrap"><?= htmlspecialchars($orderDetails['qty'])?></div>
+                                            <div class="whitespace-nowrap"><?= htmlspecialchars($orderDetails['qty_per_package'])?></div>
                                         </div>
                                         <div class="mb-2 flex w-full items-center justify-between">
                                             <div class="text-white-dark">Order Status :</div>

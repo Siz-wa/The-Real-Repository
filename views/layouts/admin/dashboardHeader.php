@@ -2,7 +2,7 @@
                     <div class="shadow-sm">
                         <div class="relative flex w-full items-center bg-white px-5 py-2.5 dark:bg-[#0e1726]">
                             <div class="horizontal-logo flex items-center justify-between ltr:mr-2 rtl:ml-2 lg:hidden">
-                                <a href="index.html" class="main-logo flex shrink-0 items-center">
+                                <a href="?action=profile" class="main-logo flex shrink-0 items-center">
                                 <img class="ml-[3px] w-12 h-12 rounded-full flex-none" src="<?php echo htmlspecialchars($_SESSION['user']['pfPicture']); ?>" alt="image">
                                 <span class="align-middle text-sm font-semibold ltr:ml-1.5 rtl:mr-1.5 dark:text-white-light lg:inline block break-words truncate max-w-[80px]"><?php echo htmlspecialchars($_SESSION['user']['fname'].' '.$_SESSION['user']['lname'])?></span>
                                 </a>

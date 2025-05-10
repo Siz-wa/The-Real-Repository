@@ -1,0 +1,70 @@
+
+<body class="starter-page-page">
+
+
+
+  <main class="main">
+
+    <section style="padding: 50px 20px; background: linear-gradient(to right, #fff0f6, #ffe4ec); font-family: 'Inter', sans-serif; border-radius: 15px; max-width: 1000px; margin: 50px auto; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+
+      <h2 style="text-align: center; color: #c2185b; font-size: 36px; font-weight: 800; margin-bottom: 40px;">Secure Your Sweet Subscription 💕</h2>
+    
+      <!-- Plan Selection -->
+      <div style="margin-bottom: 30px;">
+        <label for="plan" style="display: block; font-weight: 600; color: #c2185b; font-size: 18px; margin-bottom: 10px;">Choose a Plan:</label>
+        <select id="plan" style="width: 100%; padding: 12px; border-radius: 10px; border: 1px solid #ccc;">
+          <option value="basic">Basic Plan – ₱1,459</option>
+          <option value="standard">Standard Plan – ₱2,179</option>
+          <option value="premium" selected>Premium Plan – ₱2,899</option>
+          <option value="ultimate">Ultimate Plan – ₱3,819</option>
+        </select>
+      </div>
+    
+      <!-- Dynamic Plan Details -->
+      <div id="plan-details" style="background: #fff; padding: 30px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.07); margin-bottom: 40px;">
+        <h3 style="color: #c2185b; font-weight: 700; margin-bottom: 15px;">🍪 Selected Plan: <span id="plan-name">Premium Plan</span> – <span id="plan-price">₱2,899</span></h3>
+        <ul id="plan-items" style="color: #555; padding-left: 20px; line-height: 1.8;"></ul>
+      </div>
+    
+      <!-- Payment Method -->
+      <div style="margin-bottom: 40px;">
+        <h3 style="color: #c2185b; margin-bottom: 20px;">💳 Choose a Payment Method</h3>
+    
+        <label style="display: flex; align-items: center; margin-bottom: 15px; background: #fff; border: 2px solid #f8bbd0; border-radius: 10px; padding: 15px; cursor: pointer;">
+          <input type="radio" name="payment-method" value="cod" checked style="margin-right: 12px;">
+          <strong>Cash on Delivery</strong> – Pay when your goodies arrive at your door!
+        </label>
+    
+        <label style="display: flex; align-items: center; background: #fff; border: 2px solid #f8bbd0; border-radius: 10px; padding: 15px; cursor: pointer;">
+          <input type="radio" name="payment-method" value="gcash" style="margin-right: 12px;">
+          <strong>GCash</strong> – Fast and secure mobile payment.
+        </label>
+    
+        <!-- GCash fields -->
+        <div id="gcash-info" style="display: none; margin-top: 25px; background: #fff0f6; padding: 20px; border: 1px solid #f48fb1; border-radius: 10px;">
+          <label style="display: block; margin-bottom: 15px;">
+            <span style="display: block; margin-bottom: 6px; color: #c2185b;">GCash Account Name</span>
+            <input type="text" placeholder="Juan Dela Cruz" style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px;">
+          </label>
+          <label>
+            <span style="display: block; margin-bottom: 6px; color: #c2185b;">GCash Number</span>
+            <input type="text" placeholder="09XXXXXXXXX" style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px;">
+          </label>
+        </div>
+      </div>
+    
+      <!-- Submit Button -->
+      <div style="text-align: center;">
+        <button style="background-color: #c2185b; color: white; padding: 14px 30px; font-size: 16px; font-weight: 600; border: none; border-radius: 50px; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.2); transition: 0.3s;">
+          Place My Order 💌
+        </button>
+      </div>
+    </section>
+    
+  </main>
+
+  
+
+</body>
+
+</html>

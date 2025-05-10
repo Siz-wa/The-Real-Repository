@@ -20,8 +20,7 @@ class OrderDetailsModel {
             SELECT 
             c.brgy, c.blk, c.lot,c.city, c.province, c.ZipCode, c.fname, c.lname, c.email, c.phoneNo,
             o.orderID, o.created_at, o.requiredDate, o.status,
-            p.productName, p.image,
-            op.qty
+            p.productName, p.image, p.qty_per_package
             FROM orderr o
             JOIN customer c ON c.customerID = o.customerID
             JOIN order_product op ON op.orderID = o.orderID

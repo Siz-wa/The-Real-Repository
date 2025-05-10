@@ -3,7 +3,7 @@
   <div class="container position-relative d-flex align-items-center justify-content-between">
 
     <a href="index.html" class="logo d-flex align-items-center me-auto me-xl-0">
-    <img src="./assets/img/thc logo.png" alt="" width="60px" width="60px" class="rounded-circle">
+    <img src="assets/img/thclogo.png" alt="" width="60px" width="60px" class="rounded-circle">
       <h1 class="sitename">Two Hearts Confections</h1>
       <span>.</span>
     </a>
@@ -30,7 +30,7 @@
             <p class="mb-0"><strong><?php echo htmlspecialchars($_SESSION['user']['fname']) . ' ' . htmlspecialchars($_SESSION['user']['lname']); ?></strong></p>
           </li>
           <li><hr class="dropdown-divider"></li>
-          <li><a class="dropdown-item bi bi-person-fill" href="?action=profile"> View Profile</a></li>
+          <li><a class="dropdown-item bi bi-person-fill" href="?action=users&userID=<?=$_SESSION['user']['user_id']?>"> View Profile</a></li>
           <li><a class="dropdown-item bi bi-grid-fill" href="?action=admindashboard"> Dashboard</a></li>
           <li><a class="dropdown-item bi-door-open-fill" href="?action=logout"> Log Out</a></li>
         </ul>

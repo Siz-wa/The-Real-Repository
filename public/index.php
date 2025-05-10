@@ -26,7 +26,7 @@ $router->addroute('forgotpw','ForgotPwController','ForgotPw');
 $router->addroute('dashboarduser','DashboardController','Dashboard');
 $router->addroute('admindashboard','AdminDashboardController','AdminDashboard');
 $router->addroute('logout','LogoutController','Logout');
-$router->addroute('profile','ProfileController','Profile');
+$router->addroute('schedule','ScheduleController','Schedule');
 $router->addroute('demographics','DemographicsController','Demographics');
 $router->addroute('cities','CitiesController','Cities');
 $router->addroute('verifyaccount','VerifyAccountController','VerifyAccount');
@@ -43,6 +43,8 @@ $router->addroute('employees','EmployeesController','Employee');
 $router->addroute('product','ProductController','Product');
 $router->addroute('category','CategoryController','Category');
 $router->addroute('plans','PlansController','Plans');
+$router->addroute('payment','PaymentController','Payment');
+$router->addroute('assigndelivery','AssignDeliveryController','AssignDelivery');
 
 
 

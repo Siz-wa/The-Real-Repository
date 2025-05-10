@@ -6,7 +6,7 @@
         
           <?php foreach($plans as $plan):?>
           <div class="col-lg-3 mb-4">
-            <a href="Services.html" style="text-decoration: none;">
+            <a href="?action=payment&plan=<?=urlencode($plan['planName'])?>" style="text-decoration: none;">
               <div class="card h-100 text-center border-0 shadow" style="transition: all 0.4s ease; border-radius: 20px; overflow: hidden; cursor: pointer;">
                 <div class="card-header text-white" style="background-color: #f4b89e;">
                   <div class="py-3">
@@ -30,23 +30,5 @@
       </div>
     </section>
   
-    <style>
-      .card {
-        transition: all 0.3s ease;
-      }
-  
-      .card:hover {
-        transform: scale(1.05);
-        box-shadow: 0 25px 45px rgba(0, 0, 0, 0.2);
-        border: 2px solid #d8825e;
-      }
-  
-      .card-header, .card-body {
-        transition: background-color 0.3s ease;
-      }
-  
-      .card-header:hover {
-        background-color: #f7b89e; /* Change color on hover */
-      }
-    </style>
+    
   </main>

@@ -1,6 +1,7 @@
 <?php
 require_once '../controllers/Controller.php';
 require_once '../models/ProductModel.php';
+
 require_once '../config/Database.php';
 
 class ProductController extends Controller{
@@ -22,6 +23,7 @@ class ProductController extends Controller{
         
         $this->loadAdmin('Product', [
             'cats' => $employeesData['cats'],
+            'plans' => $employeesData['plans'],
             'productInfo' => $employeesData['productInfo']
         ]);
     }
@@ -54,7 +56,10 @@ class ProductController extends Controller{
             'email' => $_POST['email'],
             'role' => $_POST['role'],
             'id' => $_POST['id'],
+            'location' => $_POST['location'],
             'categoryID' =>$_POST['categoryID'],
+            'qty_per_package' => $_POST['qty_per_package'],
+            'availability' => $_POST['availability'],
             'image' => file_get_contents($_FILES['image']['tmp_name'])
         ];
     
@@ -93,6 +98,11 @@ class ProductController extends Controller{
             'name' => $_POST['name'],
             'email' => $_POST['email'],
             'role' => $_POST['role'],
+            'id' => $_POST['id'],
+            'location' => $_POST['location'],
+            'categoryID' =>$_POST['categoryID'],
+            'qty_per_package' => $_POST['qty_per_package'],
+            'availability' => $_POST['availability'],
             'image' => file_get_contents($_FILES['image']['tmp_name'])
         ];
     

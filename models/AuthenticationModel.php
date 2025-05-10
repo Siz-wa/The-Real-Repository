@@ -18,19 +18,31 @@ class AuthenticationModel {
         if($this->validate($email,$password)){
            $user = $this->findUser($email,$password);
             
-           if($this->getRole($user['customerID'])){
+           if($this->getAdmin($user['customerID'])){
                 return[
                     'success' => true,
                     'user' => $user,
                     'admin' => true,
+                    'employee' => false,
                     'errors' => null
                    ];
 
-            }else{
+            }else if($this->getEmployee($user['customerID'])){
+                 return[
+                    'success' => true,
+                    'user' => $user,
+                    'employee' => true,
+                    'admin' => false,
+                    'errors' => null
+                   ];
+
+            }
+            else{
                 return[
                     'success' => true,
                     'user' => $user,
                     'admin' => false,
+                    'employee' => false,
                     'errors' => null
                    ];
             }
@@ -40,6 +52,7 @@ class AuthenticationModel {
                 'success' => false,
                 'user' => null,
                 'admin' => false,
+                'employee' => false,
                 'errors' => $this->errors
             ];
         }
@@ -83,7 +96,23 @@ class AuthenticationModel {
 
     }
 
-    public function getRole($userID){
+    public function getEmployee($userID){
+        try {
+            $query = "SELECT * FROM employee WHERE userID = :customerID";
+            $getRole = $this->conn->prepare($query);
+            $getRole->bindParam(':customerID', $userID);
+            $getRole->execute();
+            if ($getRole->rowCount() > 0) {
+            return true;
+            }
+        } catch (PDOException $e) {
+            $this->errors[] = "Error fetching role: " . $e->getMessage();
+            return false;
+        }
+    }
+
+    
+    public function getAdmin($userID){
         try {
             $query = "SELECT * FROM administrator WHERE userID = :customerID";
             $getRole = $this->conn->prepare($query);

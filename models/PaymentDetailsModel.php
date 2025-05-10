@@ -29,7 +29,7 @@ class PaymentDetailsModel {
             pl.planName, pl.type, pl.price,
             c.fname, c.lname, c.blk, c.lot, c.brgy, c.city, c.province, c.ZipCode, c.phoneNo, c.email  
             FROM payment p
-            JOIN subscription s ON s.subscriptionID = p.subscriptionID
+            JOIN subscription s ON s.userID = p.customerID
             JOIN plans pl ON pl.planID = s.planID
             JOIN customer c ON c.customerID = p.customerID
             WHERE p.paymentID = :paymentID

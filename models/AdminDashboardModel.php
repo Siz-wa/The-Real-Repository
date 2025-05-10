@@ -209,7 +209,7 @@ class AdminDashboardModel{
         try{
             $query ="
             SELECT p.productName,p.image,
-            SUM(op.qty) as totalOrder,
+            SUM(p.qty_per_package) as totalOrder,
             c.name as category
             FROM orderr o
             JOIN order_product op ON op.orderID = o.orderID
@@ -221,14 +221,14 @@ class AdminDashboardModel{
             LIMIT :limit
             ";
             $getTopProduct = $this->conn->prepare($query);
-            $getTopProduct -> bindValue(':status', 'delivered', PDO::PARAM_STR);
+            $getTopProduct -> bindValue(':status', 'Shipped', PDO::PARAM_STR);
             $getTopProduct -> bindValue(':limit', (int)10, PDO::PARAM_INT);
             $getTopProduct->execute();
 
             return $getTopProduct->fetchAll(PDO::FETCH_ASSOC);
 
         }catch(PDOException $e){
-            error_log("Errors fetching the top ordered products");
+            error_log("Errors fetching the top ordered products".$e->getMessage());
             return[];
         }
     }

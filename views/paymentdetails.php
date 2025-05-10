@@ -58,6 +58,7 @@
                                 Edit
                             </a>
                         </div>
+                        
                         <div class="panel">
                             <div class="flex flex-wrap justify-between gap-4 px-4">
                                 <div class="text-2xl font-semibold uppercase">Invoice</div>
@@ -173,7 +174,7 @@
             </div>
         </div>
 
-    
+
         <script>
 
     const raw = <?= json_encode($paymentDetails ?? []); ?>;

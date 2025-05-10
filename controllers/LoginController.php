@@ -65,12 +65,16 @@ class LoginController extends Controller{
                 'Bday' => $user['Bday'],
                 'isVerified' => $user['isVerified'],
                 'admin' => $result['admin'],
+                'employee' => $result['employee']
             ];
 
             if($result['admin']){
                 header("Location: ?action=admindashboard");
                 exit();
-            }else{
+            }else if($result['employee']){
+
+            }
+            else{
                 header("Location: ?action=dashboarduser");
                 exit();
             }

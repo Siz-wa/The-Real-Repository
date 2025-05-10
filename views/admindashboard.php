@@ -516,7 +516,7 @@
 
                                 <div class="panel h-full w-full">
                                     <div class="mb-5 flex items-center justify-between">
-                                        <h5 class="text-lg font-semibold dark:text-white-light">Top Selling Product</h5>
+                                        <h5 class="text-lg font-semibold dark:text-white-light">Customer Favorites – Top 10 Picks</h5>
                                     </div>
                                     <div class="table-responsive">
                                         <table>

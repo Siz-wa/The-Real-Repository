@@ -39,7 +39,7 @@
                                 <line x1="6" y1="6" x2="18" y2="18"></line>
                             </svg>
                         </a>
-                        <h4 class="mb-1 dark:text-white">TEMPLATE CUSTOMIZER</h4>
+                        <h4 class="mb-1 dark:text-white">SET YOUR PREFERENCE</h4>
                         <p class="text-white-dark">Set preferences that will be cookied for your live preview demonstration.</p>
                     </div>
                     <div class="mb-3 rounded-md border border-dashed border-[#e0e6ed] p-3 dark:border-[#1b2e4b]">
@@ -173,7 +173,7 @@
 
                     <!-- USER -->
                         <div class="flex items-center justify-between px-4 py-3">
-                            <a href="?action=profile" class="main-logo flex shrink-0 items-center">
+                            <a href="?action=users&userID=<?=$_SESSION['user']['user_id']?>" class="main-logo flex shrink-0 items-center">
                                 <img class="ml-[3px] w-12 h-12 rounded-full flex-none" src="<?php echo htmlspecialchars($_SESSION['user']['pfPicture']); ?>" alt="image">
                                 <span class="align-middle text-sm font-semibold ltr:ml-1.5 rtl:mr-1.5 dark:text-white-light lg:inline block break-words truncate max-w-[80px]"><?php echo htmlspecialchars($_SESSION['user']['fname'].' '.$_SESSION['user']['lname'])?></span>
                             </a>
@@ -209,12 +209,20 @@
                                     <li>
                                         <a href="?action=demographics">Demographics</a>
                                     </li>
+                                   
+                                    <?php if($_SESSION['user']['admin'] === false || $_SESSION['user']['employee']===false):?>
+                                    
+                                    <?php else:?>
+                                        <li>
+                                        <a href="?action=schedule">Schedule Orders</a>
+                                        </li>
+                                    <?php endif;?>
+                                    <?php if($_SESSION['user']['employee']):?>
                                     <li>
-                                        <a href="finance.html">Finance</a>
+                                        <a href="?action=assigndelivery">Crypto</a>
                                     </li>
-                                    <li>
-                                        <a href="crypto.html">Crypto</a>
-                                    </li>
+                                    <?php else:?>
+                                    <?php endif;?>    
                                 </ul>
                             </li>
 
@@ -287,7 +295,7 @@
                                             </div>
                                         </a>
                                     </li>
-                                   
+                                   <?php if($_SESSION['user']['admin']):?>
                                     <li class="menu nav-item">
                                         <button type="button" class="nav-link group" :class="{'active' : activeDropdown === 'invoice'}" @click="activeDropdown === 'invoice' ? activeDropdown = null : activeDropdown = 'invoice'">
                                             <div class="flex items-center">
@@ -315,7 +323,10 @@
                                             
                                         </ul>
                                     </li> 
-
+                                    <?php else:?>
+                                    <?php endif;?>    
+                                        
+                                    <?php if( $_SESSION['user']['admin']):?>    
                                     <li class="menu nav-item">
                                         <button type="button" class="nav-link group" :class="{'active' : activeDropdown === 'components'}" @click="activeDropdown === 'components' ? activeDropdown = null : activeDropdown = 'components'">
                                             <div class="flex items-center">
@@ -345,6 +356,8 @@
                                             
                                         </ul>
                                     </li>
+                                    <?php else:?>
+                                    <?php endif;?>    
                                     <li class="nav-item">
                                         <a href="apps-calendar.html" class="group">
                                             <div class="flex items-center">
@@ -728,7 +741,7 @@
                                 </button>
                                 <ul x-cloak="" x-show="activeDropdown === 'users'" x-collapse="" class="sub-menu text-gray-500">
                                     <li>
-                                        <a href="users-profile.html">Profile</a>
+                                        <a href="?action=users&userID=<?=$_SESSION['user']['user_id']?>">Profile</a>
                                     </li>
                                     <li>
                                         <a href="users-account-settings.html">Account Settings</a>

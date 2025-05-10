@@ -20,6 +20,7 @@ class PaymentDetailsController extends Controller{
 
         $this->loadAdmin('paymentdetails', [
             'paymentDetails' => $paymentDetails['paymentDetails']
+      
         ]);
     }
 }

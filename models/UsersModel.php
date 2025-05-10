@@ -1,11 +1,10 @@
 <?php
 class UsersModel {
-    private $conn;
+    protected $conn;
 
     public function __construct(){
         $this->conn = Database::getInstance()->getConnection();
     }
-
     public function UsersHandler($customerID){
         $userData = $this->getUserData($customerID);
         $orderData = $this->getOrderData($customerID);
@@ -40,12 +39,15 @@ class UsersModel {
     public function getSubscriptionData($customerID){
         try {
             $query = "
-            SELECT 
-            s.endDate, s.status, 
+            SELECT
+            s.endDate, s.status, s.startDate,s.planID, 
             p.planName, p.type, p.description, p.price 
             FROM subscription s
             JOIN plans p ON p.planID = s.planID
-            WHERE s.userID = :customerID
+            WHERE 
+            s.userID = :customerID
+            AND CURDATE() BETWEEN startDate AND endDate
+            LIMIT 1
             ";
 
             $getSubsData = $this->conn->prepare($query);

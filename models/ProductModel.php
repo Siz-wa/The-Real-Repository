@@ -1,15 +1,19 @@
 <?php
-class ProductModel {
-    private $conn;
+require_once "../models/PlansModel.php"; 
+
+class ProductModel extends PlansModel{
+
     public function __construct(){
-        $this->conn = Database::getInstance()->getConnection();
+        parent::__construct();
     }
 
     public function ProductHandler(){
         $productInfo = $this->getProduct();
         $cat = $this->getCat();
+        $plans = $this->getPlans();
         return[
             'cats' => $cat,
+            'plans' => $plans,
             'productInfo' => $productInfo
         ];
     }
@@ -33,8 +37,8 @@ class ProductModel {
         try {
             $query = "
                 INSERT INTO product 
-                (productName, description, image, categoryID)
-                VALUES (:productName, :description, :image, :categoryID)
+                (productName, description, image, categoryID, planID, qty_per_package, availability)
+                VALUES (:productName, :description, :image, :categoryID, :planID, :qty, :availability)
             ";
     
             $add = $this->conn->prepare($query);
@@ -43,12 +47,16 @@ class ProductModel {
                 ':description' => $data['email'],
                 ':image' => $data['image'], // already binary from file_get_contents
                 ':categoryID' => $data['role'],
+                ':qty' => $data['qty_per_package'],
+                ':planID' => $data['location'],
+                'availability' => $data['availability']
             ]);
     
             return true;
     
         } catch (PDOException $e) {
             error_log('Insert Error: ' . $e->getMessage());
+            echo json_encode("ERROR:".$e->getMessage());
             return false;
         }
     }
@@ -63,7 +71,10 @@ class ProductModel {
                     productName = :productName,
                     description =:description,
                     image = :image,
-                    categoryID = :categoryID
+                    categoryID = :categoryID,
+                    qty_per_package = :qty,
+                    planID = :planID,
+                    availability = :availability
                 WHERE 
                     productID = :id
 
@@ -74,7 +85,10 @@ class ProductModel {
                 ':productName' => $data['name'],
                 ':description' => $data['email'],
                 ':image' => $data['image'], // already binary from file_get_contents
-                ':categoryID' => $data['categoryID'],
+                ':categoryID' => $data['role'],
+                ':qty' => $data['qty_per_package'],
+                ':planID' => $data['location'],
+                'availability' => $data['availability'],
                 ':id' => $data['id']
             ]);
 
@@ -101,7 +115,7 @@ class ProductModel {
         try {
             $query = "
                 SELECT 
-                p.productName, p.image, p.description, p.productID,
+                p.productName, p.image, p.description, p.productID, p.planID, p.qty_per_package, p.availability,
                 c.categoryID, c.name
                 FROM product p
                 JOIN category c ON c.categoryID = p.categoryID
