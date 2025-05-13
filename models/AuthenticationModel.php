@@ -76,7 +76,7 @@ class AuthenticationModel {
     }
 
     public function findUser($email, $password){
-            $query = "SELECT * FROM customer WHERE email = :email";
+            $query = "CALL auth(:email)";
             $login = $this->conn->prepare($query);
             $login->bindParam(':email', $email);
             $login->execute();

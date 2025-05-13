@@ -39,6 +39,8 @@ class AdminDashboardController extends Controller{
         // calculationg the profit
         $profit = $analyticsData['totalRevenue'] - $analyticsData['totalExpenses'];
 
+       
+
 
         $this->loadAdmin('adminDashboard', [
             'monthlyRevenue' => $analyticsData['monthlyRevenue'],
@@ -53,7 +55,8 @@ class AdminDashboardController extends Controller{
             'currentWeek' => $analyticsData['currentWeek'],
             'lastWeek' => $analyticsData['lastWeek'],
             'recentOrders' => $analyticsData['recentOrders'],
-            'topProd' => $analyticsData['topProd']
+            'topProd' => $analyticsData['topProd'],
+            'courier' => $analyticsData['courier'],
         ]);
     }
 

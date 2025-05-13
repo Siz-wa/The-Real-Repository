@@ -45,6 +45,8 @@ $router->addroute('category','CategoryController','Category');
 $router->addroute('plans','PlansController','Plans');
 $router->addroute('payment','PaymentController','Payment');
 $router->addroute('assigndelivery','AssignDeliveryController','AssignDelivery');
+$router->addroute('orderfulfill','OrderFulfillController','OrderFulfill');
+$router->addroute('deliver','DeliverController','Deliver');
 
 
 

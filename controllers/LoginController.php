@@ -65,7 +65,11 @@ class LoginController extends Controller{
                 'Bday' => $user['Bday'],
                 'isVerified' => $user['isVerified'],
                 'admin' => $result['admin'],
-                'employee' => $result['employee']
+                'jobTitle' => $user['jobTitle'],
+                'employeeID' => $user['employeeID'],
+                'adminID' => $user['adminID'],
+                'employee' => $result['employee'],
+                'availability' => true,
             ];
 
             if($result['admin']){

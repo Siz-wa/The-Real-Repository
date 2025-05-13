@@ -1,5 +1,5 @@
 <?php
-class AssignDeliveryModel {
+class OrderFulfillModel {
     private $conn;
     public function __construct(){
         $this->conn = Database::getInstance()->getConnection();
@@ -21,7 +21,7 @@ class AssignDeliveryModel {
             JOIN order_product op ON op.orderID = o.orderID
             JOIN product p ON p.productID = op.productID
             WHERE
-                o.status = 'Fulfilled'
+                o.status = 'Pending'
             ";
 
             $getpaymentDetails = $this->conn->prepare($query);
@@ -35,35 +35,17 @@ class AssignDeliveryModel {
         }
     }
 
-    public function insertDelivery($data) {
-    try {
-        $query = "
-            INSERT INTO delivery (employeeID, orderID, CustomerID)
-            VALUES (:employeeID, :orderID, :CustomerID)
-        ";
-        $stmt = $this->conn->prepare($query);
 
-        return $stmt->execute([
-            ':employeeID' => $data['employeeID'],
-            ':orderID'    => $data['orderID'],
-            ':CustomerID' => $data['CustomerID'],
-        ]);
-    } catch (PDOException $e) {
-        error_log("Insert Delivery Error: " . $e->getMessage());
-        error_log("Failed Data: " . json_encode($data));
-        return false;
-    }
-}
 
-    public function updateOrderStatus($orderID) {
+    public function updateOrderStatus($data) {
         try {
             $query = "
                 UPDATE orderr
-                SET status = 'Out for Delivery'
+                SET status = 'Fulfilled'
                 WHERE orderID = :orderID
             ";
             $stmt = $this->conn->prepare($query);
-            return $stmt->execute([':orderID' => $orderID]);
+            return $stmt->execute([':orderID' => $data['orderID']]);
         } catch (PDOException $e) {
             error_log("Update Order Status Error: " . $e->getMessage());
             return false;

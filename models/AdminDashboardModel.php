@@ -17,6 +17,7 @@ class AdminDashboardModel{
         $dailyOrder = $this->getDailyOrder();
         $recentOrders = $this->getRecentOrders();
         $topProd = $this->getTopProduct();
+        $courier = $this->getCourier();
 
         return[
             'monthlyRevenue' => $monthlyRevenue,
@@ -29,8 +30,27 @@ class AdminDashboardModel{
             'currentWeek' => $dailyOrder['currentWeek'],
             'lastWeek' => $dailyOrder['lastWeek'],
             'recentOrders' => $recentOrders,
-            'topProd' => $topProd
+            'topProd' => $topProd,
+            'courier' => $courier
         ];
+    }
+    public function getCourier(){
+         try{
+            $query ="
+            SELECT c.fname, c.lname, e.jobTitle, e.employeeID
+            FROM employee e
+            JOIN customer c ON c.customerID = e.userID
+            WHERE e.jobTitle = 'Courier'
+            ";
+            $getRecent = $this->conn->prepare($query);
+            $getRecent->execute();
+
+            return $getRecent->fetchAll(PDO::FETCH_ASSOC);
+        }catch(PDOException $e){
+            error_log("Error fetching recent orders".$e->getMessage());
+            return[];
+        }
+
     }
 
     // FETCHES ALL THE DAILY ORDERS

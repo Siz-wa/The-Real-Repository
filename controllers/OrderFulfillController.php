@@ -2,18 +2,18 @@
 
 <?php
 require_once '../controllers/Controller.php';
-require_once '../models/AssignDeliveryModel.php';
+require_once '../models/OrderFulfillModel.php';
 require_once '../config/Database.php';
 
-class AssignDeliveryController extends Controller{
-    private $assignDeliveryModel;
+class OrderFulfillController extends Controller{
+    private $orderfulfillModel;
     public function __construct(){
-        $this->assignDeliveryModel = new AssignDeliveryModel();
+        $this->orderfulfillModel = new OrderFulfillModel();
     }
 
-    public function AssignDelivery(){
+    public function OrderFulfill(){
 
-        $deliveryData = $this->assignDeliveryModel->assignDelivery();
+        $deliveryData = $this->orderfulfillModel->assignDelivery();
 
         foreach($deliveryData['delivery'] as &$data){
             if ($data['image'] ||  $data['pfPicture']){
@@ -26,12 +26,12 @@ class AssignDeliveryController extends Controller{
             }
         }
 
-        $this->loadAdmin('assigndelivery',[
+        $this->loadAdmin('orderfulfill',[
             'delivery' => $deliveryData['delivery']
         ]);
     }
 
-        public function assign()
+        public function fulfill()
         {
             header('Content-Type: application/json'); // Ensures JSON response
             ini_set('display_errors', 1); // Show errors in development
@@ -48,12 +48,11 @@ class AssignDeliveryController extends Controller{
             $successCount = 0;
 
             foreach ($input as $row) {
-                if (!isset($row['employeeID'], $row['orderID'], $row['CustomerID'])) {
+                if (!isset($row['orderID'], $row['CustomerID'])) {
                     continue; // Skip invalid rows
                 }
 
-                $success = $this->assignDeliveryModel->insertDelivery($row);
-                $this->assignDeliveryModel->updateOrderStatus($row['orderID']);
+                $success=$this->orderfulfillModel->updateOrderStatus($row);
                 if ($success) $successCount++;
             }
 

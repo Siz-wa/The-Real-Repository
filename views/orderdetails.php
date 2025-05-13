@@ -1,3 +1,5 @@
+
+
 <body x-data="main" class="relative overflow-x-hidden font-nunito text-sm font-normal antialiased" :class="[ $store.app.sidebar ? 'toggle-sidebar' : '', $store.app.theme === 'dark' || $store.app.isDarkMode ?  'dark' : '', $store.app.menu, $store.app.layout,$store.app.rtlClass]">
         <!-- sidebar menu overlay -->
         
@@ -8,8 +10,44 @@
                
                 <div class="animate__animated p-6" :class="[$store.app.animation]">
                     <!-- start main content section -->
+                     
                     <div x-data="invoicePreview">
-                        <div class="panel">
+
+                   <?php if(empty($orderDetails['POD'])): ?>
+                      <div class="mb-5 grid gap-6 xl:grid-cols-3">
+                       
+
+                            <div class="panel mb-6 lg:col-span-1 custom-file-container">
+                                <div class="panel mb-6 lg:col-span-1 custom-file-container">
+                                <form method="POST" enctype="multipart/form-data">
+                                    <label class="input-container" style="margin-bottom: 300px;">
+                                        Select image:
+                                        <input
+                                            class="mb-5 input-hidden"
+                                            type="file"
+                                            name="image"
+                                            id="customImageInput"
+                                            accept="image/*"
+                                        />
+                                        <span class="browse-button">Browse</span>
+                                        <span class="input-visible">Proof of Delivery</span>
+
+                                        <!-- Image preview container -->
+                                        <div id="customImagePreview" class="mt-5"></div>
+                                    </label>
+                                      <div class="mb-5">
+                                                                            <button type="submit" class="btn btn-primary" name="submit">Confirm Order</button>
+
+                                    </div>
+                                  
+                                </form>
+                            </div>
+                        </div>
+                   <?php endif;?>     
+                                
+<!-- script -->
+                   
+                        <div class="panel  h-full xl:col-span-2">
                             <div class="flex flex-wrap justify-between gap-4 px-4">
                                 <div class="text-2xl font-semibold uppercase">Order Details</div>
                                 <div class="shrink-0">
@@ -27,6 +65,8 @@
                             <hr class="my-6 border-[#e0e6ed] dark:border-[#1b2e4b]">
                             <div class="flex flex-col flex-wrap justify-between gap-6 lg:flex-row">
                                 <div class="flex-1">
+                                <img src="data:image/jpeg;base64,<?=$orderDetails['POD']?>" alt="" class="w-1/2 h-1/2 rounded-lg">
+
                                     <div class="space-y-1 text-white-dark">
                                         <div>Issue For:</div>
                                         <div class="font-semibold text-black dark:text-white"><?= htmlspecialchars($orderDetails['fname'].' '.$orderDetails['lname'])?></div>
@@ -37,30 +77,30 @@
                                 </div>
                                 <div class="flex flex-col justify-between gap-6 sm:flex-row lg:w-2/3">
                                     <div class="xl:1/3 sm:w-1/2 lg:w-2/5">
-                                        <div class="mb-2 flex w-full items-center justify-between">
-                                            <div class="text-white-dark">Product :</div>
+                                        <div class="mb-5 flex w-full items-center justify-between">
+                                            <div class="text-white-dark">Product: </div>
                                             <div><?= htmlspecialchars($orderDetails['productName'])?></div>
                                         </div>
-                                        <div class="mb-2 flex w-full items-center justify-between">
-                                            <div class="text-white-dark">Date Ordered :</div>
+                                        <div class="mb-5 flex w-full items-center justify-between">
+                                            <div class="text-white-dark">Date Ordered: </div>
                                             <div><?= htmlspecialchars(date("D, d M Y",strtotime($orderDetails['created_at'])))?></div>
                                         </div>
-                                        <div class="mb-2 flex w-full items-center justify-between">
-                                            <div class="text-white-dark">Delivery Date :</div>
+                                        <div class="mb-5 flex w-full items-center justify-between">
+                                            <div class="text-white-dark">Delivery Date: </div>
                                             <div><?= htmlspecialchars(date("D, d M Y",strtotime($orderDetails['requiredDate'])))?></div>
                                         </div>
                                         <div class="flex w-full items-center justify-between">
-                                            <div class="text-white-dark">Order ID :</div>
+                                            <div class="text-white-dark">Order ID: </div>
                                             <div># <?= htmlspecialchars($orderDetails['orderID'])?></div>
                                         </div>
                                     </div>
                                     <div class="xl:1/3 sm:w-1/2 lg:w-2/5">
-                                        <div class="mb-2 flex w-full items-center justify-between">
-                                            <div class="text-white-dark">Quantity :</div>
+                                        <div class="mb-5 flex w-full items-center justify-between">
+                                            <div class="text-white-dark">Quantity: </div>
                                             <div class="whitespace-nowrap"><?= htmlspecialchars($orderDetails['qty_per_package'])?></div>
                                         </div>
-                                        <div class="mb-2 flex w-full items-center justify-between">
-                                            <div class="text-white-dark">Order Status :</div>
+                                        <div class="mb-5 flex w-full items-center justify-between">
+                                            <div class="text-white-dark">Order Status: </div>
                                             <div><?= htmlspecialchars($orderDetails['status'])?></div>
                                         </div>
                                         <!-- <div class="mb-2 flex w-full items-center justify-between">
@@ -126,6 +166,7 @@
                                 </div>
                             </div> -->
                         </div>
+                          </div>   
                     </div>
                     <!-- end main content section -->
 
@@ -138,10 +179,39 @@
                 <!-- end footer section -->
             </div>
         </div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const input = document.getElementById('customImageInput');
+    const previewContainer = document.getElementById('customImagePreview');
+
+    input.addEventListener('change', function () {
+        const file = this.files[0];
+
+        if (file && file.type.startsWith('image/')) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                previewContainer.innerHTML = `
+                    <img src="${e.target.result}" alt="Preview" class="w-full max-w-xs rounded border border-gray-300 shadow" />
+                `;
+            };
+            reader.readAsDataURL(file);
+        } else {
+            previewContainer.innerHTML = '<p class="text-red-500">Selected file is not an image.</p>';
+        }
+    });
+});
+</script>
 
 
         <script>
+
+            
             document.addEventListener('alpine:init', () => {
+                
+                   // single image upload
+               
+    
+       
                 // main section
                 Alpine.data('scrollToTop', () => ({
                     showTopButton: false,
@@ -164,6 +234,7 @@
                         document.documentElement.scrollTop = 0;
                     },
                 }));
+              
 
                 // theme customization
                 Alpine.data('customizer', () => ({
@@ -190,6 +261,11 @@
                     },
                 }));
 
+         
+                // Set the name attribute after DOM content is ready
+                
+
+                   
                 // header section
                 Alpine.data('header', () => ({
                     init() {

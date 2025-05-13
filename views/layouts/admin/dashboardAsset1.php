@@ -10,3 +10,4 @@
         <script defer="" src="assetsD/js/tippy-bundle.umd.min.js"></script>
         <script defer="" src="assetsD/js/sweetalert.min.js"></script>  
         <link rel="icon" type="image/x-icon" href="assets/img/thclogo.png">
+        <link rel="stylesheet" type="text/css" href="assetsD/css/file-upload-with-preview.min.css">
