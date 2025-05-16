@@ -6,12 +6,7 @@ class UsersController extends Controller{
     }
 
     public function Users(){
-        if (isset($_SESSION['user']['user_id']) && $_SESSION['user']['admin'] === false ) {
-            header("Location: ?action=dashboarduser");
-            exit();
-        }else if(!isset( $_SESSION['user']['admin'])) {
-            header("Location: ?action=home");
-        }
+       
 
         $customerID = $_GET['userID'];
 
@@ -49,6 +44,10 @@ class UsersController extends Controller{
             $email = $data['email'];
             $isVerified = $data['isVerified'];
             
+        }
+
+        foreach($userData['paymentData'] as $data){
+            $data['Amount'] = number_format($data['Amount'], 2);
         }
 
         $this->loadAdmin('users',[

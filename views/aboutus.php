@@ -253,7 +253,7 @@
               </div>
               <div class="member-info">
                 <h4>Renzy Rivas</h4>
-                <span>Admin</span>
+                <span>Documentations</span>
                 <p></p>
               </div>
             </div>
@@ -291,7 +291,7 @@
               </div>
               <div class="member-info">
                 <h4>Alexa</h4>
-                <span>Data Analyst</span>
+                <span>Documentations</span>
                 <p></p>
               </div>
             </div>

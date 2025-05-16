@@ -115,6 +115,7 @@ class AddCustomerModel extends TokenGeneratorModel{
     $addCustomer->bindParam(':pfPicture', $image);
     $addCustomer->execute();
 
+    error_log("User registered successfully: " . $password . " " . $lastName);
     return true;
   }
 

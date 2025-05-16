@@ -13,7 +13,7 @@
                      
                     <div x-data="invoicePreview">
 
-                   <?php if(empty($orderDetails['POD'])): ?>
+                   <?php if(empty($orderDetails['POD'] )): ?>
                       <div class="mb-5 grid gap-6 xl:grid-cols-3">
                        
 

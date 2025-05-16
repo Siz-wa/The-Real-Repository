@@ -17,8 +17,20 @@ class AuthenticationModel {
        
         if($this->validate($email,$password)){
            $user = $this->findUser($email,$password);
-            
-           if($this->getAdmin($user['customerID'])){
+
+           if(!$user || !is_array($user)){
+                $this->errors[] = "Invalid email or password.";
+                return [
+                    'success' => false,
+                    'user' => null,
+                    'admin' => false,
+                    'employee' => false,
+                    'errors' => $this->errors
+                ];
+
+           }else
+           {
+            if($this->getAdmin($user['customerID'])){
                 return[
                     'success' => true,
                     'user' => $user,
@@ -45,7 +57,11 @@ class AuthenticationModel {
                     'employee' => false,
                     'errors' => null
                    ];
-            }
+            }   
+
+           }
+            
+           
 
         } else{
             return [
@@ -66,35 +82,34 @@ class AuthenticationModel {
             $isValid = false;
         } 
         
-        if(!$this->findUser($email,$password)){
-            $this->errors[] = "Email or password is incorrect.";
-            $isValid = false;
-        }
+      
 
         return $isValid;
 
     }
 
-    public function findUser($email, $password){
-            $query = "CALL auth(:email)";
-            $login = $this->conn->prepare($query);
-            $login->bindParam(':email', $email);
-            $login->execute();
+   public function findUser($email, $password){
+    $query = "SELECT * FROM customer WHERE email = :email";
+    $login = $this->conn->prepare($query);
+    $login->bindParam(':email', $email);
+    $login->execute();
 
-            if($login->rowCount()>0){
-                $isValid = true;
+    if($login->rowCount() > 0){
+        $user = $login->fetch(PDO::FETCH_ASSOC);
 
-                $user = $login->fetch(PDO::FETCH_ASSOC);
-                if (password_verify($password, $user['password'])) {
-                    return $user; 
-                }else{
-                    $isValid = false;
-                }
+       
 
-                return $isValid; // Authentication failed
+        if (isset($user['password']) && password_verify($password, $user['password'])) {
+            return $user; 
+        } else {
+            return false; // Password mismatch
         }
-
     }
+
+    
+
+    return false; // No user found
+}
 
     public function getEmployee($userID){
         try {

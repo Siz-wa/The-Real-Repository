@@ -6,8 +6,8 @@ class DeliverController extends Controller{
     }
 
     public function Deliver(){
-      
-        $deliveryData = $this->deliverModel->deliverHandler($employeeID = $_SESSION['user']['employeeID']);
+        $empID = $this->deliverModel->getEmpID($_GET['userID']);
+        $deliveryData = $this->deliverModel->deliverHandler($empID['employeeID']);
 
          foreach($deliveryData['delivery'] as &$data){
             if ($data['image'] ||  $data['pfPicture']){

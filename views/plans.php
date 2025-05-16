@@ -170,7 +170,7 @@
                                             <div class="break-words text-white-dark" x-text="contact.email"></div>
                                         </div>
                                         <div class="flex items-center">
-                                            <div class="flex-none ltr:mr-2 rtl:ml-2">Price :$</div>
+                                            <div class="flex-none ltr:mr-2 rtl:ml-2">Price :₱</div>
                                             <div class="text-white-dark" x-text="contact.phone"></div>
                                         </div>
                                         <div class="flex items-center">

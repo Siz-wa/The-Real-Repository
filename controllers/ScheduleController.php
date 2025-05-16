@@ -28,7 +28,9 @@ class ScheduleController extends Controller{
                 $customerID = $_SESSION['user']['user_id'];
     
                 // Attempt to subscribe
-                $scheduleOrder = $this->scheduleModel->scheduleOrder($customerID, $PID, $Odate);
+                $scheduleOrder = $this->scheduleModel->scheduleOrder($customerID, $Odate);
+
+                $this->scheduleModel->insert($PID,$scheduleOrder);
     
                 if (isset($subscriptionResult['error'])) {
                     echo json_encode(['error' => $scheduleOrder['error']]);

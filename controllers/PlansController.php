@@ -19,6 +19,10 @@ class PlansController extends Controller{
 
         $plansData = $this->PlansModel->plansHandler();
         
+        foreach($plansData['plans'] as $data){
+            $data['price'] = number_format($data['price'], 2);
+        }
+        
         $this->loadAdmin('plans',[
             'plansData' => $plansData['plans']
         ]);

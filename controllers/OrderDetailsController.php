@@ -9,25 +9,27 @@ class OrderDetailsController extends Controller{
         $this->orderDetailsModel = new OrderDetailsModel();
     }
     public function OrderDetails(){
-        if (isset($_SESSION['user']['user_id']) && $_SESSION['user']['admin'] === false ) {
-            header("Location: ?action=dashboarduser");
-            exit();
-        }else if(!isset( $_SESSION['user']['admin'])) {
-            header("Location: ?action=home");
-        }
+       
         if (isset($_POST["submit"])) {
             $orderID = $_GET['orderID'];
             $deliveryID = $_GET['DeliveryID'];
+
+            if($deliveryID === null){
+                $deliveryID = $this->orderDetailsModel->getDeliveryID($orderID);
+            }
             $imageName = $_FILES["image"]["name"];
             $POD = file_get_contents($_FILES["image"]["tmp_name"]);
 
             $this->orderDetailsModel->confirmDelivery($orderID,$POD,$deliveryID);
 
-        }
-          $orderID = $_GET['orderID'];
 
-        $orderDetails = $this->orderDetailsModel->orderDetailsHandler($orderID);
-        $orderDetails['orderDetails']['POD'] = base64_encode($orderDetails['orderDetails']['POD']);
+        }
+        $OID = $_GET['orderID'];
+
+        $orderDetails = $this->orderDetailsModel->orderDetailsHandler($OID);
+      
+         $orderDetails['orderDetails']['POD'] = base64_encode($orderDetails['orderDetails']['POD']);
+      
 
         $this->loadAdmin('orderdetails',[
             'orderDetails' => $orderDetails['orderDetails']

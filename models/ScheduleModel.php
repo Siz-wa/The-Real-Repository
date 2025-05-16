@@ -38,7 +38,7 @@ class ScheduleModel extends UsersModel {
         }
     }
 
-    public function scheduleOrder($customerID,$productID,$orderDate){
+    public function scheduleOrder($customerID,$orderDate){
         try {
            
             $query= "
@@ -54,7 +54,19 @@ class ScheduleModel extends UsersModel {
 
             $OID = $this->conn->lastInsertId();
 
-            $query2 = "
+       
+
+            return $OID;
+           
+        } catch (PDOException $e) {
+            error_log("Failed fetching order data of the user: ".$e->getMessage());
+            return ['error' => 'Database error'.$e->getMessage()]; // Return empty array in case of failure
+        }
+
+    }
+
+    public function insert($productID,$OID){
+         $query2 = "
             INSERT INTO order_product (orderID,productID) 
             VALUES (:orderID, :productID)
             ";
@@ -63,15 +75,6 @@ class ScheduleModel extends UsersModel {
                 ':orderID' => $OID,
                 ':productID' => $productID
             ]);
-
-
-            return true;
-           
-        } catch (PDOException $e) {
-            error_log("Failed fetching order data of the user: ".$e->getMessage());
-            return ['error' => 'Database error'.$e->getMessage()]; // Return empty array in case of failure
-        }
-
     }
 
     

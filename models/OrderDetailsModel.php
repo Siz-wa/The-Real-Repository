@@ -13,6 +13,14 @@ class OrderDetailsModel {
         ];
     }
 
+    public function getDeliveryID($orderID){
+        $get = $this->conn->prepare("SELECT DeliveryID FROM delivery WHERE orderID = :orderID ");
+        $get->execute([
+            'orderID' => $orderID
+        ]);
+
+        return $get->fetch(PDO::FETCH_ASSOC);
+    }
     public function getorderDetails($orderID){
         try {
 
@@ -37,7 +45,7 @@ class OrderDetailsModel {
             return $getOrderDet -> fetch(PDO::FETCH_ASSOC);
             
         } catch (PDOException $e) {
-            error_log("Failed fetching order details".$e->getMessage());
+            error_log("Failed fetchiasdsadsng details".$e->getMessage());
             return[];
         }
     }

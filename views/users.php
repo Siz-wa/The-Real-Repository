@@ -131,20 +131,21 @@
                             
                             <div class="panel mb-5">
                             <div class="mt-10 flex items-center justify-between">
-                                <h5 class="text-lg font-semibold dark:text-white-light"><?= htmlspecialchars($subsData['planName'])?></h5>
-                                <a href="javascript:;" class="btn btn-primary">Renew Now</a>
+                                <h5 class="text-lg font-semibold dark:text-white-light">
+                                    <?= htmlspecialchars($subsData['planName'] ?? '') ?>
+                                </h5>
                             </div>
                             <div class="group mt-10">
-                            <ul class="mb-7 list-outside list-disc space-y-2 font-semibold text-white-dark text-left pl-5">
-                            <li class="mt-10"><?= htmlspecialchars($subsData['description'])?></li>
-                                    <?php if($subsData['type'] === 'Yearly'):?>
+                                <ul class="mb-7 list-outside list-disc space-y-2 font-semibold text-white-dark text-left pl-5">
+                                    <li class="mt-10"><?= htmlspecialchars($subsData['description'] ?? '') ?></li>
+                                    <?php if(($subsData['type'] ?? '') === 'Yearly'): ?>
                                         <li class="mt-10">1 year of weekly deliveries</li>
-                                    <?php elseif($subsData['type'] === 'Quarterly'):?>
-                                        <li class="mt-10">3 months of weekly deliveries</li> 
+                                    <?php elseif(($subsData['type'] ?? '') === 'Quarterly'): ?>
+                                        <li class="mt-10">3 months of weekly deliveries</li>
+                                    <?php elseif(($subsData['type'] ?? '') === 'Monthly'): ?>
+                                        <li class="mt-10">1 month of weekly deliveries</li>
                                     <?php else:?>
-                                        <li class="mt-10">1 month of weekly deliveries</li> 
-                                    <?php endif;?>    
-
+                                    <?php endif; ?>
                                 </ul>
                                 <div class="mt-10 flex items-center justify-between font-semibold ">
                                     <p class="flex items-center rounded-full bg-dark px-2 py-1 text-xs font-semibold text-white-light">
@@ -152,24 +153,27 @@
                                             <circle opacity="0.5" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5"></circle>
                                             <path d="M12 8V12L14.5 14.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                                         </svg>
-                                        Date of Expiry: <?=htmlspecialchars(date("D, d M Y"),strtotime($subsData['endDate']))?>
+                                        Date of Expiry: 
+                                        <?php
+                                            $endDate = $subsData['endDate'] ?? null;
+                                            echo $endDate ? htmlspecialchars(date("D, d M Y", strtotime($endDate))) : 'N/A';
+                                        ?>
                                     </p>
-                                    <p class="text-info">$ <?= htmlspecialchars(number_format($subsData['price'],2))?> / 
-                                    <?php if($subsData['type'] === 'Yearly'):?>
-                                        Year
-                                    <?php elseif($subsData['type'] === 'Quarterly'):?>
-                                        Quarter 
-                                    <?php else:?>
-                                        Month
-                                    <?php endif;?>
+                                    <p class="text-info">
+                                        $ <?= htmlspecialchars(number_format($subsData['price'] ?? 0, 2)) ?> /
+                                        <?php if(($subsData['type'] ?? '') === 'Yearly'): ?>
+                                            Year
+                                        <?php elseif(($subsData['type'] ?? '') === 'Quarterly'): ?>
+                                            Quarter
+                                        <?php else: ?>
+                                            Month
+                                        <?php endif; ?>
                                     </p>
                                 </div>
                                 <div class="mb-5 h-2.5 overflow-hidden rounded-full bg-dark-light p-0.5 dark:bg-dark-light/10">
                                     <div class="relative h-full w-full rounded-full bg-gradient-to-r from-[#f67062] to-[#fc5296]" style="width: 100%"></div>
                                 </div>
                             </div>
-
-                        </div> 
                         
                         </div>
 
@@ -284,11 +288,12 @@
                 this.datatable1 = new simpleDatatables.DataTable('#myTable2', {
                       data: {
                           headings: ['ID','Payment Date', 'Amount'],
-                          data: paymentData.map(payment => [
+                        data: paymentData.map(payment => [
                             payment.paymentID,
                             payment.created_at,
-                            payment.Amount
-                          ]),
+                            Number(payment.Amount).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+                        ]),
+                          
                       },
                       searchable: true,
                       perPage: 10,
